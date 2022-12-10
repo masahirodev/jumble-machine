@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+pyinstaller
+web3
+pillow
+pandas

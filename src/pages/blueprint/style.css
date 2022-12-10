@@ -1,0 +1,24 @@
+.sticky_table {
+  white-space: nowrap;
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #eee !important;
+  padding: 4px 20px !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sticky_table th:first-child {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  background-color: white;
+}
+
+.sticky_table thead th:first-child {
+  z-index: 2 !important;
+}
