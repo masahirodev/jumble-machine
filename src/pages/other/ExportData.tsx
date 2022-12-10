@@ -34,8 +34,6 @@ export const ExportData: React.FC<Props> = ({ setComment, operateIpc }) => {
           export_format: format,
         },
       });
-    } else {
-      //setIpcStatus("stop");
     }
   };
 

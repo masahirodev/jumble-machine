@@ -85,8 +85,6 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
           value: path,
         },
       });
-    } else {
-      //setIpcStatus("stop");
     }
   };
 

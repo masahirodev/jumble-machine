@@ -25,14 +25,21 @@ contextBridge.exposeInMainWorld("electronApi", {
   },
 });
 
+//TODOエラーの捕捉位置を変更
 contextBridge.exposeInMainWorld("fastApi", {
   operateFastApi: async ({ method, arg }) => {
-    return await ipcRenderer
-      .invoke("operateFastApi", { method, arg })
-      .then()
-      .catch((error) => {
-        console.log(error);
-        return { status: false, response: "ipc通信エラー" };
-      });
+    return await ipcRenderer.invoke("operateFastApi", { method, arg });
   },
 });
+
+//contextBridge.exposeInMainWorld("fastApi", {
+//  operateFastApi: async ({ method, arg }) => {
+//    return await ipcRenderer
+//      .invoke("operateFastApi", { method, arg })
+//      .then()
+//      .catch((error) => {
+//        console.log(error);
+//        return { status: false, response: "ipc通信エラー" };
+//      });
+//  },
+//});
