@@ -273,11 +273,12 @@ ipcMain.handle("operateShowOpen", async (event, { method, arg }) => {
   }
 
   const paths = dialog.showOpenDialogSync(mainWindow, dialogContents);
-  const path = paths[0];
 
   if (paths === undefined) {
     return { status: false, response: "キャンセルされました。" };
   }
+
+  const path = paths[0];
 
   try {
     switch (method) {

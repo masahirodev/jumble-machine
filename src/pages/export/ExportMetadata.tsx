@@ -23,6 +23,7 @@ export const ExportMetadata: React.FC<Props> = ({ projectId }) => {
       method: "getFolder",
       arg: {},
     });
+
     if (fetch.status) {
       await operateIpc({
         ipc: "operateFastApi",
@@ -32,8 +33,6 @@ export const ExportMetadata: React.FC<Props> = ({ projectId }) => {
           folderPath: fetch.response as string,
         },
       });
-    } else {
-      setIpcStatus("stop");
     }
   };
 

@@ -239,10 +239,10 @@ electron_1.ipcMain.handle("operateShowOpen", async (event, { method, arg }) => {
         ];
     }
     const paths = electron_1.dialog.showOpenDialogSync(mainWindow, dialogContents);
-    const path = paths[0];
     if (paths === undefined) {
         return { status: false, response: "キャンセルされました。" };
     }
+    const path = paths[0];
     try {
         switch (method) {
             case "fileOpen":
