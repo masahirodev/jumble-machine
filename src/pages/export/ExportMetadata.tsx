@@ -32,6 +32,8 @@ export const ExportMetadata: React.FC<Props> = ({ projectId }) => {
           folderPath: fetch.response as string,
         },
       });
+    } else {
+      setIpcStatus("stop");
     }
   };
 

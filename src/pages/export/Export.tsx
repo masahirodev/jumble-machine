@@ -72,6 +72,8 @@ export const Export: React.FC = () => {
         handleSetData<number>("step", 2);
         saveData();
       }
+    } else {
+      setIpcStatus("stop");
     }
   };
 

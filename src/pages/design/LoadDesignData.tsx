@@ -54,6 +54,8 @@ export const LoadDesignData: React.FC<Props> = ({ setComment }) => {
       );
       setDesignDatas(designDatas);
       setComment("次は、ジェネラティブの設定を行っていこう！");
+    } else {
+      //setIpcStatus("stop");
     }
   };
 

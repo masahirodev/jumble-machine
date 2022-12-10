@@ -55,6 +55,8 @@ export const ImportData: React.FC<Props> = ({ setComment, operateIpc }) => {
           folderPath: fetch.response as string,
         },
       });
+    } else {
+      //setIpcStatus("stop");
     }
   };
 
