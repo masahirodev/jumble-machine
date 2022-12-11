@@ -2,7 +2,7 @@
   "author": "eggdragon",
   "description": "This is Generative NFT creation tool",
   "name": "jumble-machine",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -51,7 +51,8 @@
     "dist:mac": "npm run build:python && npm run build && tsc -p electron && electron-builder -m -c.extraMetadata.main=build/electron.js",
     "dist:linux": "npm run build:python && npm run build && tsc -p electron && electron-builder -l -c.extraMetadata.main=build/electron.js",
     "dist:win-publish": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish always -c.extraMetadata.main=build/electron.js",
-    "dist:win-never": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish never -c.extraMetadata.main=build/electron.js"
+    "dist:win-never": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish never -c.extraMetadata.main=build/electron.js",
+    "dist:mac-publish": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --x64 --publish always -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
