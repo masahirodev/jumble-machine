@@ -36,20 +36,12 @@ def make_export_data(path, mainHeader):
     return df
 
 
-def export_csv(df, export_path):
-    df.to_csv(export_path, index=False)
-    return "ok"
-
-
-def export_excel(df, export_path):
-    df.to_excel(export_path, index=False)
-    return "ok"
-
-
 def export_data(path, mainHeader, export_folder, export_format):
     df = make_export_data(path, mainHeader)
     if export_format == "excel":
-        df.to_excel(os.path.join(export_folder, "blueprint.xlsx"), index=False)
+        df.to_excel(os.path.join(export_folder, "blueprint.xlsx"),
+                    index=False)
     elif export_format == "csv":
-        df.to_csv(os.path.join(export_folder, "blueprint.csv"), index=False)
+        df.to_csv(os.path.join(export_folder, "blueprint.csv"),
+                  index=False, encoding="shift jis")
     return "ok"

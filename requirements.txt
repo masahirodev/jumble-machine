@@ -4,3 +4,4 @@ pyinstaller
 web3
 pillow
 pandas
+openpyxl
