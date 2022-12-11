@@ -24,3 +24,72 @@
 1. 本ツールは、急遽サービス終了になる可能性があります。
 2. 保守、アップデート等は、予定しておりません。（arweave,xrp フォルダがあるのは気のせいです）
 3. 会員制度は単なるネタなので、無くなるかもしれないし、コストも適当です。全て気の向くままに
+
+<br>
+<br>
+<br>
+
+# Electron の使い方など
+
+## まずは、npm パッケージのインストール
+
+```
+npm i
+```
+
+## python 関係の準備
+
+```
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## 立ち上げ
+
+```
+.\venv\Scripts\activate
+npm start
+```
+
+## build 関係について
+
+| OS      | コマンド             |
+| ------- | -------------------- |
+| windows | `npm run dist:win`   |
+| mac     | `npm run dist:mac`   |
+| linux   | `npm run dist:linux` |
+
+なお、auto update のやり方は複数あります。
+現状、Github の release 経由での auto update に対応しています。
+レポジトリ内に「electron-builder.env」というファイルと作り、その中に「Personal access tokens」を埋め込みます。
+`GH_TOKEN=<access tokens>`
+
+あとは、`dist:win-publish`で OK。なお、publish したくない場合は、`dist:win-never`
+
+<br>
+
+# fastapi について
+
+## fastAPI 単独のテスト立ち上げなど
+
+```
+.\venv\Scripts\activate
+cd py_src
+uvicorn main:app --reload
+```
+
+## fastAPI の便利な機能
+
+| 内容  | URL                           |
+| ----- | ----------------------------- |
+| docs  | `http://localhost:8000/docs`  |
+| redoc | `http://127.0.0.1:8000/redoc` |
+
+## その他コマンド
+
+| OS                   | コマンド                  |
+| -------------------- | ------------------------- |
+| 仮想環境スタート　   | `.\venv\Scripts\activate` |
+| 仮想環境ストップ     | `deactivate`              |
+| パッケージの書き出し | `pip freeze`              |
