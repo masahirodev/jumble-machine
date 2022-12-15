@@ -1,12 +1,12 @@
 # -*- mode: python ; coding: utf-8 -*-
 import PyInstaller.config
-PyInstaller.config.CONF['distpath'] = "./py_dist/"
+PyInstaller.config.CONF['distpath'] = ".\\py_dist\\"
 
 block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['./py_src/'],
+             pathex=['.\\py_src\\'],
              binaries=[],
              datas=[],
              hiddenimports=[

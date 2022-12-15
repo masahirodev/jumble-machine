@@ -10,6 +10,9 @@ const electron_devtools_installer_1 = require("electron-devtools-installer");
 const ElectronStore = require("electron-store");
 let mainWindow;
 let pythonProcess;
+//plaform
+const isWin = process.platform === "win32";
+const isMacOS = process.platform === "darwin";
 //auto updata
 const { autoUpdater } = require("electron-updater");
 const log = require("electron-log");
@@ -26,33 +29,68 @@ const generateHexString = (length) => {
 const SECRET_TOKEN_LENGTH = 64;
 const SECRET_TOKEN = generateHexString(SECRET_TOKEN_LENGTH);
 const launchPython = () => {
-    if (isDev) {
-        pythonProcess = (0, child_process_1.spawn)("python", [
-            ".\\py_src\\main.py",
-            "--host",
-            PY_HOST,
-            "--port",
-            PY_PORT,
-            "--log-level",
-            PY_LOG_LEVEL,
-            "--secret",
-            SECRET_TOKEN,
-        ]);
-        console.log("Python process started in dev mode");
+    if (isWin) {
+        if (isDev) {
+            pythonProcess = (0, child_process_1.spawn)("python", [
+                ".\\py_src\\main.py",
+                "--host",
+                PY_HOST,
+                "--port",
+                PY_PORT,
+                "--log-level",
+                PY_LOG_LEVEL,
+                "--secret",
+                SECRET_TOKEN,
+            ]);
+            console.log("Python process started in dev mode");
+        }
+        else {
+            pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, "..\\..\\..\\py_dist\\main\\main.exe"), [
+                "--host",
+                PY_HOST,
+                "--port",
+                PY_PORT,
+                "--log-level",
+                PY_LOG_LEVEL,
+                "--secret",
+                SECRET_TOKEN,
+            ]);
+            console.log("Python process started in built mode");
+        }
+        ;
     }
-    else {
-        pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, "..\\..\\..\\py_dist\\main\\main.exe"), [
-            "--host",
-            PY_HOST,
-            "--port",
-            PY_PORT,
-            "--log-level",
-            PY_LOG_LEVEL,
-            "--secret",
-            SECRET_TOKEN,
-        ]);
-        console.log("Python process started in built mode");
+    ;
+    if (isMacOS) {
+        if (isDev) {
+            pythonProcess = (0, child_process_1.spawn)("python", [
+                "./py_src/main.py",
+                "--host",
+                PY_HOST,
+                "--port",
+                PY_PORT,
+                "--log-level",
+                PY_LOG_LEVEL,
+                "--secret",
+                SECRET_TOKEN,
+            ]);
+            console.log("Python process started in dev mode on MacOS");
+        }
+        else {
+            pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, "../../../py_dist/main/main"), [
+                "--host",
+                PY_HOST,
+                "--port",
+                PY_PORT,
+                "--log-level",
+                PY_LOG_LEVEL,
+                "--secret",
+                SECRET_TOKEN,
+            ]);
+            console.log("Python process started in built mode on MacOS");
+        }
+        ;
     }
+    ;
     return pythonProcess;
 };
 const createWindow = () => {
