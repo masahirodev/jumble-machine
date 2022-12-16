@@ -22,7 +22,7 @@ import {
   prepLoader,
   topLoader,
 } from "../hooks/routerLoader";
-import { PageTemplate } from "./test/PageTemplate";
+import { TestTop } from "./test/TestTop";
 import { Convert } from "./convert/Convert";
 import { Other } from "./other/Other";
 
@@ -114,16 +114,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/test",
-          element: (
-            <PageTemplate
-              button={<div>test</div>}
-              contents={
-                <>
-                  <Test />
-                </>
-              }
-            />
-          ),
+          element: <TestTop />,
           errorElement: <ErrorBoundary />,
         },
       ],
