@@ -4,6 +4,7 @@ import { IntricateContext } from "../intricate/IntricateContext";
 import type { IntricateDataType } from "../../schema/intricate";
 import Button from "react-bootstrap/Button";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
+import { checkConfirmation } from "../../hooks/checkConfirmation";
 
 type Props = {};
 
@@ -16,6 +17,10 @@ export const LoadIntricateData: React.FC<Props> = () => {
   const { projectId, setIntricateDatas, setComment } =
     useContext(IntricateContext);
   const { operateIpc } = useOperateIpc();
+
+  const readParts = () => {
+    checkConfirmation(projectId, "intricateDatas", () => getFolderContents());
+  };
 
   //パーツデータの読み込み
   const getFolderContents = async () => {
@@ -63,7 +68,7 @@ export const LoadIntricateData: React.FC<Props> = () => {
       <Button
         className={"me-3"}
         onClick={() => {
-          getFolderContents();
+          readParts();
         }}
         onMouseEnter={() =>
           setComment([

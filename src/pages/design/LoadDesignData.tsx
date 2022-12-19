@@ -4,6 +4,7 @@ import { DesignContext } from "../design/DesignContext";
 import type { DesignDataType } from "../../schema/design";
 import Button from "react-bootstrap/Button";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
+import { checkConfirmation } from "../../hooks/checkConfirmation";
 
 type Props = {
   setComment: React.Dispatch<React.SetStateAction<string | string[]>>;
@@ -17,6 +18,10 @@ export type FolderContents = {
 export const LoadDesignData: React.FC<Props> = ({ setComment }) => {
   const { projectId, setDesignDatas } = useContext(DesignContext);
   const { operateIpc } = useOperateIpc();
+
+  const readParts = () => {
+    checkConfirmation(projectId, "designDatas", () => getFolderContents());
+  };
 
   //パーツデータの読み込み
   const getFolderContents = async () => {
@@ -62,7 +67,7 @@ export const LoadDesignData: React.FC<Props> = ({ setComment }) => {
       <Button
         className={"me-3"}
         onClick={() => {
-          getFolderContents();
+          readParts();
         }}
         onMouseEnter={() =>
           setComment([

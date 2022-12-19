@@ -187,8 +187,7 @@ electron_1.ipcMain.handle("operateStore", (event, { method, arg }) => {
                 store.set(arg.key, arg.value);
                 return { status: true, response: "ok" };
             case "has":
-                store.has(arg.key);
-                return { status: true, response: "ok" };
+                return { status: store.has(arg.key), response: store.has(arg.key) };
             default:
                 return { status: false, response: "no method" };
         }
