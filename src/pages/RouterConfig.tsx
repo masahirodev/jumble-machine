@@ -19,12 +19,18 @@ import {
   designLoader,
   exportLoader,
   importLoader,
+  intricateLoader,
   prepLoader,
   topLoader,
 } from "../hooks/routerLoader";
 import { TestTop } from "./test/TestTop";
 import { Convert } from "./convert/Convert";
 import { Other } from "./other/Other";
+import { Intricate } from "./intricate/Intricate";
+import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolder";
+import { IntricateProvider } from "./intricate/IntricateContext";
+import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
+import { OptionConfig } from "./intricate/subContents/optionConfig/OptionConfig";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -65,6 +71,32 @@ export const RouterConfig: React.FC = () => {
           ),
           loader: async () => {
             return designLoader();
+          },
+          errorElement: <ErrorBoundary />,
+        },
+        {
+          path: "/intricate",
+          element: (
+            <IntricateProvider>
+              <Intricate />
+            </IntricateProvider>
+          ),
+          children: [
+            {
+              path: "settingFolder",
+              element: <SettingFolder />,
+            },
+            {
+              path: "mainConfig",
+              element: <MainConfig />,
+            },
+            {
+              path: "optionConfig",
+              element: <OptionConfig />,
+            },
+          ],
+          loader: async () => {
+            return intricateLoader();
           },
           errorElement: <ErrorBoundary />,
         },

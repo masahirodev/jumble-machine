@@ -1,5 +1,6 @@
 export const internalLinks = [
   "design",
+  "intricate",
   "prep",
   "blueprint",
   "convert",
@@ -16,6 +17,9 @@ export const internalLinkContents: {
 } = {
   design: {
     title: "Design",
+  },
+  intricate: {
+    title: "Intricate",
   },
   prep: {
     title: "Preparation",

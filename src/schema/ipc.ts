@@ -4,6 +4,7 @@ import { FolderContents } from "../pages/design/LoadDesignData";
 import { Data } from "./data";
 import { DesignDataType } from "./design";
 import { ExportData } from "./exportData";
+import { IntricateDataType } from "./intricate";
 import { PrepData } from "./prepData";
 
 //TODO ipc毎に整理。returnTypeの設定
@@ -28,7 +29,8 @@ export type OperateIpc =
           | PrepData
           | DesignDataType[]
           | Sample
-          | number;
+          | number
+          | IntricateDataType[];
       };
     }
   | {

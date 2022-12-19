@@ -24,6 +24,18 @@ export const designLoader = async () => {
   return [data, projectId];
 };
 
+export const intricateLoader = async () => {
+  const projectId: number = await window.storeApi.getStoreValue(
+    "config",
+    "edit"
+  );
+  const data: DesignDataType[] = await window.storeApi.getStoreValue(
+    String(projectId),
+    "intricateDatas"
+  );
+  return [data, projectId];
+};
+
 export const prepLoader = async () => {
   const projectId: number = await window.storeApi.getStoreValue(
     "config",
