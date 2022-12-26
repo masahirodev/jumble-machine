@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { internalLinkContents, internalLinks } from "../utils/internalLinks";
-import { LoginContext } from "./common/LoginContext";
+import { LoginContext } from "../pages/common/LoginContext";
 import NotFound from "../assets/icon.svg";
 
 import Navbar from "react-bootstrap/Navbar";
@@ -13,7 +13,7 @@ const activeStyle = {
 };
 
 //TODO ヘッダーデザイン変えたい
-export const Layout = () => {
+export const Header = () => {
   const { membership } = useContext(LoginContext);
   return (
     <Navbar bg="dark" variant="dark">
@@ -24,7 +24,7 @@ export const Layout = () => {
           height={"30px"}
           className="mx-2"
         ></Image>
-        <span style={{ color: "#f2f45b" }}>J</span>umble{" "}
+        <span style={{ color: "#f2f45b" }}>J</span>umble
         <span style={{ color: "#35bacf" }}>M</span>achine
       </NavLink>
       {membership && (
