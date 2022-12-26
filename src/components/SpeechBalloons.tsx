@@ -7,7 +7,7 @@ type Props = {
 export const SpeechBalloons: React.FC<Props> = ({ comment }) => {
   return (
     <>
-      <div style={{ padding: "1rem" }}>
+      <div style={{ padding: "1rem", width: "100%" }}>
         <div style={balloon}>
           <div style={faceicon}>
             <img src={Faceicon} alt="faceicon" style={faceiconImg}></img>

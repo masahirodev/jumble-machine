@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import { IntricateContext } from "./IntricateContext";
 import { useContext } from "react";
 import { IntricateTopButton } from "./IntricateTopButton";
+import Col from "react-bootstrap/Col";
 
 export const Intricate: React.FC = () => {
   const { intricateDatas, comment } = useContext(IntricateContext);
@@ -24,10 +25,21 @@ export const Intricate: React.FC = () => {
                 display: "flex",
                 flexDirection: "row",
                 flexGrow: 1,
+                overflowY: "auto",
+                maxHeight: `calc(100vh - 48px - 15vh)`,
               }}
             >
-              <Sidebar />
-              <Outlet />
+              <Col className="col-2">
+                <Sidebar />
+              </Col>
+              <Col
+                style={{
+                  background: "#dfebf7",
+                  flex: "1",
+                }}
+              >
+                <Outlet />
+              </Col>
             </Container>
           )}
         </>

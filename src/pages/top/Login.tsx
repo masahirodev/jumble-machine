@@ -13,12 +13,9 @@ import { useMembership } from "../../hooks/useMembership";
 import { getEllipsisTxt } from "../../hooks/getEllipsisTxt";
 import { disconnect } from "../../hooks/disconnect";
 import { GlobalAlert } from "../../components/GlobalAlert";
+import { useComment } from "../../hooks/useComment";
 
-type ConnectButtonType = {
-  setComment: React.Dispatch<React.SetStateAction<string | string[]>>;
-};
-
-export const Login: React.FC<ConnectButtonType> = ({ setComment }) => {
+export const Login: React.FC = () => {
   const { account } = useWeb3React();
   const { setMembership } = useContext(LoginContext);
   const [hovered, setHovered] = useState<boolean>(false);
@@ -31,23 +28,21 @@ export const Login: React.FC<ConnectButtonType> = ({ setComment }) => {
     ...contractSet.polygon,
   });
 
+  const { selectSetComment } = useComment();
   //TODO useEffect適切ではない気がする
   useEffect(() => {
     if (checkMembership === undefined) {
-      setComment("ブロックチェーンにつながらないみたい・・・");
+      selectSetComment("loginNotConnect");
     } else {
       setMembership(checkMembership);
       if (account !== undefined) {
         checkMembership
-          ? setComment(
-              "メンバーシップへようこそ！もうウォレットの接続を解除しても大丈夫なので、右側のボタンを押して接続を解除してもいいよ。"
-            )
-          : setComment(
-              "このアドレスは、メンバーシップが有効じゃないみたい・・・"
-            );
+          ? selectSetComment("loginSuccess")
+          : selectSetComment("loginFalse");
       }
     }
-  }, [checkMembership, account, setComment, setMembership]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkMembership, account, setMembership]);
 
   return (
     <>

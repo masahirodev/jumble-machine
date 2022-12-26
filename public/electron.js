@@ -25,6 +25,10 @@ const generateHexString = (length) => {
 };
 const SECRET_TOKEN_LENGTH = 64;
 const SECRET_TOKEN = generateHexString(SECRET_TOKEN_LENGTH);
+const PRODUCT_PY_PATH = {
+    win32: "../../../py_dist/main/main.exe",
+    darwin: "../../../py_dist/main/main",
+}[process.platform];
 const launchPython = () => {
     if (isDev) {
         pythonProcess = (0, child_process_1.spawn)("python", [
@@ -41,7 +45,7 @@ const launchPython = () => {
         console.log("Python process started in dev mode");
     }
     else {
-        pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, "../../../py_dist/main/main.exe"), [
+        pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, PRODUCT_PY_PATH), [
             "--host",
             PY_HOST,
             "--port",
@@ -91,16 +95,16 @@ electron_1.app.whenReady().then(() => {
     pythonProcess = launchPython();
     mainWindow = createWindow();
     autoUpdater.checkForUpdatesAndNotify();
+    electron_1.app.on("activate", () => {
+        if (electron_1.BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
 });
 electron_1.app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {
         pythonProcess.kill();
         electron_1.app.quit();
-    }
-});
-electron_1.app.on("activate", () => {
-    if (electron_1.BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
     }
 });
 //auto update

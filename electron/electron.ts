@@ -35,6 +35,10 @@ const generateHexString = (length: number) => {
 };
 const SECRET_TOKEN_LENGTH = 64;
 const SECRET_TOKEN = generateHexString(SECRET_TOKEN_LENGTH);
+const PRODUCT_PY_PATH = {
+  win32: "../../../py_dist/main/main.exe",
+  darwin: "../../../py_dist/main/main",
+}[process.platform];
 
 const launchPython = () => {
   if (isDev) {
@@ -51,19 +55,16 @@ const launchPython = () => {
     ]);
     console.log("Python process started in dev mode");
   } else {
-    pythonProcess = execFile(
-      path.join(__dirname, "../../../py_dist/main/main.exe"),
-      [
-        "--host",
-        PY_HOST,
-        "--port",
-        PY_PORT,
-        "--log-level",
-        PY_LOG_LEVEL,
-        "--secret",
-        SECRET_TOKEN,
-      ]
-    );
+    pythonProcess = execFile(path.join(__dirname, PRODUCT_PY_PATH), [
+      "--host",
+      PY_HOST,
+      "--port",
+      PY_PORT,
+      "--log-level",
+      PY_LOG_LEVEL,
+      "--secret",
+      SECRET_TOKEN,
+    ]);
     console.log("Python process started in built mode");
   }
   return pythonProcess;
@@ -111,18 +112,18 @@ app.whenReady().then(() => {
   mainWindow = createWindow();
 
   autoUpdater.checkForUpdatesAndNotify();
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     pythonProcess.kill();
     app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
   }
 });
 

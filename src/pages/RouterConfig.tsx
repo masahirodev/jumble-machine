@@ -5,11 +5,9 @@ import {
   useRouteError,
 } from "react-router-dom";
 import { BlueprintProvider } from "./blueprint/BlueprintContext";
-import { Layout } from "./Layout";
+import { Header } from "../components/Header";
 import { Blueprint } from "./blueprint/Blueprint";
 import { Top } from "./top/Top";
-import { DesignConfig } from "./design/DesignConfig";
-import { DesignProvider } from "./design/DesignContext";
 import { Preparation } from "./preparation/Preparation";
 import { Export } from "./export/Export";
 import { Test } from "./test/Test";
@@ -31,6 +29,9 @@ import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolde
 import { IntricateProvider } from "./intricate/IntricateContext";
 import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
 import { OptionConfig } from "./intricate/subContents/optionConfig/OptionConfig";
+import { SubLayout } from "./SubLayout";
+import Container from "react-bootstrap/esm/Container";
+import { DesignTop } from "./design/DesignTop";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -49,8 +50,20 @@ export const RouterConfig: React.FC = () => {
       path: "/",
       element: (
         <>
-          <Layout />
-          <Outlet />
+          <Container
+            fluid
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100vh",
+              margin: "0",
+              padding: "0",
+            }}
+          >
+            <Header />
+            <Outlet />
+          </Container>
         </>
       ),
       children: [
@@ -64,11 +77,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/design",
-          element: (
-            <DesignProvider>
-              <DesignConfig />
-            </DesignProvider>
-          ),
+          element: <DesignTop />,
           loader: async () => {
             return designLoader();
           },
@@ -78,7 +87,8 @@ export const RouterConfig: React.FC = () => {
           path: "/intricate",
           element: (
             <IntricateProvider>
-              <Intricate />
+              <SubLayout />
+              {/*<Intricate />*/}
             </IntricateProvider>
           ),
           children: [
