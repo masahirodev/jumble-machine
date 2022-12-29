@@ -13,6 +13,7 @@ type Props = {
   mainFolder: string;
   mainPartsName: string;
   optionParts: OptionPart[] | undefined;
+  isTotal?: boolean;
 };
 
 const CustomStyle = {
@@ -27,6 +28,7 @@ export const MainPartsLayout: React.FC<Props> = ({
   mainFolder,
   mainPartsName,
   optionParts,
+  isTotal,
 }) => {
   const { intricateDatas, setIntricateDatas } = useContext(IntricateContext);
 
@@ -111,7 +113,7 @@ export const MainPartsLayout: React.FC<Props> = ({
             buttonFunc={deleteOptionPart}
           />
         )}
-        <UpdateDatas buttonFunc={addOptionPart} />
+        {!isTotal && <UpdateDatas buttonFunc={addOptionPart} />}
       </Col>
     </Row>
   );

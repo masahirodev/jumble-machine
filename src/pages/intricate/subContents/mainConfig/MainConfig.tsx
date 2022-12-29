@@ -11,7 +11,7 @@ export const MainConfig = () => {
     saveData();
   };
   return (
-    <Container className="pb-3">
+    <Container className="p-3">
       {intricateDatas
         .filter((value) => {
           return value.pairing === "main" || value.pairing === "bg";

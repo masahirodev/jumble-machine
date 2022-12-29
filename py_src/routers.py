@@ -170,3 +170,14 @@ class ExportBlueprintData(BaseModel):
 @router.post("/exportData")
 async def exportData(data: ExportBlueprintData) -> str:
     return export_data(data.projectPath, data.arg.sortList, data.arg.exportPath, data.arg.export_format)
+
+
+# test
+class TestData(BaseModel):
+    word: str
+
+
+@router.post("/helloWorld")
+async def helloWorld(data: TestData) -> str:
+    if data.word == "Hello":
+        return "OK"

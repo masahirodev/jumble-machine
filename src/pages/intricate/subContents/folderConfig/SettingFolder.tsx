@@ -73,7 +73,7 @@ export const SettingFolder = () => {
   //TODO 1250pxまでは左右見開きにする
   return (
     <>
-      <Container fluid style={{ background: "white" }}>
+      <Container fluid className="py-3">
         <Row>
           <Col>
             <Form>

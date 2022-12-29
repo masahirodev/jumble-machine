@@ -53,6 +53,7 @@ export const useMembership = ({
           type: "web3",
           payload: { method: "preopen", status: "success" },
         });
+        selectSetComment("preopen");
 
         return setCheckMembership(true);
       } else {
@@ -104,3 +105,6 @@ export const useMembership = ({
 
   return { checkMembership, status, setStatus, alert };
 };
+function selectSetComment(arg0: string) {
+  throw new Error("Function not implemented.");
+}

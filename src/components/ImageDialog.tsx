@@ -26,7 +26,7 @@ export const ImageDialog = ({ src, alt = "" }: Props) => {
         style={customStyle.imageBox}
         tabIndex={0}
       >
-        <Image src={src} alt={alt} height="300" />
+        <Image src={"file:///" + src} alt={alt} height="300" />
       </div>
       <dialog
         ref={ref}
@@ -34,7 +34,7 @@ export const ImageDialog = ({ src, alt = "" }: Props) => {
         onClick={handleCloseDialog}
       >
         <div style={customStyle.contentsImg}>
-          <img src={src} alt={alt} height="100%" />
+          <img src={"file:///" + src} alt={alt} height="100%" />
         </div>
       </dialog>
     </React.Fragment>

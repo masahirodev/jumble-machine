@@ -29,9 +29,10 @@ import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolde
 import { IntricateProvider } from "./intricate/IntricateContext";
 import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
 import { OptionConfig } from "./intricate/subContents/optionConfig/OptionConfig";
-import { SubLayout } from "./SubLayout";
 import Container from "react-bootstrap/esm/Container";
 import { DesignTop } from "./design/DesignTop";
+import { OptionConfigTotal } from "./intricate/subContents/optionConfig/OptionConfigTotal";
+import { SortConfig } from "./intricate/subContents/sortConfig/SortConfig";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -87,8 +88,7 @@ export const RouterConfig: React.FC = () => {
           path: "/intricate",
           element: (
             <IntricateProvider>
-              <SubLayout />
-              {/*<Intricate />*/}
+              <Intricate />
             </IntricateProvider>
           ),
           children: [
@@ -102,7 +102,15 @@ export const RouterConfig: React.FC = () => {
             },
             {
               path: "optionConfig",
+              element: <OptionConfigTotal />,
+            },
+            {
+              path: "optionConfig/:mainPartsName",
               element: <OptionConfig />,
+            },
+            {
+              path: "sortConfig",
+              element: <SortConfig />,
             },
           ],
           loader: async () => {

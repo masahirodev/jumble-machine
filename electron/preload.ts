@@ -2,13 +2,13 @@ import { contextBridge, ipcRenderer } from "electron";
 
 //TODO storeApi移行して削除
 contextBridge.exposeInMainWorld("storeApi", {
-  getStoreValue: async (name, key) => {
+  getStoreValue: async (name: string, key: string | []) => {
     return await ipcRenderer.invoke("getStoreValue", name, key);
   },
-  setStoreValue: async (name, key, value) => {
+  setStoreValue: async (name: string, key: string, value: any) => {
     return await ipcRenderer.invoke("setStoreValue", name, key, value);
   },
-  hasStoreValue: async (name, key) => {
+  hasStoreValue: async (name: string, key: string) => {
     return await ipcRenderer.invoke("hasStoreValue", name, key);
   }, //上削除
   operateStore: async ({ method, arg }) => {
@@ -34,5 +34,8 @@ contextBridge.exposeInMainWorld("fastApi", {
         console.log(error);
         return { status: false, response: "ipc通信エラー" };
       });
+  },
+  helloWorld: async (word: string) => {
+    return await ipcRenderer.invoke("helloWorld", word);
   },
 });

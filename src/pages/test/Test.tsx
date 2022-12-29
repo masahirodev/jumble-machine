@@ -1,8 +1,15 @@
 //TODO テストページ
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 export const Test = () => {
-  const button = async () => {};
+  const [result, setResult] = useState<string>("");
+  const word: string = "Hello";
+  const button = async () => {
+    const fetch: string = await window.fastApi.helloWorld(word);
+    setResult(fetch);
+  };
   const button2 = () => {};
   const button3 = () => {};
 
@@ -22,7 +29,13 @@ export const Test = () => {
       <Button onClick={button}>スタート</Button>
       <Button onClick={button2}>成功</Button>
       <Button onClick={button3}>失敗</Button>
-      <div>test</div>
+      <Image
+        src={
+          "file:///" +
+          "Users/eggdragon/Library/Application Support/jumble-machine/sample.png"
+        }
+      ></Image>
+      <div>{result}</div>
     </>
   );
 };

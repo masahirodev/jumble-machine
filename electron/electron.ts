@@ -30,19 +30,15 @@ const PY_LOG_LEVEL = "info";
 //シークレットトークン
 const generateHexString = (length: number) => {
   return [...Array(length)]
-    .map((i) => (~~(Math.random() * 36)).toString(36))
+    .map(() => (~~(Math.random() * 36)).toString(36))
     .join("");
 };
 const SECRET_TOKEN_LENGTH = 64;
 const SECRET_TOKEN = generateHexString(SECRET_TOKEN_LENGTH);
-const PRODUCT_PY_PATH = {
-  win32: "../../../py_dist/main/main.exe",
-  darwin: "../../../py_dist/main/main",
-}[process.platform];
 
 const launchPython = () => {
   if (isDev) {
-    pythonProcess = spawn("python", [
+    pythonProcess = spawn("python3", [
       "./py_src/main.py",
       "--host",
       PY_HOST,
@@ -55,16 +51,23 @@ const launchPython = () => {
     ]);
     console.log("Python process started in dev mode");
   } else {
-    pythonProcess = execFile(path.join(__dirname, PRODUCT_PY_PATH), [
-      "--host",
-      PY_HOST,
-      "--port",
-      PY_PORT,
-      "--log-level",
-      PY_LOG_LEVEL,
-      "--secret",
-      SECRET_TOKEN,
-    ]);
+    pythonProcess = execFile(
+      path.join(
+        __dirname,
+        "../../../py_dist/main/",
+        process.platform === "darwin" ? "main" : "main.exe"
+      ),
+      [
+        "--host",
+        PY_HOST,
+        "--port",
+        PY_PORT,
+        "--log-level",
+        PY_LOG_LEVEL,
+        "--secret",
+        SECRET_TOKEN,
+      ]
+    );
     console.log("Python process started in built mode");
   }
   return pythonProcess;
@@ -90,9 +93,19 @@ const createWindow = () => {
   if (isDev) {
     //devtool機能、detach:devtool分離
     mainWindow.webContents.openDevTools({ mode: "detach" });
-    require("electron-nice-auto-reload")({
-      rootPath: path.join(process.cwd(), "public"),
-      rules: [{ action: "app.relaunch" }],
+
+    //hot reload
+    require("electron-reload")(__dirname, {
+      electron: path.join(
+        __dirname,
+        "..",
+        "..",
+        "node_modules",
+        ".bin",
+        "electron"
+      ),
+      forceHardReset: true,
+      hardResetMethod: "exit",
     });
   } else {
     //メニューバー非表示
@@ -131,12 +144,13 @@ app.on("window-all-closed", () => {
 autoUpdater.on("checking-for-update", () => {
   log.info(process.pid, "checking-for-update...");
 });
+
 // アップデートが見つかった
-autoUpdater.on("update-available", (ev, info) => {
+autoUpdater.on("update-available", (event, info) => {
   log.info(process.pid, "Update available.");
 });
 // アップデートがなかった（最新版だった）
-autoUpdater.on("update-not-available", (ev, info) => {
+autoUpdater.on("update-not-available", (event, info) => {
   log.info(process.pid, "Update not available.");
 });
 // アップデートのダウンロードが完了
@@ -157,8 +171,8 @@ autoUpdater.on("update-downloaded", (info) => {
   });
 });
 // エラーが発生
-autoUpdater.on("error", (err) => {
-  log.error(process.pid, err);
+autoUpdater.on("error", (error: unknown) => {
+  log.error(process.pid, error);
 });
 
 //storeAPI
@@ -305,7 +319,7 @@ ipcMain.handle("operateShowOpen", async (event, { method, arg }) => {
         };
 
       case "getFolderContents":
-        const pathList = {};
+        const pathList: { [key: string]: string[] } = {};
         const folderList = fs
           .readdirSync(path, { withFileTypes: true })
           .filter((dirent) => dirent.isFile() === false)
@@ -362,6 +376,24 @@ ipcMain.handle("operateFastApi", async (event, { method, arg }) => {
       response: resp.data,
     };
   } catch (error: unknown) {
+    console.error(error);
     return { status: false, response: error };
+  }
+});
+
+//fastApi test
+ipcMain.handle("helloWorld", async (event, word) => {
+  try {
+    const resp: any = await axios.post(
+      "http://localhost:8000/helloWorld",
+      { word: word },
+      {
+        headers: { "secret-token": SECRET_TOKEN },
+      }
+    );
+    return resp.data;
+  } catch (error) {
+    console.error(error);
+    return "NG";
   }
 });

@@ -154,7 +154,7 @@ export const BlueprintTable: React.FC<Props> = ({ switchingDisplay }) => {
                               "not found"
                             ) : (
                               <Image
-                                src={blueprintData[value]}
+                                src={"file:///" + blueprintData[value]}
                                 height={100}
                                 width="auto"
                               ></Image>

@@ -55,8 +55,8 @@ export const commentLists = [
     comment: "ここを上下に動かすことでパーツの並び替えが出来るよ。",
   },
   {
-    target: "",
-    comment: "",
+    target: "preopen",
+    comment: "β版の間は、会員証のチェックはされません。",
   },
   {
     target: "",

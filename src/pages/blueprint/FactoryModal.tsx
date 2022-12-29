@@ -224,7 +224,7 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
           <Modal.Body className="d-flex justify-content-center">
             {completedImage !== "" && (
               <Image
-                src={completedImage}
+                src={"file:///" + completedImage}
                 height={300}
                 alt={"完成後のイメージ画像"}
               ></Image>

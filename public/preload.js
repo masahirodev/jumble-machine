@@ -34,5 +34,8 @@ electron_1.contextBridge.exposeInMainWorld("fastApi", {
             return { status: false, response: "ipc通信エラー" };
         });
     },
+    helloWorld: async (word) => {
+        return await electron_1.ipcRenderer.invoke("helloWorld", word);
+    },
 });
 //# sourceMappingURL=preload.js.map
