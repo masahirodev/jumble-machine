@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
   //TODO useEffect適切ではない気がする
   useEffect(() => {
     if (checkMembership === undefined) {
-      selectSetComment("loginNotConnect");
+      //      selectSetComment("loginNotConnect");
     } else {
       setMembership(checkMembership);
       if (account !== undefined) {
@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkMembership, account, setMembership]);
+  }, [checkMembership, account]);
 
   return (
     <>

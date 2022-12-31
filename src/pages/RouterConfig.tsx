@@ -101,7 +101,7 @@ export const RouterConfig: React.FC = () => {
               element: <MainConfig />,
             },
             {
-              path: "optionConfig",
+              path: "optionConfigTotal",
               element: <OptionConfigTotal />,
             },
             {

@@ -6,6 +6,8 @@ import { MainPartsLayout } from "./MainPartsLayout";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import { NavLink } from "react-router-dom";
+import Col from "react-bootstrap/Col";
 
 //TODO sidebar選択から、folder情報を受け渡す
 export const OptionConfigTotal = () => {
@@ -22,7 +24,14 @@ export const OptionConfigTotal = () => {
         .map((value, index) => {
           return (
             <Container className="pb-5" key={index}>
-              <Row>メインパーツ：{value.folder}</Row>
+              <Row>
+                <Col>
+                  メインパーツ：
+                  <NavLink to={`/intricate/optionConfig/${value.folder}`}>
+                    {value.folder}
+                  </NavLink>
+                </Col>
+              </Row>
               {value.fileDatas.map((fileData, index) => {
                 return (
                   <MainPartsLayout

@@ -12,6 +12,7 @@ from function.convert import convert_property
 from function.import_json import import_json
 from function.import_excel import import_excel
 from function.export_blueprint import export_data
+from function.intricate_jumble import do_intricate_jumble
 
 router = APIRouter()
 
@@ -181,3 +182,8 @@ class TestData(BaseModel):
 async def helloWorld(data: TestData) -> str:
     if data.word == "Hello":
         return "OK"
+
+
+@router.post("/intricateJumble")
+async def intricateJumble(data: JumbleData) -> str:
+    return do_intricate_jumble(data.projectPath)

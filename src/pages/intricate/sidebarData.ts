@@ -4,7 +4,7 @@ export type SidebarDataType = {
   link: string;
 };
 
-export const sidebarData: SidebarDataType[] = [
+export const sidebarData = [
   {
     title: "フォルダ設定",
     icon: "GrDomain",
@@ -18,11 +18,13 @@ export const sidebarData: SidebarDataType[] = [
   {
     title: "オプションパーツ設定",
     icon: "GrDomain",
-    link: "/intricate/optionConfig",
+    link: "/intricate/optionConfigTotal",
   },
   {
     title: "並び替え設定",
     icon: "GrDomain",
     link: "/intricate/sortConfig",
   },
-];
+] as const;
+
+export type IntricateLinks = typeof sidebarData[number]["link"];

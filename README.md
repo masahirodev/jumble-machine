@@ -54,11 +54,13 @@ npm start
 
 ## build 関係について
 
-| OS      | コマンド             |
-| ------- | -------------------- |
-| windows | `npm run dist:win`   |
-| mac     | `npm run dist:mac`   |
-| linux   | `npm run dist:linux` |
+| OS      | コマンド                   | 備考               |
+| ------- | -------------------------- | ------------------ |
+| windows | `npm run dist:win-publish` | auto update する   |
+| windows | `npm run dist:win-never`   | auto update しない |
+| mac     | `npm run dist:mac`         | auto update しない |
+| mac m1  | `npm run dist:mac-m1`      | auto update しない |
+| linux   | `npm run dist:linux`       | auto update しない |
 
 なお、auto update のやり方は複数あります。
 現状、Github の release 経由での auto update に対応しています。
@@ -73,8 +75,19 @@ npm start
 
 ## fastAPI 単独のテスト立ち上げなど
 
+### windows
+
 ```
 .\venv\Scripts\activate
+cd py_src
+uvicorn main:app --reload
+```
+
+### mac
+
+```
+python -m venv venv
+source venv/bin/activate
 cd py_src
 uvicorn main:app --reload
 ```
@@ -91,6 +104,6 @@ uvicorn main:app --reload
 | 内容                     | コマンド（Windows）               | コマンド（Mac）                   |
 | ------------------------ | --------------------------------- | --------------------------------- |
 | 仮想環境スタート　       | `.\venv\Scripts\activate`         | `source ./venv/bin/activate`      |
-| 仮想環境ストップ         | `deactivate`                      |
+| 仮想環境ストップ         | `deactivate`                      | `deactivate`                      |
 | パッケージのインストール | `pip install -r requirements.txt` | `pip install -r requirements.txt` |
 | パッケージの書き出し     | `pip freeze`                      | `pip freeze`                      |

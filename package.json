@@ -40,12 +40,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:python": "pyinstaller -y ./py_src/main.spec",
-    "dist:win": "npm run build:python && npm run build && tsc -p electron && electron-builder -w -c.extraMetadata.main=build/electron.js",
-    "dist:mac": "npm run build:python && npm run build && tsc -p electron && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "dist:mac": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --x64 -c.extraMetadata.main=build/electron.js",
+    "dist:mac-m1": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --arm64 -c.extraMetadata.main=build/electron.js",
     "dist:linux": "npm run build:python && npm run build && tsc -p electron && electron-builder -l -c.extraMetadata.main=build/electron.js",
     "dist:win-publish": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish always -c.extraMetadata.main=build/electron.js",
-    "dist:win-never": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish never -c.extraMetadata.main=build/electron.js",
-    "dist:mac-publish": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --x64 --publish always -c.extraMetadata.main=build/electron.js"
+    "dist:win-never": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish never -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [

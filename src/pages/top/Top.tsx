@@ -2,7 +2,11 @@ import { Buffer } from "buffer";
 
 import { Start } from "./Start";
 import { GlobalLayoutContext } from "../../components/GlobalLayoutContext";
-import { TopButton } from "./TopButton";
+
+import { Web3ReactProvider } from "@web3-react/core";
+
+import { Login } from "./Login";
+import connectors from "../../utils/connectors";
 
 export const Top: React.FC = () => {
   // @ts-ignore
@@ -10,10 +14,12 @@ export const Top: React.FC = () => {
 
   return (
     <>
-      <GlobalLayoutContext
-        mainContents={<Start />}
-        buttonContents={<TopButton />}
-      />
+      <Web3ReactProvider connectors={connectors}>
+        <GlobalLayoutContext
+          mainContents={<Start />}
+          buttonContents={<Login />}
+        />
+      </Web3ReactProvider>
     </>
   );
 };

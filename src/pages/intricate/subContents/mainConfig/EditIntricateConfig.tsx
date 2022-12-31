@@ -116,16 +116,20 @@ export const EditIntricateConfig: React.FC<Props> = ({ data }) => {
         </Form.Select>
       </Col>
       <Col className="col-2">
-        <Form.Select
-          onChange={propertyFunc}
-          defaultValue={
-            data.property === undefined ? "default" : String(data.property)
-          }
-        >
-          <option value={"default"}>重み付け</option>
-          <option value={"random"}>ランダム</option>
-          <option value={"fixed"}>個数</option>
-        </Form.Select>
+        {data.combi !== "" || disabled ? (
+          <></>
+        ) : (
+          <Form.Select
+            onChange={propertyFunc}
+            defaultValue={
+              data.property === undefined ? "default" : String(data.property)
+            }
+          >
+            <option value={"default"}>重み付け</option>
+            <option value={"random"}>ランダム</option>
+            <option value={"fixed"}>個数</option>
+          </Form.Select>
+        )}
       </Col>
       <Col className="col-4">
         {data.combi !== "" || disabled ? (
