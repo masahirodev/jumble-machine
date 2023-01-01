@@ -55,6 +55,7 @@ export const OptionPartsLayout: React.FC<Props> = ({
               onChange={propertyFunc}
               className="col-2"
               defaultValue={optionPart.property}
+              disabled={!isUpdate}
             >
               <option value={"random"}>ランダム</option>
               <option value={"fixed"}>個数</option>
@@ -64,6 +65,7 @@ export const OptionPartsLayout: React.FC<Props> = ({
               onChange={changeOption}
               defaultValue={optionPart.option}
               type="number"
+              disabled={!isUpdate}
             />
             <InputGroup.Text className="col-1">{unit}</InputGroup.Text>
           </InputGroup>

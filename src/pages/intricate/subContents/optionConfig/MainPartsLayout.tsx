@@ -8,7 +8,6 @@ import Row from "react-bootstrap/Row";
 import { UpdateDatas } from "./UpdateDatas";
 import { SavedInDatas } from "./SavedInDatas";
 
-//TODO sidebar選択から、folder情報を受け渡す
 type Props = {
   mainFolder: string;
   mainPartsName: string;
@@ -23,7 +22,6 @@ const CustomStyle = {
   backgroundColor: "white",
 };
 
-//TODO sidebar選択から、folder情報を受け渡す
 export const MainPartsLayout: React.FC<Props> = ({
   mainFolder,
   mainPartsName,
@@ -33,34 +31,36 @@ export const MainPartsLayout: React.FC<Props> = ({
   const { intricateDatas, setIntricateDatas } = useContext(IntricateContext);
 
   const addOptionPart = (updateOptionPart: OptionPart) => {
+    //updateするメインパーツのデータの抽出
     const updateData = intricateDatas.filter((intricateData) => {
       return intricateData.folder === mainFolder;
     })[0];
 
     const updateFileData = updateData.fileDatas.map((fileData) => {
-      if (fileData.optionParts !== undefined) {
-        const index = fileData.optionParts.findIndex((value) => {
-          return (
-            value.folder === updateOptionPart.folder &&
-            value.name === updateOptionPart.name
-          );
-        });
-        if (index === -1) {
-          fileData.optionParts.push(updateOptionPart);
-        } else {
-          fileData.optionParts[index] = updateOptionPart;
-        }
-      }
-
-      return fileData.name === mainPartsName
-        ? {
-            ...fileData,
-            optionParts:
-              fileData.optionParts === undefined
-                ? [updateOptionPart]
-                : fileData.optionParts,
+      if (fileData.name === mainPartsName) {
+        if (fileData.optionParts !== undefined) {
+          const index = fileData.optionParts.findIndex((value) => {
+            return (
+              value.folder === updateOptionPart.folder &&
+              value.name === updateOptionPart.name
+            );
+          });
+          if (index === -1) {
+            fileData.optionParts.push(updateOptionPart);
+          } else {
+            fileData.optionParts[index] = updateOptionPart;
           }
-        : fileData;
+        }
+        return {
+          ...fileData,
+          optionParts:
+            fileData.optionParts === undefined
+              ? [updateOptionPart]
+              : fileData.optionParts,
+        };
+      } else {
+        return fileData;
+      }
     });
 
     const updateIntricateDatas = intricateDatas.map((intricateData) => {
@@ -77,22 +77,23 @@ export const MainPartsLayout: React.FC<Props> = ({
     })[0];
 
     const updateFileData = updateData.fileDatas.map((fileData) => {
-      if (fileData.optionParts !== undefined) {
-        const index = fileData.optionParts.findIndex((value) => {
-          return (
-            value.folder === updateOptionPart.folder &&
-            value.name === updateOptionPart.name
-          );
-        });
-        fileData.optionParts.splice(index, 1);
+      if (fileData.name === mainPartsName) {
+        if (fileData.optionParts !== undefined) {
+          const index = fileData.optionParts.findIndex((value) => {
+            return (
+              value.folder === updateOptionPart.folder &&
+              value.name === updateOptionPart.name
+            );
+          });
+          fileData.optionParts.splice(index, 1);
+        }
+        return {
+          ...fileData,
+          optionParts: fileData.optionParts,
+        };
+      } else {
+        return fileData;
       }
-
-      return fileData.name === mainPartsName
-        ? {
-            ...fileData,
-            optionParts: fileData.optionParts,
-          }
-        : fileData;
     });
 
     const updateIntricateDatas = intricateDatas.map((intricateData) => {
@@ -113,7 +114,9 @@ export const MainPartsLayout: React.FC<Props> = ({
             buttonFunc={deleteOptionPart}
           />
         )}
-        {!isTotal && <UpdateDatas buttonFunc={addOptionPart} />}
+        {!isTotal && (
+          <UpdateDatas buttonFunc={addOptionPart} mainFolder={mainFolder} />
+        )}
       </Col>
     </Row>
   );

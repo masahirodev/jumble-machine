@@ -1,4 +1,3 @@
-//TODO削除
 import { useContext } from "react";
 import { IntricateContext } from "../../IntricateContext";
 import { MainPartsLayout } from "./MainPartsLayout";
@@ -9,7 +8,6 @@ import Row from "react-bootstrap/Row";
 import { NavLink } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 
-//TODO sidebar選択から、folder情報を受け渡す
 export const OptionConfigTotal = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
   const next = () => {

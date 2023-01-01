@@ -202,6 +202,8 @@ def add_option_parts(option_datas, df_subDatas):
                 [df_subDatas_true.reset_index(drop=True), df], axis=1)
 
             df_subDatas = pd.concat([df_subDatas_true, df_subDatas_false])
+            df_subDatas = df_subDatas.reset_index(drop=True)
+
     return df_subDatas
 
 
@@ -237,13 +239,13 @@ def do_intricate_jumble(projectPath):
     df_subDatas = pd.concat(
         [df_subDatas_jumble, df_subDatas_fixed, df_subDatas_random], axis=1)
 
-    print(df_subDatas)
-
     # オプション
     df_subDatas = add_option_parts(option_datas, df_subDatas)
+    df_subDatas = df_subDatas.fillna("")
 
     factory = make_factory(df_subDatas)
-    blueprint = make_blueprint(df, df_subDatas, create_number, projectPath)
+#    df_subDatas = do_rename(projectPath, df_subDatas)
+    blueprint = make_blueprint(df, df_subDatas, create_number)
     updateData = {"factory": factory, "blueprint": blueprint}
     overwrite_json(updateData, projectPath)
     return "ok"

@@ -10,7 +10,6 @@ import Col from "react-bootstrap/Col";
 import { sidebarData } from "../../sidebarData";
 import { linkTo } from "../../../../hooks/linkTo";
 
-//TODO sidebar選択から、folder情報を受け渡す
 export const OptionConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
   const urlParams = useParams();
@@ -48,6 +47,7 @@ export const OptionConfig = () => {
           />
         );
       })}
+      <Button onClick={saveData}>データを保存</Button>
       <Button onClick={next}>データを保存してオプションパーツ設定に戻る</Button>
     </Container>
   );

@@ -123,8 +123,7 @@ def make_factory(df):
     return factory
 
 
-# メタデータを作成
-def make_blueprint(df, df_subDatas, create_number, projectPath):
+def do_rename(projectPath, df_subDatas):
     json_data = read_json(projectPath)
     rename_lists = [{x["folder"]:x["rename"]}
                     for x in json_data["designDatas"] if "rename" in x]
@@ -139,6 +138,12 @@ def make_blueprint(df, df_subDatas, create_number, projectPath):
     for i in range(0, len(remove_lists)):
         df_subDatas = df_subDatas.drop(columns=remove_lists[i])
 
+    return df_subDatas
+
+
+# メタデータを作成
+def make_blueprint(df, df_subDatas, create_number):
+
     # データ整理（df=>dict）
     dict_main = df.to_dict(orient="index")
 
@@ -146,8 +151,13 @@ def make_blueprint(df, df_subDatas, create_number, projectPath):
     for i in range(0, create_number):
         subDatas = []
         for j in list(df_subDatas.columns):
-            d = {"attribute": j, "value": os.path.splitext(df_subDatas[j][i])[
-                0]}
+            # データがない場合
+            if df_subDatas[j][i] == "":
+                value = ""
+            else:
+                value = os.path.splitext(df_subDatas[j][i])[0]
+
+            d = {"attribute": j, "value": value}
             subDatas.append(d)
 
         dm = dict_main[i]
@@ -170,7 +180,8 @@ def do_jumble(projectPath):
         parts_list, parts_sublist, pair_setlist, item_list, rare_list, create_number)
 
     factory = make_factory(df_subDatas)
-    blueprint = make_blueprint(df, df_subDatas, create_number, projectPath)
+    df_subDatas = do_rename(projectPath, df_subDatas)
+    blueprint = make_blueprint(df, df_subDatas, create_number)
 
     updateData = {"factory": factory, "blueprint": blueprint}
     overwrite_json(updateData, projectPath)

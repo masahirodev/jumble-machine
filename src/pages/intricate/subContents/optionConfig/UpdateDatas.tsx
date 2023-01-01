@@ -10,9 +10,10 @@ import { OptionPartsLayout } from "./OptionPartsLayout";
 
 type Props = {
   buttonFunc: (updateOptionPart: OptionPart) => void;
+  mainFolder: string;
 };
 
-export const UpdateDatas: React.FC<Props> = ({ buttonFunc }) => {
+export const UpdateDatas: React.FC<Props> = ({ buttonFunc, mainFolder }) => {
   const { intricateDatas } = useContext(IntricateContext);
 
   const init = "Open this select menu";
@@ -31,13 +32,37 @@ export const UpdateDatas: React.FC<Props> = ({ buttonFunc }) => {
 
   const [selectFolder, setSelectFolder] = useState<string>("init");
 
+  //既に選択されているペアパーツを除去;
+  const selectedOptionParts = intricateDatas
+    .filter((intricateData) => {
+      return intricateData.folder !== mainFolder;
+    })
+    .map((intricateData) => {
+      return intricateData.fileDatas;
+    })
+    .flat()
+    .map((fileData) => {
+      return fileData.optionParts;
+    })
+    .flat()
+    .filter((optionPart) => {
+      return optionPart?.folder === selectFolder;
+    })
+    .map((optionPart) => {
+      return optionPart?.name;
+    });
+
+  //選択結果からオプションパーツのdatasetを作成
   const selectOptionParts: OptionPart[] | undefined =
     selectFolder !== "init"
       ? optionDataLists
           .filter((value) => {
             return value.folder === selectFolder;
           })[0]
-          .fileDatas.map((fileData) => {
+          .fileDatas.filter((fileData) => {
+            return !selectedOptionParts.includes(fileData);
+          })
+          .map((fileData) => {
             return {
               folder: selectFolder,
               name: fileData,
