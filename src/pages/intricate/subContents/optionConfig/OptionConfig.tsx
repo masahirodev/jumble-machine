@@ -47,7 +47,9 @@ export const OptionConfig = () => {
           />
         );
       })}
-      <Button onClick={saveData}>データを保存</Button>
+      <Button onClick={saveData} style={{ marginRight: "1rem" }}>
+        データを保存
+      </Button>
       <Button onClick={next}>データを保存してオプションパーツ設定に戻る</Button>
     </Container>
   );

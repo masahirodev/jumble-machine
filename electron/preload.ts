@@ -32,7 +32,10 @@ contextBridge.exposeInMainWorld("fastApi", {
       .then()
       .catch((error) => {
         console.log(error);
-        return { status: false, response: "ipc通信エラー" };
+        return {
+          status: false,
+          response: "プログラムの処理にエラーが発生しました。",
+        };
       });
   },
   helloWorld: async (word: string) => {

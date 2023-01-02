@@ -14,6 +14,8 @@ def organize_data(projectPath):
     json_data = read_json(projectPath)
     intricate_datas = json_data["intricateDatas"]
 
+    sort_datas = {x["folder"]: x["id"] for x in intricate_datas}
+
     main_datas = [x for x in intricate_datas if
                   x["pairing"] == "main" or x["pairing"] == "bg"]
 
@@ -37,7 +39,7 @@ def organize_data(projectPath):
                 option_datas.append(d)
 
     prep_data = json_data["prep"]
-    return design_datas, prep_data, fixed_datas, random_datas, option_datas
+    return sort_datas, design_datas, prep_data, fixed_datas, random_datas, option_datas
 
 
 # 個数制限排出
@@ -198,17 +200,24 @@ def add_option_parts(option_datas, df_subDatas):
 
             df_subDatas_false = df_subDatas[df_subDatas[option["folder"]]
                                             != option["name"]]
+
             df_subDatas_true = pd.concat(
                 [df_subDatas_true.reset_index(drop=True), df], axis=1)
 
             df_subDatas = pd.concat([df_subDatas_true, df_subDatas_false])
+
             df_subDatas = df_subDatas.reset_index(drop=True)
 
     return df_subDatas
 
 
+def sort_columns(df_subDatas, sort_datas):
+    sort_columns = sorted(df_subDatas.columns, key=lambda x: sort_datas[x])
+    return df_subDatas[sort_columns]
+
+
 def do_intricate_jumble(projectPath):
-    design_datas, prep_data, fixed_datas, random_datas, option_datas = organize_data(
+    sort_datas, design_datas, prep_data, fixed_datas, random_datas, option_datas = organize_data(
         projectPath)
 
     create_number, nft_name, prep_data = configNFT(prep_data)
@@ -242,6 +251,7 @@ def do_intricate_jumble(projectPath):
     # オプション
     df_subDatas = add_option_parts(option_datas, df_subDatas)
     df_subDatas = df_subDatas.fillna("")
+    df_subDatas = sort_columns(df_subDatas, sort_datas)
 
     factory = make_factory(df_subDatas)
 #    df_subDatas = do_rename(projectPath, df_subDatas)

@@ -21,7 +21,7 @@ export const SampleModal: React.FC<Props> = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Image
-          src={"file:///" + props.image}
+          src={"file:///" + props.image + `?${new Date().getTime()}`}
           width="100%"
           height="100%"
         ></Image>

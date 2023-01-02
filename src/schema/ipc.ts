@@ -86,7 +86,7 @@ export type OperateIpc =
     }
   | {
       ipc: "operateFastApi";
-      method: "makeSample" | "jumble";
+      method: "makeSample" | "jumble" | "intricateJumble";
       arg: {
         projectId: number;
       };

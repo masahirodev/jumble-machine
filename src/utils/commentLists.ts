@@ -59,16 +59,25 @@ export const commentLists = [
     comment: "β版の間は、会員証のチェックはされません。",
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateSampleButton",
+    comment: [
+      "このボタンを押すと、ジェネラティブしたときのサンプルを表示させることが出来るよ。",
+      "どの組み合わせ・どの順番でジェネラティブするかは、下の表で設定してね。",
+    ],
   },
   {
-    target: "",
-    comment: "",
+    target: "commonSaveButton",
+    comment: [
+      "編集が終わったら、必ず保存ボタンを押してね。",
+      "今は、あえて、自動保存には対応してないんだ。",
+    ],
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateNext",
+    comment: [
+      "ジェネラティブの設定が終わったら、次へを押してね。",
+      "次へを押すと、ここで設定したデータが保存されて、次のステップに進むよ。",
+    ],
   },
   {
     target: "",

@@ -16,14 +16,14 @@ export const sidebarData = [
     link: "/intricate/mainConfig",
   },
   {
-    title: "オプションパーツ設定",
-    icon: "GrDomain",
-    link: "/intricate/optionConfigTotal",
-  },
-  {
     title: "並び替え設定",
     icon: "GrDomain",
     link: "/intricate/sortConfig",
+  },
+  {
+    title: "オプションパーツ設定",
+    icon: "GrDomain",
+    link: "/intricate/optionConfigTotal",
   },
 ] as const;
 

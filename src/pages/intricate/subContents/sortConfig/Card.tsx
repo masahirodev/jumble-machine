@@ -124,7 +124,7 @@ export const Card: React.FC<CardProps> = ({ data, index, moveCard }) => {
           justifyContent: "center",
         }}
       >
-        <BiMoveVertical />
+        {data.pairing !== "bg" && <BiMoveVertical />}
       </Col>
     </Row>
   );

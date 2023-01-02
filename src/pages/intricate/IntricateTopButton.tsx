@@ -6,11 +6,13 @@ import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { linkTo } from "../../hooks/linkTo";
 import { Sample } from "../../schema/intricate";
 import { SampleModal } from "../design/SampleModal";
+import { useComment } from "../../hooks/useComment";
+import { GlobalAlert } from "../../components/GlobalAlert";
 
 export const IntricateTopButton: React.FC = () => {
-  const { intricateDatas, projectId, sampleData, setComment } =
+  const { intricateDatas, projectId, sampleData } =
     useContext(IntricateContext);
-  const { setIpcStatus, operateIpc } = useOperateIpc();
+  const { ipcStatus, setIpcStatus, alert, operateIpc } = useOperateIpc();
 
   //サンプルのモーダル機能
   const [modalShow, setModalShow] = useState<boolean>(false);
@@ -21,9 +23,11 @@ export const IntricateTopButton: React.FC = () => {
     const sampleFile = intricateDatas.map((intricateData) => {
       const targetFolder =
         intricateData.combi !== "" ? intricateData.combi : intricateData.folder;
+
       const targetId = intricateDatas.filter(
         (intricateData) => intricateData.folder === targetFolder
       )[0].id;
+
       if (sampleData[targetId] !== undefined && sampleData[targetId] !== "") {
         return sampleData[targetId];
       } else {
@@ -33,7 +37,10 @@ export const IntricateTopButton: React.FC = () => {
       }
     });
     const sample: Sample = intricateDatas.map((intricateData, index) => {
-      return { folder: intricateData.folder, file: sampleFile[index] };
+      return {
+        folder: intricateData.folder,
+        file: sampleFile[index] !== "なし" ? sampleFile[index] : "",
+      };
     });
     const fetch = await operateIpc({
       ipc: "store",
@@ -101,6 +108,8 @@ export const IntricateTopButton: React.FC = () => {
     linkTo("prep");
   };
 
+  const { selectSetComment } = useComment();
+
   return (
     <>
       <LoadIntricateData />
@@ -111,12 +120,7 @@ export const IntricateTopButton: React.FC = () => {
             type="button"
             onClick={sampleFunc}
             className={"me-3"}
-            onMouseEnter={() =>
-              setComment([
-                "このボタンを押すと、ジェネラティブしたときのサンプルを表示させることが出来るよ。",
-                "どの組み合わせ・どの順番でジェネラティブするかは、下の表で設定してね。",
-              ])
-            }
+            onMouseEnter={() => selectSetComment("intricateSampleButton")}
           >
             サンプル
           </Button>
@@ -125,23 +129,13 @@ export const IntricateTopButton: React.FC = () => {
             type="button"
             onClick={saveData}
             className={"me-3"}
-            onMouseEnter={() =>
-              setComment([
-                "編集が終わったら、必ず保存ボタンを押してね。",
-                "今は、あえて、自動保存には対応してないんだ。",
-              ])
-            }
+            onMouseEnter={() => selectSetComment("commonSaveButton")}
           >
             データを保存
           </Button>
           <Button
             onClick={next}
-            onMouseEnter={() =>
-              setComment([
-                "ジェネラティブの設定が終わったら、次へを押してね。",
-                "次へを押すと、ここで設定したデータが保存されて、次のステップに進むよ。",
-              ])
-            }
+            onMouseEnter={() => selectSetComment("intricateNext")}
           >
             次へ
           </Button>
@@ -151,6 +145,11 @@ export const IntricateTopButton: React.FC = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         image={imagePath}
+      />
+      <GlobalAlert
+        ipcStatus={ipcStatus}
+        setIpcStatus={setIpcStatus}
+        alert={alert}
       />
     </>
   );

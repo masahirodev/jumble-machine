@@ -17,7 +17,6 @@ export const CardData: React.FC<Props> = ({ data }) => {
   const radio = (name: string) => {
     sampleData[data.id] = name;
     setSampleData(sampleData);
-    console.log(sampleData);
   };
 
   const Contents = ({ fileData }: { fileData: FileData }) => {

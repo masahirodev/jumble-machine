@@ -34,9 +34,6 @@ export const UpdateDatas: React.FC<Props> = ({ buttonFunc, mainFolder }) => {
 
   //既に選択されているペアパーツを除去;
   const selectedOptionParts = intricateDatas
-    .filter((intricateData) => {
-      return intricateData.folder !== mainFolder;
-    })
     .map((intricateData) => {
       return intricateData.fileDatas;
     })

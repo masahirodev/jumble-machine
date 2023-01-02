@@ -51,14 +51,15 @@ export const Preparation: React.FC = () => {
   };
 
   //次へ
-  const next = async () => {
-    checkConfirmation(projectId, "blueprint", () => jumbleFunc());
+  const next = async (method: "jumble" | "intricateJumble") => {
+    checkConfirmation(projectId, "blueprint", () => jumbleFunc(method));
   };
-  const jumbleFunc = async () => {
+
+  const jumbleFunc = async (method: "jumble" | "intricateJumble") => {
     await saveData();
     const fetch = await operateIpc({
       ipc: "operateFastApi",
-      method: "jumble",
+      method: method,
       arg: {
         projectId: projectId,
       },
@@ -77,6 +78,18 @@ export const Preparation: React.FC = () => {
           </Col>
           <Col className="col-4 d-flex align-items-center justify-content-end">
             <Button
+              className={"me-3"}
+              onClick={() => next("intricateJumble")}
+              onMouseEnter={() =>
+                setComment([
+                  "メタデータに書き込むデータの設定が終わったら、次へを押してね。",
+                  "次へを押すと、ここで設定したデータが保存されて、次のステップに進むよ。",
+                ])
+              }
+            >
+              intricate function
+            </Button>
+            <Button
               variant="success"
               type="button"
               onClick={checkAndSave}
@@ -91,7 +104,7 @@ export const Preparation: React.FC = () => {
               データを保存
             </Button>
             <Button
-              onClick={next}
+              onClick={() => next("jumble")}
               onMouseEnter={() =>
                 setComment([
                   "メタデータに書き込むデータの設定が終わったら、次へを押してね。",

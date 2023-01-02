@@ -10,6 +10,9 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useHandleForm } from "../../../../hooks/useHandleForm";
 
+import { GlobalAlert } from "../../../../components/GlobalAlert";
+import { IpcStatus } from "../../../../schema/ipc";
+
 type Pairing = { [key: string]: IntricateDataType["pairing"] };
 
 export const SettingFolder = () => {
@@ -34,12 +37,40 @@ export const SettingFolder = () => {
     setUpdateDatas: setPairing,
   });
 
+  //アラート関係
+  //TODO まとめる
+  const alert = { text: "背景は、必ず一つ選択してください", variant: "danger" };
+  const [ipcStatus, setIpcStatus] = useState<IpcStatus>("stop");
+
   //データを保存する
   const next = async () => {
-    intricateDatas.map((value) => {
-      return (value.pairing = pairing[value.folder]);
-    });
-    saveData();
+    if (Object.values(pairing).filter((v) => v === "bg").length !== 1) {
+      setIpcStatus("error");
+    } else {
+      intricateDatas.map((value) => {
+        return (value.pairing = pairing[value.folder]);
+      });
+
+      intricateDatas.filter((value) => {
+        return value.pairing === "bg";
+      })[0].id = 0;
+
+      intricateDatas
+        .filter((value) => {
+          return value.pairing !== "bg";
+        })
+        .map((value, index) => {
+          return (value.id = index + 1);
+        });
+
+      intricateDatas.sort((a, b) => {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
+      });
+
+      saveData();
+    }
   };
 
   const TwoPages = ({
@@ -100,6 +131,11 @@ export const SettingFolder = () => {
         </Row>
         <Button onClick={next}>データを保存して次に進む</Button>
       </Container>
+      <GlobalAlert
+        ipcStatus={ipcStatus}
+        setIpcStatus={setIpcStatus}
+        alert={alert}
+      />
     </>
   );
 };
