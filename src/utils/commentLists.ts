@@ -80,16 +80,20 @@ export const commentLists = [
     ],
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateEmissionDescription",
+    comment: [
+      "ここでは、ジェネラティブの排出設定ができるよ。",
+      "隣にある数字は、ジェネラティブしたときの排出率を設定することが出来るよ。",
+    ],
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateDescriptionSample",
+    comment:
+      "この欄では、サンプルデータの選択をすることが出来るよ。パーツを選んでサンプル機能を押してみてね。",
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateEmissionDescriptionOptionparts",
+    comment: ["ここでは、オプションパーツの排出設定ができるよ。"],
   },
   {
     target: "",

@@ -7,8 +7,9 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { NavLink, useParams } from "react-router-dom";
 import Col from "react-bootstrap/Col";
-import { sidebarData } from "../../sidebarData";
+import { sidebarData1 } from "../../sidebarData";
 import { linkTo } from "../../../../hooks/linkTo";
+import { OptionCardHeader } from "./OptionCardHeader";
 
 export const OptionConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
@@ -20,7 +21,7 @@ export const OptionConfig = () => {
     return value.folder === mainParts;
   })[0];
 
-  const backPage = sidebarData.filter((value) => {
+  const backPage = sidebarData1.filter((value) => {
     return value.title === "オプションパーツ設定";
   })[0].link;
 
@@ -30,23 +31,30 @@ export const OptionConfig = () => {
   };
 
   return (
-    <Container className="p-3">
-      <Row>
-        <Col>メインパーツ：{OptionConfigData.folder}</Col>
-        <Col style={{ display: "flex", justifyContent: "end" }}>
-          <NavLink to={backPage}>オプションパーツ設定に戻る</NavLink>
-        </Col>
-      </Row>
-      {OptionConfigData.fileDatas.map((fileData, index) => {
-        return (
-          <MainPartsLayout
-            mainFolder={OptionConfigData.folder}
-            mainPartsName={fileData.name}
-            optionParts={fileData.optionParts}
-            key={`optionConfig-${index}`}
-          />
-        );
-      })}
+    <Container className="py-3">
+      <Container>
+        <Row>
+          <Col>メインパーツ：{OptionConfigData.folder}</Col>
+          <Col style={{ display: "flex", justifyContent: "end" }}>
+            <NavLink to={backPage}>オプションパーツ設定に戻る</NavLink>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <OptionCardHeader />
+            {OptionConfigData.fileDatas.map((fileData, index) => {
+              return (
+                <MainPartsLayout
+                  mainFolder={OptionConfigData.folder}
+                  mainPartsName={fileData.name}
+                  optionParts={fileData.optionParts}
+                  key={`optionConfig-${index}`}
+                />
+              );
+            })}
+          </Col>
+        </Row>
+      </Container>
       <Button onClick={saveData} style={{ marginRight: "1rem" }}>
         データを保存
       </Button>

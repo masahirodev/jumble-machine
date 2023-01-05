@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { NavLink } from "react-router-dom";
 import Col from "react-bootstrap/Col";
+import { OptionCardHeader } from "./OptionCardHeader";
 
 export const OptionConfigTotal = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
@@ -30,6 +31,7 @@ export const OptionConfigTotal = () => {
                   </NavLink>
                 </Col>
               </Row>
+              <OptionCardHeader />
               {value.fileDatas.map((fileData, index) => {
                 return (
                   <MainPartsLayout

@@ -4,6 +4,7 @@ import { EditIntricateConfig } from "./EditIntricateConfig";
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import { IntricateMainHeader } from "./IntricateMainHeader";
 
 export const MainConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
@@ -12,6 +13,7 @@ export const MainConfig = () => {
   };
   return (
     <Container className="p-3">
+      <IntricateMainHeader />
       {intricateDatas
         .filter((value) => {
           return value.pairing === "main" || value.pairing === "bg";

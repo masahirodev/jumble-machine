@@ -7,9 +7,6 @@ import { SubLayout } from "../../components/SubLayout";
 export const Intricate: React.FC = () => {
   const { intricateDatas } = useContext(IntricateContext);
 
-  //TODO
-  console.log(intricateDatas);
-
   return (
     <GlobalLayoutContext
       buttonContents={<IntricateTopButton />}

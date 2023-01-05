@@ -1,7 +1,8 @@
-import { sidebarData } from "./sidebarData";
+import { sidebarData1, sidebarData2 } from "./sidebarData";
 import { useContext } from "react";
 import { IntricateContext } from "./IntricateContext";
 import { SidebarContents } from "./SidebarContents";
+import { useLocation } from "react-router-dom";
 
 export const Sidebar = () => {
   const { intricateDatas } = useContext(IntricateContext);
@@ -19,13 +20,19 @@ export const Sidebar = () => {
       link: `/intricate/optionConfig/${value}`,
     };
   });
+  const pathName = useLocation().pathname;
+  const result = pathName.includes("/intricate/optionConfig");
 
   return (
     <>
-      {sidebarData.map((menu, index) => {
+      {sidebarData1.map((menu, index) => {
         return <SidebarContents menu={menu} key={index} />;
       })}
-      {mainPartsDatas.map((menu, index) => {
+      {result &&
+        mainPartsDatas.map((menu, index) => {
+          return <SidebarContents menu={menu} key={index} />;
+        })}
+      {sidebarData2.map((menu, index) => {
         return <SidebarContents menu={menu} key={index} />;
       })}
     </>

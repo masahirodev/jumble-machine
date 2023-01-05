@@ -1,6 +1,6 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { CardStyle } from "./Card";
+import { CustomStyle } from "./EditIntricateConfig";
 import { MouseEventHandler } from "react";
 import { useComment } from "../../../../hooks/useComment";
 
@@ -11,37 +11,31 @@ type Data = {
   mouse: MouseEventHandler<HTMLElement> | undefined;
 };
 
-export const CardHeader: React.FC = () => {
+export const IntricateMainHeader: React.FC = () => {
   const { selectSetComment } = useComment();
 
   const data: Data[] = [
     {
-      class: "col-1",
-      style: { textAlign: "center" },
-      name: "分類",
+      class: "col-3",
+      style: { textAlign: "start" },
+      name: "フォルダーの名前",
       mouse: undefined,
     },
     {
       class: "col-3",
       style: { textAlign: "center" },
-      name: "フォルダ名",
-      mouse: undefined,
+      name: "ペア設定",
+      mouse: () => selectSetComment("designDescriptionPairParts"),
     },
     {
-      class: "col-7",
+      class: "col-6",
       style: { textAlign: "center" },
-      name: "パーツ一覧",
-      mouse: () => selectSetComment("intricateDescriptionSample"),
-    },
-    {
-      class: "col-1",
-      style: { textAlign: "center" },
-      name: "並び替え",
-      mouse: () => selectSetComment("designDescriptionSort"),
+      name: "排出設定",
+      mouse: () => selectSetComment("intricateEmissionDescription"),
     },
   ];
   return (
-    <Row style={{ ...CardStyle, display: "flex", alignItems: "center" }}>
+    <Row style={{ ...CustomStyle, display: "flex", alignItems: "center" }}>
       {data.map((value, index) => {
         return (
           <Col

@@ -22,7 +22,9 @@ export const SavedInDatas: React.FC<Props> = ({ optionParts, buttonFunc }) => {
       {folderList.map((folder, index) => {
         return (
           <Row key={index} className="align-items-center my-3">
-            <Col className="col-4">{folder}</Col>
+            <Col className="col-4" style={{ textAlign: "center" }}>
+              {folder}
+            </Col>
             <Col className="col-8">
               <OptionPartsLayout
                 optionParts={optionParts.filter((optionPart) => {

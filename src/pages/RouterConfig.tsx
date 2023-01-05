@@ -33,6 +33,8 @@ import Container from "react-bootstrap/esm/Container";
 import { DesignTop } from "./design/DesignTop";
 import { OptionConfigTotal } from "./intricate/subContents/optionConfig/OptionConfigTotal";
 import { SortConfig } from "./intricate/subContents/sortConfig/SortConfig";
+import { IntricateDescription } from "./intricate/subContents/IntricateDescription";
+import { RenameConfig } from "./intricate/subContents/renameConfig/RenameConfig";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -93,6 +95,10 @@ export const RouterConfig: React.FC = () => {
           ),
           children: [
             {
+              index: true,
+              element: <IntricateDescription />,
+            },
+            {
               path: "settingFolder",
               element: <SettingFolder />,
             },
@@ -101,7 +107,7 @@ export const RouterConfig: React.FC = () => {
               element: <MainConfig />,
             },
             {
-              path: "optionConfigTotal",
+              path: "optionConfig/Total",
               element: <OptionConfigTotal />,
             },
             {
@@ -111,6 +117,10 @@ export const RouterConfig: React.FC = () => {
             {
               path: "sortConfig",
               element: <SortConfig />,
+            },
+            {
+              path: "renameConfig",
+              element: <RenameConfig />,
             },
           ],
           loader: async () => {

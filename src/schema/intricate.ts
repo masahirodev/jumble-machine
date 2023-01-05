@@ -16,7 +16,6 @@ export type IntricateDataType = {
   folder: string;
   combi: string;
   fileDatas: FileData[];
-  rename?: string;
   property?: "default" | "random" | "fixed";
   pairing: "main" | "option" | "bg" | "delete";
 };
