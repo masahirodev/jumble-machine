@@ -1,7 +1,7 @@
 //TODO テストページ
 import { useState } from "react";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
 
 export const Test = () => {
   const [result, setResult] = useState<string>("");
@@ -25,17 +25,15 @@ export const Test = () => {
 
   return (
     <>
-      <div>test</div>
-      <Button onClick={button}>スタート</Button>
-      <Button onClick={button2}>成功</Button>
-      <Button onClick={button3}>失敗</Button>
-      <Image
-        src={
-          "file:///" +
-          "Users/eggdragon/Library/Application Support/jumble-machine/sample.png"
-        }
-      ></Image>
-      <div>{result}</div>
+      <Container className="px-5">
+        <Container>
+          <div>test</div>
+          <Button onClick={button}>スタート</Button>
+          <Button onClick={button2}>成功</Button>
+          <Button onClick={button3}>失敗</Button>
+          <div>{result}</div>
+        </Container>
+      </Container>
     </>
   );
 };

@@ -1,40 +1,44 @@
 import { useContext } from "react";
-import Col from "react-bootstrap/esm/Col";
-import Form from "react-bootstrap/esm/Form";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import { IntricateDataType } from "../../../../schema/intricate";
 import { IntricateContext } from "../../IntricateContext";
 
-export const RenameFolder = ({ data }: { data: IntricateDataType }) => {
+type Props = {
+  data: IntricateDataType;
+};
+
+export const RenameMainData: React.FC<Props> = ({ data }) => {
   const { intricateDatas, setIntricateDatas } = useContext(IntricateContext);
 
   const renameFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    data.combi = e.target.value;
+    data.rename = e.target.value;
+    setIntricateDatas(intricateDatas);
+  };
+  const removeFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === "false") {
+      data.notRemove = false;
+    } else {
+      data.notRemove = true;
+    }
     setIntricateDatas(intricateDatas);
   };
 
-  const propertyFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //    if (e.target.value === "false") {
-    //      data.property = false;
-    //    } else {
-    //      data.property = true;
-    //    }
-    //setIntricateDatas(intricateDatas);
-  };
   return (
     <>
       <Col className="col-2">
         <Form.Control
-          type={typeof data}
           name={"rename"}
           onChange={renameFunc}
-          defaultValue={data === undefined ? "" : data.combi}
+          defaultValue={data.rename === undefined ? "" : data.rename}
         />
       </Col>
+
       <Col className="col-1">
         <Form.Select
-          onChange={propertyFunc}
+          onChange={removeFunc}
           defaultValue={
-            data.property === undefined ? "true" : String(data.property)
+            data.notRemove === undefined ? "true" : String(data.notRemove)
           }
         >
           <option value={"true"}>必要</option>

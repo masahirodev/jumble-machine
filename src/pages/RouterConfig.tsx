@@ -4,11 +4,8 @@ import {
   RouterProvider,
   useRouteError,
 } from "react-router-dom";
-import { BlueprintProvider } from "./blueprint/BlueprintContext";
 import { Header } from "../components/Header";
-import { Blueprint } from "./blueprint/Blueprint";
 import { Top } from "./top/Top";
-import { Preparation } from "./preparation/Preparation";
 import { Export } from "./export/Export";
 import { Test } from "./test/Test";
 import {
@@ -22,11 +19,9 @@ import {
   topLoader,
 } from "../hooks/routerLoader";
 import { TestTop } from "./test/TestTop";
-import { Convert } from "./convert/Convert";
 import { Other } from "./other/Other";
-import { Intricate } from "./intricate/Intricate";
+import { IntricateTop } from "./intricate/IntricateTop";
 import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolder";
-import { IntricateProvider } from "./intricate/IntricateContext";
 import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
 import { OptionConfig } from "./intricate/subContents/optionConfig/OptionConfig";
 import Container from "react-bootstrap/esm/Container";
@@ -35,6 +30,11 @@ import { OptionConfigTotal } from "./intricate/subContents/optionConfig/OptionCo
 import { SortConfig } from "./intricate/subContents/sortConfig/SortConfig";
 import { IntricateDescription } from "./intricate/subContents/IntricateDescription";
 import { RenameConfig } from "./intricate/subContents/renameConfig/RenameConfig";
+import { PreparationTop } from "./preparation/PreparationTop";
+import { BlueprintTop } from "./blueprint/BlueprintTop";
+import { ConvertTop } from "./convert/ConvertTop";
+import { ExportTop } from "./export/ExportTop";
+import { OtherTop } from "./other/OtherTop";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -88,11 +88,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/intricate",
-          element: (
-            <IntricateProvider>
-              <Intricate />
-            </IntricateProvider>
-          ),
+          element: <IntricateTop />,
           children: [
             {
               index: true,
@@ -130,7 +126,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/prep",
-          element: <Preparation />,
+          element: <PreparationTop />,
           loader: async () => {
             return prepLoader();
           },
@@ -138,11 +134,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/blueprint",
-          element: (
-            <BlueprintProvider>
-              <Blueprint />
-            </BlueprintProvider>
-          ),
+          element: <BlueprintTop />,
           loader: async () => {
             return blueprintLoader();
           },
@@ -150,7 +142,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/convert",
-          element: <Convert />,
+          element: <ConvertTop />,
           loader: async () => {
             return convertLoader();
           },
@@ -158,7 +150,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/export",
-          element: <Export />,
+          element: <ExportTop />,
           loader: async () => {
             return exportLoader();
           },
@@ -166,7 +158,7 @@ export const RouterConfig: React.FC = () => {
         },
         {
           path: "/other",
-          element: <Other />,
+          element: <OtherTop />,
           loader: async () => {
             return importLoader();
           },

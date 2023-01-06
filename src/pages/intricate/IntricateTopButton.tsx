@@ -1,6 +1,6 @@
-import Button from "react-bootstrap/Button";
-import { LoadIntricateData } from "./LoadIntricateData";
 import { useContext, useState } from "react";
+
+import { LoadIntricateData } from "./LoadIntricateData";
 import { IntricateContext } from "./IntricateContext";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { linkTo } from "../../hooks/linkTo";
@@ -8,6 +8,8 @@ import { Sample } from "../../schema/intricate";
 import { SampleModal } from "../design/SampleModal";
 import { useComment } from "../../hooks/useComment";
 import { GlobalAlert } from "../../components/GlobalAlert";
+
+import Button from "react-bootstrap/Button";
 
 export const IntricateTopButton: React.FC = () => {
   const { intricateDatas, projectId, sampleData } =
@@ -93,8 +95,17 @@ export const IntricateTopButton: React.FC = () => {
   //組合せ総数の計算
   const calculationMaxQuantity = () => {
     const maxQuantity = intricateDatas
+      .filter((intricateData) => {
+        return (
+          intricateData.pairing === "main" || intricateData.pairing === "bg"
+        );
+      })
       .map((intricateData) => {
-        return intricateData.combi === "" ? intricateData.fileDatas.length : 1;
+        return intricateData.combi !== "" ||
+          intricateData.property === "random" ||
+          intricateData.property === "fixed"
+          ? 1
+          : intricateData.fileDatas.length;
       })
       .reduce((result, value) => {
         return result * value;

@@ -2,9 +2,10 @@ import { useContext } from "react";
 
 import { IntricateContext } from "../intricate/IntricateContext";
 import type { IntricateDataType } from "../../schema/intricate";
-import Button from "react-bootstrap/Button";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { checkConfirmation } from "../../hooks/checkConfirmation";
+
+import Button from "react-bootstrap/Button";
 
 type Props = {};
 

@@ -95,97 +95,99 @@ export const Start: React.FC = () => {
     <>
       {membership && (
         <Container className="px-5">
-          <Row>
-            <Form className="align-items-center">
-              <Form.Group as={Row} className="m-2">
-                <Form.Label column className="col-2">
-                  新規作成
-                </Form.Label>
-                <Col className="col-8">
-                  <Form.Control
-                    type="string"
-                    name={"projectName"}
-                    onChange={(e) => setProjectName(e.target.value)}
-                    value={projectName}
-                    placeholder="プロジェクトの名前を入力してね"
-                  />
-                </Col>
-                <Col>
-                  <Button onClick={newEdit}>次へ</Button>
-                </Col>
-              </Form.Group>
-            </Form>
+          <Container>
+            <Row>
+              <Form className="align-items-center">
+                <Form.Group as={Row} className="m-2">
+                  <Form.Label column className="col-2">
+                    新規作成
+                  </Form.Label>
+                  <Col className="col-8">
+                    <Form.Control
+                      type="string"
+                      name={"projectName"}
+                      onChange={(e) => setProjectName(e.target.value)}
+                      value={projectName}
+                      placeholder="プロジェクトの名前を入力してね"
+                    />
+                  </Col>
+                  <Col>
+                    <Button onClick={newEdit}>次へ</Button>
+                  </Col>
+                </Form.Group>
+              </Form>
 
-            <Form className="align-items-center">
-              <Form.Group as={Row} className="m-2">
-                <Form.Label column className="col-2">
-                  続きから始める
-                </Form.Label>
-                <Col className="col-8">
-                  <Form.Select
-                    onChange={(e) => {
-                      select(e, setEditProjectId);
-                    }}
-                    defaultValue={editProjectName}
-                    disabled={configDatas.project === undefined}
-                  >
-                    {configDatas.project !== undefined ? (
-                      configDatas.project.map((projectList) => (
-                        <option key={projectList.projectId}>
-                          {projectList.projectName}
-                        </option>
-                      ))
-                    ) : (
-                      <option>{initSelect}</option>
-                    )}
-                  </Form.Select>
-                </Col>
-                <Col>
-                  <Button
-                    onClick={continueEdit}
-                    disabled={configDatas.project === undefined}
-                  >
-                    次へ
-                  </Button>
-                </Col>
-              </Form.Group>
-            </Form>
-
-            <Form className="align-items-center">
-              <Form.Group as={Row} className="m-2">
-                <Form.Label column className="col-2">
-                  プロジェクトを削除する
-                </Form.Label>
-                <Col className="col-8">
-                  <Form.Select
-                    onChange={(e) => {
-                      select(e, setDelProjectId);
-                    }}
-                    defaultValue={initSelect}
-                    disabled={configDatas.project === undefined}
-                  >
-                    <option>{initSelect}</option>
-                    {configDatas.project !== undefined
-                      ? configDatas.project.map((projectList) => (
+              <Form className="align-items-center">
+                <Form.Group as={Row} className="m-2">
+                  <Form.Label column className="col-2">
+                    続きから始める
+                  </Form.Label>
+                  <Col className="col-8">
+                    <Form.Select
+                      onChange={(e) => {
+                        select(e, setEditProjectId);
+                      }}
+                      defaultValue={editProjectName}
+                      disabled={configDatas.project === undefined}
+                    >
+                      {configDatas.project !== undefined ? (
+                        configDatas.project.map((projectList) => (
                           <option key={projectList.projectId}>
                             {projectList.projectName}
                           </option>
                         ))
-                      : null}
-                  </Form.Select>
-                </Col>
-                <Col>
-                  <Button
-                    onClick={deleteProject}
-                    disabled={configDatas.project === undefined}
-                    variant={"danger"}
-                  >
-                    削除
-                  </Button>
-                </Col>
-              </Form.Group>
-            </Form>
-          </Row>
+                      ) : (
+                        <option>{initSelect}</option>
+                      )}
+                    </Form.Select>
+                  </Col>
+                  <Col>
+                    <Button
+                      onClick={continueEdit}
+                      disabled={configDatas.project === undefined}
+                    >
+                      次へ
+                    </Button>
+                  </Col>
+                </Form.Group>
+              </Form>
+
+              <Form className="align-items-center">
+                <Form.Group as={Row} className="m-2">
+                  <Form.Label column className="col-2">
+                    プロジェクトを削除する
+                  </Form.Label>
+                  <Col className="col-8">
+                    <Form.Select
+                      onChange={(e) => {
+                        select(e, setDelProjectId);
+                      }}
+                      defaultValue={initSelect}
+                      disabled={configDatas.project === undefined}
+                    >
+                      <option>{initSelect}</option>
+                      {configDatas.project !== undefined
+                        ? configDatas.project.map((projectList) => (
+                            <option key={projectList.projectId}>
+                              {projectList.projectName}
+                            </option>
+                          ))
+                        : null}
+                    </Form.Select>
+                  </Col>
+                  <Col>
+                    <Button
+                      onClick={deleteProject}
+                      disabled={configDatas.project === undefined}
+                      variant={"danger"}
+                    >
+                      削除
+                    </Button>
+                  </Col>
+                </Form.Group>
+              </Form>
+            </Row>
+          </Container>
         </Container>
       )}
     </>

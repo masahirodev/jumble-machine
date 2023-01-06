@@ -1,9 +1,15 @@
 import { useContext, useState } from "react";
 import { BlueprintContext } from "./BlueprintContext";
 
+import { TiDelete } from "react-icons/ti";
+import { HiPlusCircle } from "react-icons/hi";
+
 import { SubData } from "../../schema/data";
 import { ImageDialog } from "../../components/ImageDialog";
-import { AlertModal } from "../../components/AlertModal";
+import { tableHeader } from "../../schema/tableHeader";
+import { useOperateIpc } from "../../hooks/useOperateIpc";
+import { GlobalAlert } from "../../components/GlobalAlert";
+import { IpcStatus } from "../../schema/ipc";
 import NotFound from "../../assets/notFound.svg";
 
 import Button from "react-bootstrap/Button";
@@ -14,16 +20,10 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import InputGroup from "react-bootstrap/InputGroup";
 
-import { TiDelete } from "react-icons/ti";
-import { HiPlusCircle } from "react-icons/hi";
-import { tableHeader } from "../../schema/tableHeader";
-import { useOperateIpc } from "../../hooks/useOperateIpc";
-
 type Props = {
   onHide: () => void;
 };
 
-//TODO AlertModalの見直し
 export const EditComponents: React.FC<Props> = ({ onHide }) => {
   const {
     blueprintDatas,
@@ -37,10 +37,16 @@ export const EditComponents: React.FC<Props> = ({ onHide }) => {
     setExData,
   } = useContext(BlueprintContext);
 
-  //alert用
-  const [alertText, setAlertText] = useState<string>("");
-  const [alertShow, setAlertShow] = useState<boolean>(false);
-  const [variant, setVariant] = useState<string>("");
+  //アラート関係
+  //TODO まとめる
+  const initAlert = {
+    text: "",
+    variant: "",
+  };
+  const [alert, setAlert] = useState<{ text: string; variant: string }>(
+    initAlert
+  );
+  const [ipcStatus, setIpcStatus] = useState<IpcStatus>("stop");
 
   //フォーム
   const handleEditData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,10 +86,9 @@ export const EditComponents: React.FC<Props> = ({ onHide }) => {
   const addButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const nextId = addData(editData);
-    setAlertShow(true);
-    setAlertText(`ID No.${nextId}を追加しました。`);
-    setVariant("success");
-    onHide();
+    setAlert({ text: `ID No.${nextId}を追加しました。`, variant: "success" });
+    setIpcStatus("success");
+    //onHide();
   };
 
   //editdataの保存
@@ -163,9 +168,8 @@ export const EditComponents: React.FC<Props> = ({ onHide }) => {
       });
       setNewSubData(initNewSubData);
     } else {
-      setAlertText("重複する為、追加できません");
-      setVariant("danger");
-      setAlertShow(true);
+      setAlert({ text: "重複する為、追加できません", variant: "danger" });
+      setIpcStatus("error");
     }
   };
 
@@ -379,11 +383,10 @@ export const EditComponents: React.FC<Props> = ({ onHide }) => {
           Next
         </Button>
       </Container>
-      <AlertModal
-        alertText={alertText}
-        alertShow={alertShow}
-        setAlertShow={setAlertShow}
-        variant={variant}
+      <GlobalAlert
+        ipcStatus={ipcStatus}
+        setIpcStatus={setIpcStatus}
+        alert={alert}
       />
     </>
   );

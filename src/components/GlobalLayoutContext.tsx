@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 
 type Props = {
   mainContents: ReactElement;
-  buttonContents: ReactElement;
+  buttonContents: ReactElement | undefined;
 };
 
 //TODOcontextベースになっているbuttonをどうしてもprops受けする必要がある
@@ -33,18 +33,20 @@ export const GlobalLayoutContext: React.FC<Props> = ({
         >
           <CommentHeader />
         </Col>
-        <Col
-          className="col-4"
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            alignItems: "center",
-          }}
-        >
-          <Row>
-            <Col>{buttonContents}</Col>
-          </Row>
-        </Col>
+        {buttonContents && (
+          <Col
+            className="col-4"
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+            }}
+          >
+            <Row>
+              <Col>{buttonContents}</Col>
+            </Row>
+          </Col>
+        )}
       </Row>
       <Row
         style={{

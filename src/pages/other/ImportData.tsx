@@ -10,12 +10,11 @@ import { tableHeader } from "../../schema/tableHeader";
 import { checkConfirmation } from "../../hooks/checkConfirmation";
 
 type Props = {
-  setComment: React.Dispatch<React.SetStateAction<string | string[]>>;
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;
 };
 
 //TODO コメント
-export const ImportData: React.FC<Props> = ({ setComment, operateIpc }) => {
+export const ImportData: React.FC<Props> = ({ operateIpc }) => {
   const [projectId] = useLoaderData() as [number];
 
   //Excelデータを読み込む

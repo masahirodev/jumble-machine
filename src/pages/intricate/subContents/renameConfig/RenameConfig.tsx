@@ -3,44 +3,43 @@ import { IntricateContext } from "../../IntricateContext";
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
-import Form from "react-bootstrap/esm/Form";
-import { RenameFolder } from "./RenameFolder";
-
-const CustomStyle = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
-};
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { RenameMainData } from "./RenameMainData";
+import { RenameFileData } from "./RenameFileData";
+import { CardStyle } from "../sortConfig/Card";
+import { linkTo } from "../../../../hooks/linkTo";
+import { RenameConfigHeader } from "./RenameConfigHeader";
 
 export const RenameConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
   const next = () => {
     saveData();
+    linkTo("prep");
   };
-  const renameFunc = () => {};
 
   return (
     <Container className="p-3">
-      {intricateDatas.map((data, index) => {
+      <RenameConfigHeader />
+      {intricateDatas.map((intricateData, index) => {
         return (
           <Row
-            style={{ ...CustomStyle, display: "flex", alignItems: "center" }}
+            style={{ ...CardStyle, display: "flex", alignItems: "center" }}
+            key={index}
           >
-            <Col className="col-3">{data.folder}</Col>
-            <RenameFolder data={data} />
+            <Col className="col-3">{intricateData.folder}</Col>
+            <RenameMainData data={intricateData} />
             <Col className="col-6">
-              {data.fileDatas.map((data, index) => {
+              {intricateData.fileDatas.map((fileData, index) => {
                 return (
                   <Row key={index}>
-                    <Col>{data.name}</Col>
+                    <Col style={{ alignSelf: "center" }}>
+                      {fileData.name.split(".").slice(0, -1).join(".")}
+                    </Col>
                     <Col>
-                      <Form.Control
-                        name={"rename"}
-                        onChange={renameFunc}
-                        defaultValue={"qaa"}
+                      <RenameFileData
+                        data={fileData}
+                        folder={intricateData.folder}
                       />
                     </Col>
                   </Row>

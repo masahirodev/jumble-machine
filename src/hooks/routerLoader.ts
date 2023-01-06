@@ -46,12 +46,23 @@ export const prepLoader = async () => {
     String(projectId),
     "prep"
   );
+
   const maxQuantity: number | undefined = await window.storeApi.getStoreValue(
     String(projectId),
     "maxQuantity"
   );
 
-  return [prepData, maxQuantity !== undefined ? maxQuantity : 1, projectId];
+  const hasIntricateDatas: boolean = await window.storeApi.hasStoreValue(
+    String(projectId),
+    "intricateDatas"
+  );
+
+  return [
+    prepData,
+    maxQuantity !== undefined ? maxQuantity : 1,
+    projectId,
+    hasIntricateDatas,
+  ];
 };
 
 export const blueprintLoader = async () => {

@@ -7,16 +7,10 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { CardStyle } from "../sortConfig/Card";
 
 type Props = {
   data: IntricateDataType;
-};
-
-export const CustomStyle = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
 };
 
 export const EditIntricateConfig: React.FC<Props> = ({ data }) => {
@@ -98,7 +92,7 @@ export const EditIntricateConfig: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <Row style={{ ...CustomStyle, display: "flex", alignItems: "center" }}>
+    <Row style={{ ...CardStyle, display: "flex", alignItems: "center" }}>
       <Col className="col-3">{data.folder}</Col>
       <Col className="col-3">
         <Form.Select

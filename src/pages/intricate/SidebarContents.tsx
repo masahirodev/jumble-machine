@@ -1,9 +1,11 @@
+import { CSSProperties, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import type { SidebarDataType } from "../../utils/sidebarData";
+import { GetSvg } from "../../components/GetSvg";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import type { SidebarDataType } from "./sidebarData";
-import { NavLink } from "react-router-dom";
-import { CSSProperties, useState } from "react";
-import { GetSvg } from "../../components/GetSvg";
 
 const activeStyle = (isActive: boolean): CSSProperties => {
   return {

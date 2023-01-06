@@ -11,7 +11,7 @@ type Data = {
   mouse: MouseEventHandler<HTMLElement> | undefined;
 };
 
-export const IntricateMainHeader: React.FC = () => {
+export const RenameConfigHeader: React.FC = () => {
   const { selectSetComment } = useComment();
 
   const data: Data[] = [
@@ -22,16 +22,28 @@ export const IntricateMainHeader: React.FC = () => {
       mouse: undefined,
     },
     {
-      class: "col-3",
+      class: "col-2",
       style: { textAlign: "center" },
-      name: "ペア設定",
-      mouse: () => selectSetComment("designDescriptionPairParts"),
+      name: "パーツの名称",
+      mouse: () => selectSetComment("designDescriptionProperty"),
     },
     {
-      class: "col-6",
+      class: "col-1",
       style: { textAlign: "center" },
-      name: "排出設定",
-      mouse: () => selectSetComment("intricateEmissionDescription"),
+      name: "メタデータに使う？",
+      mouse: () => selectSetComment("designDescriptionPropertyDropdown"),
+    },
+    {
+      class: "col-3",
+      style: { textAlign: "center" },
+      name: "ファイルの名前",
+      mouse: undefined,
+    },
+    {
+      class: "col-3",
+      style: { textAlign: "center" },
+      name: "パーツの名前",
+      mouse: () => selectSetComment("designDescriptionProperty"),
     },
   ];
   return (

@@ -151,7 +151,6 @@ def select_random(parts_list, parts_sublist, pair_setlist, item_list, rare_list,
 
 # オプションパーツの追加
 def add_option_parts(option_datas, df_subDatas):
-
     for option in option_datas:
         # データ整理
         total = (df_subDatas[option["folder"]] == option["name"]).sum()
@@ -191,6 +190,7 @@ def add_option_parts(option_datas, df_subDatas):
 
         # データ整理
         l = list(itertools.chain.from_iterable(l))
+
         if len(l) != 0:
             random.shuffle(l)
             df = pd.DataFrame(l)
@@ -201,19 +201,63 @@ def add_option_parts(option_datas, df_subDatas):
             df_subDatas_false = df_subDatas[df_subDatas[option["folder"]]
                                             != option["name"]]
 
-            df_subDatas_true = pd.concat(
+            df_check = pd.concat(
                 [df_subDatas_true.reset_index(drop=True), df], axis=1)
 
-            df_subDatas = pd.concat([df_subDatas_true, df_subDatas_false])
+            # 重複処理
+            check_l = list(df_check.columns)
+            duplication_l = [x for x in set(check_l) if check_l.count(x) > 1]
+
+            if len(duplication_l) == 0:
+                df_subDatas_true = df_check
+            else:
+                df_subDatas_true = pd.concat(
+                    [df_subDatas_true.drop(duplication_l, axis=1).reset_index(drop=True), df], axis=1)
+
+            df_subDatas = pd.concat(
+                [df_subDatas_true, df_subDatas_false])
 
             df_subDatas = df_subDatas.reset_index(drop=True)
 
     return df_subDatas
 
 
+# 並び替え
 def sort_columns(df_subDatas, sort_datas):
     sort_columns = sorted(df_subDatas.columns, key=lambda x: sort_datas[x])
     return df_subDatas[sort_columns]
+
+
+# 名前の変更
+def do_rename(projectPath, df_subDatas):
+    json_data = read_json(projectPath)
+    rename_lists = [{x["folder"]:x["rename"]}
+                    for x in json_data["intricateDatas"] if "rename" in x]
+
+    rename_lists2 = []
+    for x in json_data["intricateDatas"]:
+        for y in x["fileDatas"]:
+            if "rename" in y:
+                d = {"folder": x["folder"],
+                     "file": y["name"], "rename": y["rename"]}
+                rename_lists2.append(d)
+
+    remove_lists = [x["folder"] for x in json_data["intricateDatas"]
+                    if "notRemove" in x and x["notRemove"] is False]
+
+    for x in rename_lists2:
+        df_subDatas[x["folder"]] = df_subDatas[x["folder"]].where(
+            df_subDatas[x["folder"]] != x["file"], x["rename"])
+
+    for i in range(0, len(rename_lists)):
+        df_subDatas = df_subDatas.rename(columns=rename_lists[i])
+        remove_lists = [rename_lists[i][x]
+                        if x in rename_lists[i] else x for x in remove_lists]
+
+    for i in range(0, len(remove_lists)):
+        df_subDatas = df_subDatas.drop(columns=remove_lists[i])
+
+    return df_subDatas
 
 
 def do_intricate_jumble(projectPath):
@@ -224,7 +268,6 @@ def do_intricate_jumble(projectPath):
     df = create_metadata(prep_data, create_number, nft_name)
 
     # 重み付け排出
-    # TODO 数が足りない
     parts_list, parts_sublist, pair_setlist, item_list, rare_list = create_data_set(
         design_datas)
 
@@ -253,8 +296,11 @@ def do_intricate_jumble(projectPath):
     df_subDatas = df_subDatas.fillna("")
     df_subDatas = sort_columns(df_subDatas, sort_datas)
 
+    # シャッフル
+    df_subDatas = df_subDatas.sample(frac=1, ignore_index=True)
+
     factory = make_factory(df_subDatas)
-#    df_subDatas = do_rename(projectPath, df_subDatas)
+    df_subDatas = do_rename(projectPath, df_subDatas)
     blueprint = make_blueprint(df, df_subDatas, create_number)
     updateData = {"factory": factory, "blueprint": blueprint}
     overwrite_json(updateData, projectPath)

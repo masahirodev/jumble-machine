@@ -1,6 +1,6 @@
-import { ConvertContents } from "../pages/convert/ConvertConfig";
 import { Sample } from "../pages/design/DesignConfig";
 import { FolderContents } from "../pages/design/LoadDesignData";
+import { ConvertContents } from "./convert";
 import { Data } from "./data";
 import { DesignDataType } from "./design";
 import { ExportData } from "./exportData";

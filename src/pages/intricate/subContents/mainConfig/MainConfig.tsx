@@ -5,11 +5,13 @@ import { EditIntricateConfig } from "./EditIntricateConfig";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { IntricateMainHeader } from "./IntricateMainHeader";
+import { linkTo } from "../../../../hooks/linkTo";
 
 export const MainConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
   const next = () => {
     saveData();
+    linkTo("/intricate/optionConfig/Total");
   };
   return (
     <Container className="p-3">

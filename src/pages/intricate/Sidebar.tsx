@@ -1,8 +1,9 @@
-import { sidebarData1, sidebarData2 } from "./sidebarData";
 import { useContext } from "react";
+import { useLocation } from "react-router-dom";
+
 import { IntricateContext } from "./IntricateContext";
 import { SidebarContents } from "./SidebarContents";
-import { useLocation } from "react-router-dom";
+import { sidebarData1, sidebarData2 } from "../../utils/sidebarData";
 
 export const Sidebar = () => {
   const { intricateDatas } = useContext(IntricateContext);

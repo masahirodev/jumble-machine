@@ -1,4 +1,4 @@
-import { IntricateLinks } from "../pages/intricate/sidebarData";
+import { IntricateLinks } from "../utils/sidebarData";
 import { InternalLinks } from "../utils/internalLinks";
 
 //TODO pathの統一

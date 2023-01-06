@@ -1,18 +1,10 @@
-import { PageTemplate } from "./PageTemplate";
+import { GlobalLayoutContext } from "../../components/GlobalLayoutContext";
 import { Test } from "./Test";
 
 export const TestTop = () => {
   return (
     <>
-      <PageTemplate
-        button={<div>test</div>}
-        contents={
-          <>
-            <Test />
-          </>
-        }
-        comment="test"
-      />
+      <GlobalLayoutContext buttonContents={undefined} mainContents={<Test />} />
     </>
   );
 };

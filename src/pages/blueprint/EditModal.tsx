@@ -1,8 +1,9 @@
 import { useContext } from "react";
+
 import { BlueprintContext } from "./BlueprintContext";
+import { EditComponents } from "./EditComponents";
 
 import Modal from "react-bootstrap/Modal";
-import { EditComponents } from "./EditComponents";
 
 type Props = {
   show: boolean;

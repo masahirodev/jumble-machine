@@ -1,5 +1,5 @@
 import { atom, useRecoilState } from "recoil";
-import { commentLists } from "../utils/commentLists";
+import { commentLists } from "../text/commentLists";
 import { RECOIL_KEYS } from "../utils/recoilKey";
 
 export type CommentList = typeof commentLists[number]["target"];

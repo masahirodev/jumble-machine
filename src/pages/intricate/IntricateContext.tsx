@@ -1,5 +1,6 @@
 import { createContext, useState, ReactNode } from "react";
 import { useLoaderData } from "react-router-dom";
+
 import { GlobalAlert } from "../../components/GlobalAlert";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import type { IntricateDataType, SampleData } from "../../schema/intricate";

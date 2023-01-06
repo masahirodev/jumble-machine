@@ -2,7 +2,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { MouseEventHandler } from "react";
 import { useComment } from "../../../../hooks/useComment";
-import { CustomStyle } from "./MainPartsLayout";
+import { CardStyle } from "../sortConfig/Card";
 
 type Data = {
   class: string;
@@ -35,7 +35,7 @@ export const OptionCardHeader: React.FC = () => {
     },
   ];
   return (
-    <Row style={{ ...CustomStyle, display: "flex", alignItems: "center" }}>
+    <Row style={{ ...CardStyle, display: "flex", alignItems: "center" }}>
       {data.map((value, index) => {
         return (
           <Col

@@ -8,11 +8,13 @@ import Row from "react-bootstrap/Row";
 import { NavLink } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import { OptionCardHeader } from "./OptionCardHeader";
+import { linkTo } from "../../../../hooks/linkTo";
 
 export const OptionConfigTotal = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);
   const next = () => {
     saveData();
+    linkTo("/intricate/sortConfig");
   };
   return (
     <Container className="py-3">

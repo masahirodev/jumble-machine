@@ -2,16 +2,16 @@ import { useContext, useState } from "react";
 
 import type { IntricateDataType } from "../../../../schema/intricate";
 import { IntricateContext } from "../../IntricateContext";
+import { useHandleForm } from "../../../../hooks/useHandleForm";
+import { GlobalAlert } from "../../../../components/GlobalAlert";
+import { IpcStatus } from "../../../../schema/ipc";
+import { linkTo } from "../../../../hooks/linkTo";
 
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useHandleForm } from "../../../../hooks/useHandleForm";
-
-import { GlobalAlert } from "../../../../components/GlobalAlert";
-import { IpcStatus } from "../../../../schema/ipc";
 
 type Pairing = { [key: string]: IntricateDataType["pairing"] };
 
@@ -70,6 +70,7 @@ export const SettingFolder = () => {
       });
 
       saveData();
+      linkTo("/intricate/mainConfig");
     }
   };
 
