@@ -54,8 +54,9 @@ const launchPython = () => {
     pythonProcess = execFile(
       path.join(
         __dirname,
-        "../../../py_dist/main/",
-        process.platform === "darwin" ? "main" : "main.exe"
+        process.platform === "darwin"
+          ? "../../../py_dist/main/main"
+          : "..\\..\\..\\py_dist\\main\\main.exe"
       ),
       [
         "--host",

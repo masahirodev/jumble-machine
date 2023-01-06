@@ -41,7 +41,9 @@ const launchPython = () => {
         console.log("Python process started in dev mode");
     }
     else {
-        pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, "../../../py_dist/main/", process.platform === "darwin" ? "main" : "main.exe"), [
+        pythonProcess = (0, child_process_1.execFile)(path.join(__dirname, process.platform === "darwin"
+            ? "../../../py_dist/main/main"
+            : "..\\..\\..\\py_dist\\main\\main.exe"), [
             "--host",
             PY_HOST,
             "--port",
