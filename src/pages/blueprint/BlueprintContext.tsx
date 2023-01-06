@@ -121,6 +121,7 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     page,
     blueprintDatas
   );
+
   const saveData = async () => {
     await saveDataFunc();
   };

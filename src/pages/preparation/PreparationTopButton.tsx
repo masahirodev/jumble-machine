@@ -17,7 +17,6 @@ export const PreparationTopButton = () => {
     useOperateIpc();
 
   const [method, setMethod] = useState<boolean>(hasIntricateDatas);
-  console.log(maxQuantity);
   //データを保存する
   const saveData = async () => {
     await operateIpc({

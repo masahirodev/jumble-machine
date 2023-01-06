@@ -11,7 +11,6 @@ export const CommentHeader = () => {
     selectSetComment(location.pathname);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
-  console.log(location.pathname);
 
   return (
     <>

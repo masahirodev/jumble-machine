@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { BlueprintContext } from "./BlueprintContext";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
@@ -33,18 +33,22 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
   const [runNumber, setRunNumber] = useState<number>(0);
   const [completedImage, setCompletedImage] = useState<string>("");
 
+  //TODO 運用変更中
   //最大最小
-  const arrayId = blueprintDatas
-    .filter(
-      (blueprintData) =>
-        blueprintData.imagePath === "" || blueprintData.imagePath === undefined
-    )
-    .map((blueprintData) => blueprintData.id);
+  //  const arrayId = blueprintDatas
+  //    .filter(
+  //      (blueprintData) =>
+  //        blueprintData.imagePath === "" || blueprintData.imagePath === undefined
+  //    )
+  //    .map((blueprintData) => blueprintData.id);
+  //
+  //  //TODO最大値・最小値オーバーフロー
+  //  const maxId =
+  //    arrayId[arrayId.length - 1] !== undefined ? arrayId[arrayId.length - 1] : 0;
+  //  const minId = arrayId[0] !== undefined ? arrayId[0] : 0;
 
-  //TODO最大値・最小値オーバーフロー
-  const maxId =
-    arrayId[arrayId.length - 1] !== undefined ? arrayId[arrayId.length - 1] : 0;
-  const minId = arrayId[0] !== undefined ? arrayId[0] : 0;
+  const minId = blueprintDatas[0]["id"];
+  const maxId = blueprintDatas[blueprintDatas.length - 1]["id"];
 
   const initFactoryData = {
     start: minId,
@@ -53,6 +57,11 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
   };
 
   const [factoryData, setFactoryData] = useState<FactoryData>(initFactoryData);
+
+  useEffect(() => {
+    setFactoryData(initFactoryData);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blueprintDatas]);
 
   //入力フォーム用
   const handleEditData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,8 +103,10 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
   const startFactory = async () => {
     if (
       factoryData.start >= 0 &&
+      factoryData.start >= minId &&
       factoryData.start < factoryData.stop &&
       factoryData.stop > 0 &&
+      factoryData.stop <= maxId &&
       factoryData.exportPath !== ""
     ) {
       setRunFactory(true);
@@ -126,10 +137,10 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
         setRunNumber(i);
         await factory(i);
       }
+      saveData();
     } else {
       alert("入力内容がおかしいよ");
     }
-    saveData();
     setRunFactory(false);
     onHide();
   };
