@@ -20,7 +20,11 @@ export const SampleModal: React.FC<Props> = (props) => {
         <Modal.Title id="contained-modal-title-vcenter">サンプル</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Image src={props.image} width="100%" height="100%"></Image>
+        <Image
+          src={"file:///" + props.image + `?${new Date().getTime()}`}
+          width="100%"
+          height="100%"
+        ></Image>
       </Modal.Body>
     </Modal>
   );

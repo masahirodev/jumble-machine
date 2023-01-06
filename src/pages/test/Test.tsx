@@ -1,8 +1,15 @@
 //TODO テストページ
+import { useState } from "react";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 export const Test = () => {
-  const button = async () => {};
+  const [result, setResult] = useState<string>("");
+  const word: string = "Hello";
+  const button = async () => {
+    const fetch: string = await window.fastApi.helloWorld(word);
+    setResult(fetch);
+  };
   const button2 = () => {};
   const button3 = () => {};
 
@@ -18,11 +25,15 @@ export const Test = () => {
 
   return (
     <>
-      <div>test</div>
-      <Button onClick={button}>スタート</Button>
-      <Button onClick={button2}>成功</Button>
-      <Button onClick={button3}>失敗</Button>
-      <div>test</div>
+      <Container className="px-5">
+        <Container>
+          <div>test</div>
+          <Button onClick={button}>スタート</Button>
+          <Button onClick={button2}>成功</Button>
+          <Button onClick={button3}>失敗</Button>
+          <div>{result}</div>
+        </Container>
+      </Container>
     </>
   );
 };

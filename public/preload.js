@@ -31,8 +31,14 @@ electron_1.contextBridge.exposeInMainWorld("fastApi", {
             .then()
             .catch((error) => {
             console.log(error);
-            return { status: false, response: "ipc通信エラー" };
+            return {
+                status: false,
+                response: "プログラムの処理にエラーが発生しました。",
+            };
         });
+    },
+    helloWorld: async (word) => {
+        return await electron_1.ipcRenderer.invoke("helloWorld", word);
     },
 });
 //# sourceMappingURL=preload.js.map

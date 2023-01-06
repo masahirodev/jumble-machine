@@ -1,9 +1,9 @@
 import type { OperateIpc, IpcStatus } from "../schema/ipc";
 
 export type Actions = {
-  type: OperateIpc["ipc"] | "web3";
+  type: OperateIpc["ipc"] | "web3" | "other";
   payload: {
-    method: OperateIpc["method"] | "login" | "preopen";
+    method: OperateIpc["method"] | "login" | "preopen" | "other";
     status: IpcStatus;
     message?: string | undefined;
   };
@@ -109,6 +109,18 @@ export const alertReducer = (
             payload.message !== undefined && payload.status === "error"
               ? payload.message
               : ipcAlertTexts[payload.method][payload.status],
+          variant: variants[payload.status],
+        },
+      };
+
+    case "other":
+      return {
+        ...alert,
+        ...{
+          text:
+            payload.message !== undefined && payload.status === "error"
+              ? payload.message
+              : "",
           variant: variants[payload.status],
         },
       };

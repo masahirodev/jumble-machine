@@ -18,6 +18,7 @@ export const PaginationComponents = () => {
     page,
     setPage,
     projectId,
+    saveData,
   } = useContext(BlueprintContext);
 
   const pageList = [];
@@ -35,6 +36,7 @@ export const PaginationComponents = () => {
   }, [data, setBlueprintDatas]);
 
   const ChangePage = (selectPage: number) => {
+    saveData();
     setTotalData(totalData - currentPerPage + blueprintDatas.length);
     setPage(selectPage);
   };

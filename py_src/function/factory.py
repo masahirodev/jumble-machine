@@ -18,10 +18,13 @@ def run_factory(projectPath, id, export_path):
     sample_path = os.path.join(export_path, str(id) + ".png")
 
     for i in range(2, len(target_parts)):
-        img_path = os.path.join(
-            import_path, target_parts[i], target[target_parts[i]])
-        img = Image.open(img_path)
-        base_image.paste(img, (0, 0), img)
-        base_image.save(sample_path)
+
+        if target[target_parts[i]] != "":
+            img_path = os.path.join(
+                import_path, target_parts[i], target[target_parts[i]])
+
+            img = Image.open(img_path)
+            base_image.paste(img, (0, 0), img)
+            base_image.save(sample_path)
 
     return sample_path

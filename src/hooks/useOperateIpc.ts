@@ -1,5 +1,10 @@
 import { useCallback, useReducer, useState } from "react";
-import { AlertProps, alertReducer, initialState } from "./alertReducer";
+import {
+  Actions,
+  AlertProps,
+  alertReducer,
+  initialState,
+} from "./alertReducer";
 import type { OperateIpc, IpcStatus, ReturnOperateIpc } from "../schema/ipc";
 
 export type ReturnUseOperateIpc = {
@@ -8,6 +13,7 @@ export type ReturnUseOperateIpc = {
   setIpcStatus: React.Dispatch<React.SetStateAction<IpcStatus>>;
   alert: AlertProps;
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;
+  dispatch: React.Dispatch<Actions>;
 };
 
 export const useOperateIpc = (): ReturnUseOperateIpc => {
@@ -63,5 +69,5 @@ export const useOperateIpc = (): ReturnUseOperateIpc => {
     return fetch();
   }, []);
 
-  return { result, ipcStatus, setIpcStatus, alert, operateIpc };
+  return { result, ipcStatus, setIpcStatus, alert, operateIpc, dispatch };
 };

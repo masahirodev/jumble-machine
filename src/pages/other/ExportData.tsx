@@ -9,12 +9,11 @@ import Button from "react-bootstrap/Button";
 import { tableHeader } from "../../schema/tableHeader";
 
 type Props = {
-  setComment: React.Dispatch<React.SetStateAction<string | string[]>>;
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;
 };
 
 //TODO コメント
-export const ExportData: React.FC<Props> = ({ setComment, operateIpc }) => {
+export const ExportData: React.FC<Props> = ({ operateIpc }) => {
   const [projectId] = useLoaderData() as [number];
 
   //blueprintデータを取り出す

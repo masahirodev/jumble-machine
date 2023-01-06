@@ -25,6 +25,8 @@ export declare global {
         Extract<OperateIpc, { ipc: "operateFastApi" }>,
         "ipc"
       >) => ReturnOperateIpc;
+      //test
+      helloWorld: (word: string) => string;
     };
 
     electronApi: {

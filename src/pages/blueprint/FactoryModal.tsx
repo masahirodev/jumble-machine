@@ -1,5 +1,8 @@
 import { useContext, useState } from "react";
 
+import { BlueprintContext } from "./BlueprintContext";
+import { useOperateIpc } from "../../hooks/useOperateIpc";
+
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -8,8 +11,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
-import { BlueprintContext } from "./BlueprintContext";
-import { useOperateIpc } from "../../hooks/useOperateIpc";
 
 type Props = {
   show: boolean;
@@ -224,7 +225,7 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
           <Modal.Body className="d-flex justify-content-center">
             {completedImage !== "" && (
               <Image
-                src={completedImage}
+                src={"file:///" + completedImage}
                 height={300}
                 alt={"完成後のイメージ画像"}
               ></Image>

@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
-import { Data, SubData } from "../../schema/data";
-import Image from "react-bootstrap/Image";
-
 import { FaTrashAlt } from "react-icons/fa";
-import "./style.css";
+
+import { Data, SubData } from "../../schema/data";
 import { EditModal } from "./EditModal";
 import { BlueprintContext } from "./BlueprintContext";
 import { changeTableHeader } from "../../schema/tableHeader";
-import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/esm/Button";
+
+import "./style.css";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 type Props = {
   switchingDisplay: boolean;
@@ -86,7 +87,7 @@ export const BlueprintTable: React.FC<Props> = ({ switchingDisplay }) => {
     <Container fluid className="px-5">
       <div
         className="table-responsive"
-        style={{ height: "75vh", border: "groove" }}
+        style={{ height: "72vh", border: "groove" }}
       >
         <table className="table table-Light table-hover text-center fs-5 table-bordered border-light sticky_table">
           <thead className="table-light sticky-top bg-white">
@@ -154,7 +155,7 @@ export const BlueprintTable: React.FC<Props> = ({ switchingDisplay }) => {
                               "not found"
                             ) : (
                               <Image
-                                src={blueprintData[value]}
+                                src={"file:///" + blueprintData[value]}
                                 height={100}
                                 width="auto"
                               ></Image>

@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-import { SpeechBalloons } from "../../components/SpeechBalloons";
-
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import { ExportImage } from "./ExportImage";
 import { Step } from "../../components/Step";
 import { SaveImage, serverSets } from "./SaveImage";
@@ -15,6 +9,9 @@ import { initExportData, ExportData } from "../../schema/exportData";
 import { GlobalAlert } from "../../components/GlobalAlert";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { useHandleForm } from "../../hooks/useHandleForm";
+import { useComment } from "../../hooks/useComment";
+
+import Container from "react-bootstrap/Container";
 
 export const Export: React.FC = () => {
   const [savedExportData, projectId, hasBlueprint] = useLoaderData() as [
@@ -35,13 +32,6 @@ export const Export: React.FC = () => {
       arg: { name: String(projectId), key: "export", value: exportData },
     });
   };
-
-  //コメント
-  const initComment: string = hasBlueprint
-    ? "ここでは、NFTにするために必要なデータの整理を行っていくよ。"
-    : "まずは、ジェネラティブしてね！";
-
-  const [comment, setComment] = useState<string | string[]>(initComment);
 
   const { handleEditData, handleSelectData, handleCheckData, handleSetData } =
     useHandleForm<ExportData>({
@@ -112,68 +102,56 @@ export const Export: React.FC = () => {
     }
   };
 
+  //コメント
+  const { selectSetComment } = useComment();
+  if (!hasBlueprint) {
+    selectSetComment("noBlueprintDatas");
+  }
+
   return (
     <>
-      <Container fluid className="px-5">
-        <Row>
-          <Col>
-            <SpeechBalloons comment={comment} />
-          </Col>
-          <Col className="col-4 d-flex align-items-center justify-content-end">
-            <Button
-              variant="success"
-              type="button"
-              onClick={saveData}
-              className={"me-3"}
-              onMouseEnter={() =>
-                setComment([
-                  "編集が終わったら、必ず保存ボタンを押してね。今は、あえて、自動保存には対応してないんだ。",
-                ])
+      {hasBlueprint && (
+        <Container className="px-5">
+          <Container>
+            <Step
+              title={"Step1.画像データを整理する"}
+              children={
+                <ExportImage
+                  handleEditData={handleEditData}
+                  exportData={exportData}
+                  adjustImage={adjustImage}
+                />
               }
-            >
-              データを保存
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <Step
-          title={"Step1.画像データを整理する"}
-          children={
-            <ExportImage
-              handleEditData={handleEditData}
-              exportData={exportData}
-              adjustImage={adjustImage}
+              color={exportData.step === 1 ? "#0d6efd" : ""}
+              size={"min"}
             />
-          }
-          color={exportData.step === 1 ? "#0d6efd" : ""}
-          size={"min"}
-        />
-      </Container>
-      <Container className="py-3">
-        <Step
-          title={"Step2.サーバーにデータを保存する"}
-          children={
-            <SaveImage
-              handleEditData={handleEditData}
-              handleSelectData={handleSelectData}
-              handleCheckData={handleCheckData}
-              exportData={exportData}
-              saveImage={saveImage}
+          </Container>
+          <Container className="py-3">
+            <Step
+              title={"Step2.サーバーにデータを保存する"}
+              children={
+                <SaveImage
+                  handleEditData={handleEditData}
+                  handleSelectData={handleSelectData}
+                  handleCheckData={handleCheckData}
+                  exportData={exportData}
+                  saveImage={saveImage}
+                />
+              }
+              color={exportData.step === 2 ? "#0d6efd" : ""}
+              size={"min"}
             />
-          }
-          color={exportData.step === 2 ? "#0d6efd" : ""}
-          size={"min"}
-        />
-      </Container>
-      <Container>
-        <Step
-          title={"Step3.メタデータを出力する"}
-          children={<ExportMetadata projectId={projectId} />}
-          color={exportData.step === 3 ? "#0d6efd" : ""}
-          size={"min"}
-        />
-      </Container>
+          </Container>
+          <Container>
+            <Step
+              title={"Step3.メタデータを出力する"}
+              children={<ExportMetadata projectId={projectId} />}
+              color={exportData.step === 3 ? "#0d6efd" : ""}
+              size={"min"}
+            />
+          </Container>
+        </Container>
+      )}
       <GlobalAlert
         ipcStatus={ipcStatus}
         setIpcStatus={setIpcStatus}

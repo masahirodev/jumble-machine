@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { Data, initData } from "../../schema/data";
 import { useSaveDatas } from "../../hooks/useSaveDatas";
 import { GlobalAlert } from "../../components/GlobalAlert";
+import { useComment } from "../../hooks/useComment";
 
 type BlueprintContextType = {
   blueprintDatas: Data[];
@@ -25,6 +26,8 @@ type BlueprintContextType = {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   reloadData: () => Promise<void>;
+  switchingDisplay: boolean;
+  setSwitchingDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type Props = {
@@ -43,6 +46,12 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
   const [blueprintDatas, setBlueprintDatas] = useState(initDatas);
   const [editData, setEditData] = useState(initDatas[0]);
   const [totalData, setTotalData] = useState(initTotalData);
+
+  //コメント
+  const { selectSetComment } = useComment();
+  if (blueprintDatas[0].id === -1) {
+    selectSetComment("noBlueprintDatas");
+  }
 
   const initExData = initDatas
     .map((initData) => {
@@ -126,6 +135,9 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     setBlueprintDatas(dataStore);
   };
 
+  //画面切替
+  const [switchingDisplay, setSwitchingDisplay] = useState<boolean>(false);
+
   const value = {
     blueprintDatas,
     setBlueprintDatas,
@@ -146,6 +158,8 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     page,
     setPage,
     reloadData,
+    switchingDisplay,
+    setSwitchingDisplay,
   };
   return (
     <>

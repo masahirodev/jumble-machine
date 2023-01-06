@@ -1,5 +1,8 @@
+import { IntricateLinks } from "../utils/sidebarData";
 import { InternalLinks } from "../utils/internalLinks";
 
-export const linkTo = (internalLink: InternalLinks) => {
-  window.location.href = `#/${internalLink}`;
+//TODO pathの統一
+export const linkTo = (internalLink: InternalLinks | IntricateLinks) => {
+  window.location.href =
+    internalLink.charAt(0) === "/" ? `#${internalLink}` : `#/${internalLink}`;
 };

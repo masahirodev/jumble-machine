@@ -16,10 +16,11 @@ def make_sample(projectPath, export_path):
     sample_path = os.path.join(export_path, "sample.png")
 
     for i in range(1, len(sample_data)):
-        img_path = os.path.join(
-            import_path, sample_data[i]["folder"], sample_data[i]["file"])
-        img = Image.open(img_path)
-        base_image.paste(img, (0, 0), img)
-        base_image.save(sample_path)
+        if sample_data[i]["file"] != "":
+            img_path = os.path.join(
+                import_path, sample_data[i]["folder"], sample_data[i]["file"])
+            img = Image.open(img_path)
+            base_image.paste(img, (0, 0), img)
+            base_image.save(sample_path)
 
     return sample_path

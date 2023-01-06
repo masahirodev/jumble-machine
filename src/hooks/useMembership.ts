@@ -5,6 +5,7 @@ import { AbiItem } from "web3-utils";
 import { IpcStatus } from "../schema/ipc";
 import { ContractSet } from "../utils/contractSet";
 import { AlertProps, alertReducer, initialState } from "./alertReducer";
+import { useComment } from "./useComment";
 
 type ReturnCheckCoinType = {
   checkMembership: boolean | undefined;
@@ -27,14 +28,14 @@ export const useMembership = ({
 }: Props): ReturnCheckCoinType => {
   const [status, setStatus] = useState<Status>("stop");
   const [alert, dispatch] = useReducer(alertReducer, initialState);
+  const { selectSetComment } = useComment();
 
   const web3 = new Web3(rpcURL!!);
   const contract = new web3.eth.Contract(abi as AbiItem[], contractAddress);
 
   //devmodeのとき自動ログイン;
-  const [checkMembership, setCheckMembership] = useState<boolean | undefined>(
-    process.env.NODE_ENV === "development"
-  );
+  const [checkMembership, setCheckMembership] = useState<boolean | undefined>();
+  //    process.env.NODE_ENV === "development"
 
   //TODO useOperateIpcに統合
   useEffect(() => {
@@ -53,6 +54,7 @@ export const useMembership = ({
           type: "web3",
           payload: { method: "preopen", status: "success" },
         });
+        selectSetComment("preopen");
 
         return setCheckMembership(true);
       } else {

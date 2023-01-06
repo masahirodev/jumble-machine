@@ -24,6 +24,18 @@ export const designLoader = async () => {
   return [data, projectId];
 };
 
+export const intricateLoader = async () => {
+  const projectId: number = await window.storeApi.getStoreValue(
+    "config",
+    "edit"
+  );
+  const data: DesignDataType[] = await window.storeApi.getStoreValue(
+    String(projectId),
+    "intricateDatas"
+  );
+  return [data, projectId];
+};
+
 export const prepLoader = async () => {
   const projectId: number = await window.storeApi.getStoreValue(
     "config",
@@ -34,12 +46,23 @@ export const prepLoader = async () => {
     String(projectId),
     "prep"
   );
+
   const maxQuantity: number | undefined = await window.storeApi.getStoreValue(
     String(projectId),
     "maxQuantity"
   );
 
-  return [prepData, maxQuantity !== undefined ? maxQuantity : 1, projectId];
+  const hasIntricateDatas: boolean = await window.storeApi.hasStoreValue(
+    String(projectId),
+    "intricateDatas"
+  );
+
+  return [
+    prepData,
+    maxQuantity !== undefined ? maxQuantity : 1,
+    projectId,
+    hasIntricateDatas,
+  ];
 };
 
 export const blueprintLoader = async () => {
