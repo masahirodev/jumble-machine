@@ -38,7 +38,11 @@ export const Contents: React.FC = () => {
 
   return (
     <>
-      {intricateDatas.map((intricateData, i) => renderCard(intricateData, i))}
+      {intricateDatas
+        .filter((intricateData) => {
+          return intricateData.pairing !== "delete";
+        })
+        .map((intricateData, i) => renderCard(intricateData, i))}
     </>
   );
 };
