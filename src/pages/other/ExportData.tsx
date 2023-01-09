@@ -36,6 +36,26 @@ export const ExportData: React.FC<Props> = ({ operateIpc }) => {
     }
   };
 
+  //Excelデータを出力する
+  const exportIntricateDatas = async () => {
+    const fetch = await operateIpc({
+      ipc: "operateShowOpen",
+      method: "getFolder",
+      arg: {},
+    });
+
+    if (fetch.status) {
+      await operateIpc({
+        ipc: "operateFastApi",
+        method: "exportIntricateDatas",
+        arg: {
+          projectId: projectId,
+          exportFolderPath: fetch.response as string,
+        },
+      });
+    }
+  };
+
   const htmlSet = [
     {
       title: "excelファイルでblueprintデータを取り出す",
@@ -45,6 +65,10 @@ export const ExportData: React.FC<Props> = ({ operateIpc }) => {
       title: "csvファイルでblueprintデータを取り出す",
       func: () => exportData("csv"),
     },
+    //    {
+    //      title: "excelファイルでIntricateデータを取り出す",
+    //      func: () => exportIntricateDatas(),
+    //    },
   ];
 
   return (

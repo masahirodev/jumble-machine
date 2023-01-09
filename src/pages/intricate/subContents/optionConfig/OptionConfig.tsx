@@ -31,34 +31,38 @@ export const OptionConfig = () => {
   };
 
   return (
-    <Container className="py-3">
-      <Container>
-        <Row>
-          <Col>メインパーツ：{OptionConfigData.folder}</Col>
-          <Col style={{ display: "flex", justifyContent: "end" }}>
-            <NavLink to={backPage}>オプションパーツ設定に戻る</NavLink>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <OptionCardHeader />
-            {OptionConfigData.fileDatas.map((fileData, index) => {
-              return (
-                <MainPartsLayout
-                  mainFolder={OptionConfigData.folder}
-                  mainPartsName={fileData.name}
-                  optionParts={fileData.optionParts}
-                  key={`optionConfig-${index}`}
-                />
-              );
-            })}
-          </Col>
-        </Row>
+    <>
+      <Container className="py-3">
+        <Container>
+          <Row>
+            <Col>メインパーツ：{OptionConfigData.folder}</Col>
+            <Col style={{ display: "flex", justifyContent: "end" }}>
+              <NavLink to={backPage}>オプションパーツ設定に戻る</NavLink>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <OptionCardHeader />
+              {OptionConfigData.fileDatas.map((fileData, index) => {
+                return (
+                  <MainPartsLayout
+                    mainFolder={OptionConfigData.folder}
+                    mainPartsName={fileData.name}
+                    optionParts={fileData.optionParts}
+                    key={`optionConfig-${index}`}
+                  />
+                );
+              })}
+            </Col>
+          </Row>
+        </Container>
+        <Button onClick={saveData} style={{ marginRight: "1rem" }}>
+          データを保存
+        </Button>
+        <Button onClick={next}>
+          データを保存してオプションパーツ設定に戻る
+        </Button>
       </Container>
-      <Button onClick={saveData} style={{ marginRight: "1rem" }}>
-        データを保存
-      </Button>
-      <Button onClick={next}>データを保存してオプションパーツ設定に戻る</Button>
-    </Container>
+    </>
   );
 };

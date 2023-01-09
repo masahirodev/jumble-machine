@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Top } from "./top/Top";
-import { Export } from "./export/Export";
 import { Test } from "./test/Test";
 import {
   blueprintLoader,
@@ -19,7 +18,6 @@ import {
   topLoader,
 } from "../hooks/routerLoader";
 import { TestTop } from "./test/TestTop";
-import { Other } from "./other/Other";
 import { IntricateTop } from "./intricate/IntricateTop";
 import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolder";
 import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
@@ -35,6 +33,7 @@ import { BlueprintTop } from "./blueprint/BlueprintTop";
 import { ConvertTop } from "./convert/ConvertTop";
 import { ExportTop } from "./export/ExportTop";
 import { OtherTop } from "./other/OtherTop";
+import { DataConfig } from "./intricate/subContents/dataConfig/DataConfig";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -117,6 +116,10 @@ export const RouterConfig: React.FC = () => {
             {
               path: "renameConfig",
               element: <RenameConfig />,
+            },
+            {
+              path: "dataConfig",
+              element: <DataConfig />,
             },
           ],
           loader: async () => {

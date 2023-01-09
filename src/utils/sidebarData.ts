@@ -33,6 +33,11 @@ export const sidebarData2 = [
     icon: "GrDomain",
     link: "/intricate/renameConfig",
   },
+  {
+    title: "データ出力",
+    icon: "GrDomain",
+    link: "/intricate/dataConfig",
+  },
 ] as const;
 
 export type IntricateLinks =

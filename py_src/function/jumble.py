@@ -118,7 +118,7 @@ def create_metadata(prep_data, create_number, nft_name):
 def make_factory(df):
     d = df.to_dict(orient="index")
     factory = []
-    for i in range(0, len(d)):
+    for i in df.index:
         factory.append({**{"id": i}, **d[i]})
     return factory
 
@@ -142,13 +142,13 @@ def do_rename(projectPath, df_subDatas):
 
 
 # メタデータを作成
-def make_blueprint(df, df_subDatas, create_number):
+def make_blueprint(df, df_subDatas):
 
     # データ整理（df=>dict）
     dict_main = df.to_dict(orient="index")
 
     table = []
-    for i in range(0, create_number):
+    for i in df.index:
         subDatas = []
         for j in list(df_subDatas.columns):
             # データがない場合
@@ -181,7 +181,7 @@ def do_jumble(projectPath):
 
     factory = make_factory(df_subDatas)
     df_subDatas = do_rename(projectPath, df_subDatas)
-    blueprint = make_blueprint(df, df_subDatas, create_number)
+    blueprint = make_blueprint(df, df_subDatas)
 
     updateData = {"factory": factory, "blueprint": blueprint}
     overwrite_json(updateData, projectPath)

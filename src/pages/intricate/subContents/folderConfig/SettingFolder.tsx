@@ -39,7 +39,10 @@ export const SettingFolder = () => {
 
   //アラート関係
   //TODO まとめる
-  const alert = { text: "背景は、必ず一つ選択してください", variant: "danger" };
+  const alert = {
+    text: "背景やオプションパーツは、必ず一つ選択してください",
+    variant: "danger",
+  };
   const [ipcStatus, setIpcStatus] = useState<IpcStatus>("stop");
 
   //データを保存する

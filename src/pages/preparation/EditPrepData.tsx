@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { useComment } from "../../hooks/useComment";
 import { useContext } from "react";
 import { PrepContext } from "./PrepContext";
+import { AddOption } from "./AddOption";
 
 export const EditPrepData: React.FC = () => {
   const { prepData, setPrepData, maxQuantity } = useContext(PrepContext);
@@ -68,6 +69,7 @@ export const EditPrepData: React.FC = () => {
           })}
         </Container>
       </Container>
+      <AddOption />
     </>
   );
 };

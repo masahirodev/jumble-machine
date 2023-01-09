@@ -1,5 +1,6 @@
 import { Sample } from "../pages/design/DesignConfig";
 import { FolderContents } from "../pages/design/LoadDesignData";
+import { AddOption } from "./add";
 import { ConvertContents } from "./convert";
 import { Data } from "./data";
 import { DesignDataType } from "./design";
@@ -30,7 +31,8 @@ export type OperateIpc =
           | DesignDataType[]
           | Sample
           | number
-          | IntricateDataType[];
+          | IntricateDataType[]
+          | AddOption;
       };
     }
   | {
@@ -86,7 +88,11 @@ export type OperateIpc =
     }
   | {
       ipc: "operateFastApi";
-      method: "makeSample" | "jumble" | "intricateJumble";
+      method:
+        | "makeSample"
+        | "jumble"
+        | "intricateJumble"
+        | "addIntricateJumble";
       arg: {
         projectId: number;
       };
@@ -151,6 +157,22 @@ export type OperateIpc =
         sortList: string[];
         exportPath: string;
         export_format: "excel" | "csv";
+      };
+    }
+  | {
+      ipc: "operateFastApi";
+      method: "exportIntricateDatas";
+      arg: {
+        projectId: number;
+        exportFolderPath: string;
+      };
+    }
+  | {
+      ipc: "operateFastApi";
+      method: "importIntricateDatas";
+      arg: {
+        projectId: number;
+        filePath: string;
       };
     };
 

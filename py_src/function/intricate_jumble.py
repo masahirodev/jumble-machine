@@ -1,5 +1,4 @@
 # coding: utf-8
-import os
 import pandas as pd
 import random
 import numpy as np
@@ -260,7 +259,8 @@ def do_rename(projectPath, df_subDatas):
     return df_subDatas
 
 
-def do_intricate_jumble(projectPath):
+
+def result_jumble_datas(projectPath):
     sort_datas, design_datas, prep_data, fixed_datas, random_datas, option_datas = organize_data(
         projectPath)
 
@@ -298,10 +298,19 @@ def do_intricate_jumble(projectPath):
 
     # シャッフル
     df_subDatas = df_subDatas.sample(frac=1, ignore_index=True)
+    return df, df_subDatas
 
+
+def update_blueprint(projectPath, df, df_subDatas):
     factory = make_factory(df_subDatas)
     df_subDatas = do_rename(projectPath, df_subDatas)
-    blueprint = make_blueprint(df, df_subDatas, create_number)
+    blueprint = make_blueprint(df, df_subDatas)
     updateData = {"factory": factory, "blueprint": blueprint}
+    return updateData
+
+
+def do_intricate_jumble(projectPath):
+    df, df_subDatas = result_jumble_datas(projectPath)
+    updateData = update_blueprint(projectPath, df, df_subDatas)
     overwrite_json(updateData, projectPath)
     return "ok"

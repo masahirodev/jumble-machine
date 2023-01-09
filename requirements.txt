@@ -6,3 +6,4 @@ pillow
 pandas
 openpyxl
 numpy
+autopep8

@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { tableHeader } from "../../schema/tableHeader";
 import { checkConfirmation } from "../../hooks/checkConfirmation";
+import { linkTo } from "../../hooks/linkTo";
 
 type Props = {
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;
@@ -57,15 +58,44 @@ export const ImportData: React.FC<Props> = ({ operateIpc }) => {
     }
   };
 
+  //Excelデータを読み込む
+  const importIntricateDatas = async () => {
+    const fetch = await window.electronApi.operateShowOpen({
+      method: "getFile",
+      arg: {
+        fileName: "エクセルファイル",
+        extension: "xlsx",
+      },
+    });
+    if (fetch.status) {
+      await operateIpc({
+        ipc: "operateFastApi",
+        method: "importIntricateDatas",
+        arg: {
+          projectId: projectId,
+          filePath: fetch.response as string,
+        },
+      });
+      linkTo("intricate");
+    }
+  };
+
   const htmlSet = [
     {
-      title: "excelファイルからデータを取り込む",
+      title: "excelファイルのblueprintデータを取り込む",
       func: () =>
         checkConfirmation(projectId, "blueprint", () => importExcel()),
     },
     {
       title: "複数のJsonファイルからデータを取り込む",
       func: () => checkConfirmation(projectId, "blueprint", () => importJson()),
+    },
+    {
+      title: "excelファイルのIntricateデータを取り込む",
+      func: () =>
+        checkConfirmation(projectId, "intricateDatas", () =>
+          importIntricateDatas()
+        ),
     },
   ];
 

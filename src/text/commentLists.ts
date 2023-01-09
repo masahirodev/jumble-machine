@@ -257,8 +257,11 @@ export const commentLists = [
     ],
   },
   {
-    target: "",
-    comment: "",
+    target: "addOptionFunc",
+    comment: [
+      "再度ジェネラティブを行い、追加したいデータ数に応じてランダムに抽出します。",
+      "同じ組み合わせが発生しないようにチェックをかけているため必ず追加されるデータの量が減る可能性があります。",
+    ],
   },
   {
     target: "",

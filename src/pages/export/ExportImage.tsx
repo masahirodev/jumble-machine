@@ -31,7 +31,7 @@ export const ExportImage: React.FC<Props> = ({
               defaultValue={exportData.name}
             />
           </Col>
-          <Form.Label column className="col-2">
+          <Form.Label column className="col-3">
             何番から連番スタートにする？
           </Form.Label>
           <Col className="col-1">
@@ -43,7 +43,7 @@ export const ExportImage: React.FC<Props> = ({
               defaultValue={exportData.startTokenId}
             />
           </Col>
-          <Form.Label column className="col-3">
+          <Form.Label column className="col-2">
             {"⇒ "}
             {exportData.name}
             {exportData.startTokenId}.png

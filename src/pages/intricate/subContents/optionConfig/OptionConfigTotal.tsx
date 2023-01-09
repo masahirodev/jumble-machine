@@ -16,6 +16,7 @@ export const OptionConfigTotal = () => {
     saveData();
     linkTo("/intricate/sortConfig");
   };
+
   return (
     <Container className="py-3">
       {intricateDatas

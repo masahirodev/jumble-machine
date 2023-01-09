@@ -13,6 +13,9 @@ from function.import_json import import_json
 from function.import_excel import import_excel
 from function.export_blueprint import export_data
 from function.intricate_jumble import do_intricate_jumble
+from function.add_jumble import add_intricate_jumble
+from function.export_intricate import export_intricate
+from function.import_intricate import import_intricate
 
 router = APIRouter()
 
@@ -187,3 +190,38 @@ async def helloWorld(data: TestData) -> str:
 @router.post("/intricateJumble")
 async def intricateJumble(data: JumbleData) -> str:
     return do_intricate_jumble(data.projectPath)
+
+
+@router.post("/addIntricateJumble")
+async def addIntricateJumble(data: JumbleData) -> str:
+    return add_intricate_jumble(data.projectPath)
+
+
+class ExportIntricateArg(BaseModel):
+    projectId: int
+    exportFolderPath: str
+
+
+class ExportIntricateData(BaseModel):
+    projectPath: str
+    arg: ExportIntricateArg
+
+
+@router.post("/exportIntricateDatas")
+async def exportIntricateDatas(data: ExportIntricateData) -> str:
+    return export_intricate(data.projectPath, data.arg.exportFolderPath)
+
+
+class ImportIntricateArg(BaseModel):
+    projectId: int
+    filePath: str
+
+
+class ImportIntricateData(BaseModel):
+    projectPath: str
+    arg: ImportIntricateArg
+
+
+@router.post("/importIntricateDatas")
+async def importIntricateDatas(data: ImportIntricateData) -> str:
+    return import_intricate(data.projectPath, data.arg.filePath)

@@ -117,10 +117,7 @@ export const alertReducer = (
       return {
         ...alert,
         ...{
-          text:
-            payload.message !== undefined && payload.status === "error"
-              ? payload.message
-              : "",
+          text: payload.message !== undefined ? payload.message : "",
           variant: variants[payload.status],
         },
       };
