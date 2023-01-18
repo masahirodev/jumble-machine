@@ -2,7 +2,7 @@
   "author": "eggdragon",
   "description": "This is Generative NFT creation tool",
   "name": "jumble-machine",
-  "version": "1.1.1",
+  "version": "1.1.3",
   "private": true,
   "dependencies": {
     "@web3-react/core": "^8.0.35-beta.0",
@@ -40,6 +40,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:python": "pyinstaller -y ./py_src/main.spec",
+    "dist:win": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 -c.extraMetadata.main=build/electron.js",
     "dist:mac": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --x64 -c.extraMetadata.main=build/electron.js",
     "dist:mac-m1": "npm run build:python && npm run build && tsc -p electron && electron-builder --mac --arm64 -c.extraMetadata.main=build/electron.js",
     "dist:linux": "npm run build:python && npm run build && tsc -p electron && electron-builder -l -c.extraMetadata.main=build/electron.js",
