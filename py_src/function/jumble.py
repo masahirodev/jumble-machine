@@ -58,14 +58,18 @@ def create_data_set(design_datas):
     return parts_list, parts_sublist, pair_setlist, item_list, rare_list
 
 
-# 重み付け排出
-def jumble_func(parts_list, parts_sublist, pair_setlist, item_list, rare_list, create_number):
-
+# レアリストからウェイトリスト作る時に使用（現在レアリスト不使用）
+def convert_from_rare_list_to_weight_list(rare_list):
     weight_list = rare_list
     for i in range(len(weight_list)):
         max_rare = max(rare_list[i])
         for n in range(len(weight_list[i])):
             weight_list[i][n] = max_rare + 1 - weight_list[i][n]
+    return weight_list
+
+
+# 重み付け排出
+def jumble_func(parts_list, parts_sublist, pair_setlist, item_list, weight_list, create_number):
 
     # パーツをチョイス
     parts_choice = []

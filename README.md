@@ -106,4 +106,4 @@ uvicorn main:app --reload
 | 仮想環境スタート　       | `.\venv\Scripts\activate`         | `source ./venv/bin/activate`      |
 | 仮想環境ストップ         | `deactivate`                      | `deactivate`                      |
 | パッケージのインストール | `pip install -r requirements.txt` | `pip install -r requirements.txt` |
-| パッケージの書き出し     | `pip freeze`                      | `pip freeze`                      |
+| パッケージの書き出し     | `pip freeze -> requirements.txt`  | `pip freeze -> requirements.txt`  |
