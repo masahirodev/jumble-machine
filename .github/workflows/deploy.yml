@@ -29,9 +29,10 @@ jobs:
           node-version: 18
 
       - run: npm ci
-      - run: npm run dist:win-publish
-        with:
-          github_token: ${{ secrets.github_token }}
+      - name: publish
+        run: npm run dist:win-publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       #Electron Builder Action
       #https://github.com/samuelmeuli/action-electron-builder
