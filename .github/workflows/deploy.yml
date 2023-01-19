@@ -37,8 +37,7 @@ jobs:
         with:
           draft: true
           files: |
-            dist/*.exe
-            latest.yml
+            dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
