@@ -30,30 +30,16 @@ jobs:
 
       - run: npm ci
 
-      #Electron Builder Action
-      #https://github.com/samuelmeuli/action-electron-builder
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+      - run: npm run dist:win-never
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-# Old
-#      - run: npm run dist:win-never
-#      - name: create release
-#        uses: softprops/action-gh-release@v1
-#        if: startsWith(github.ref, 'refs/tags/')
-#        with:
-#          draft: true
-#          files: |
-#            dist/*
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          draft: true
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 # m1対応していない
 #  deploy_on_mac:
 #    runs-on: macos-latest

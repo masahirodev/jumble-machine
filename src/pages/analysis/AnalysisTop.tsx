@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
 
 import { GlobalLayoutContext } from "../../components/GlobalLayoutContext";
 import { SubLayout } from "../../components/SubLayout";
