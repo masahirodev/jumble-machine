@@ -37,7 +37,7 @@ jobs:
           files: |
             dist/*.exe
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # m1対応していない
   #  deploy_on_mac:
@@ -71,4 +71,4 @@ jobs:
   #        files: |
   #          dist/*.dmg
   #      env:
-  #        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
