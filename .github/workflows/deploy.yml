@@ -29,9 +29,7 @@ jobs:
           node-version: 18
 
       - run: npm ci
-      - run: npm run dist:win
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - run: npm run dist:win-never
 
       - name: create release
         uses: softprops/action-gh-release@v1
