@@ -1,7 +1,7 @@
 import { CSSProperties, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import type { SidebarDataType } from "../../utils/sidebarData";
+import type { SidebarDataType } from "../../utils/intricateSidebarData";
 import { GetSvg } from "../../components/GetSvg";
 
 import Row from "react-bootstrap/Row";
@@ -18,7 +18,11 @@ const activeStyle = (isActive: boolean): CSSProperties => {
   };
 };
 
-export const SidebarContents = ({ menu }: { menu: SidebarDataType }) => {
+export const AnalysisSidebarContents = ({
+  menu,
+}: {
+  menu: SidebarDataType;
+}) => {
   const [color, setColor] = useState("");
 
   return (

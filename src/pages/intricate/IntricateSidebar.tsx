@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 import { IntricateContext } from "./IntricateContext";
-import { SidebarContents } from "./SidebarContents";
-import { sidebarData1, sidebarData2 } from "../../utils/sidebarData";
+import { IntricateSidebarContents } from "./IntricateSidebarContents";
+import { sidebarData1, sidebarData2 } from "../../utils/intricateSidebarData";
 
-export const Sidebar = () => {
+export const IntricateSidebar = () => {
   const { intricateDatas } = useContext(IntricateContext);
   const mainPartsLists = intricateDatas
     .filter((value) => {
@@ -27,14 +27,14 @@ export const Sidebar = () => {
   return (
     <>
       {sidebarData1.map((menu, index) => {
-        return <SidebarContents menu={menu} key={index} />;
+        return <IntricateSidebarContents menu={menu} key={index} />;
       })}
       {result &&
         mainPartsDatas.map((menu, index) => {
-          return <SidebarContents menu={menu} key={index} />;
+          return <IntricateSidebarContents menu={menu} key={index} />;
         })}
       {sidebarData2.map((menu, index) => {
-        return <SidebarContents menu={menu} key={index} />;
+        return <IntricateSidebarContents menu={menu} key={index} />;
       })}
     </>
   );

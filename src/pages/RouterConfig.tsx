@@ -7,6 +7,7 @@ import {
 import { Header } from "../components/Header";
 import { Top } from "./top/Top";
 import {
+  analysisLoader,
   blueprintLoader,
   convertLoader,
   designLoader,
@@ -33,6 +34,8 @@ import { ConvertTop } from "./convert/ConvertTop";
 import { ExportTop } from "./export/ExportTop";
 import { OtherTop } from "./other/OtherTop";
 import { DataConfig } from "./intricate/subContents/dataConfig/DataConfig";
+import { AnalysisTop } from "./analysis/AnalysisTop";
+import { PartsAnalysis } from "./analysis/PartsAnalysis";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -142,6 +145,25 @@ export const RouterConfig: React.FC = () => {
           },
           errorElement: <ErrorBoundary />,
         },
+        {
+          path: "/analysis",
+          element: <AnalysisTop />,
+          loader: async () => {
+            return analysisLoader();
+          },
+          children: [
+            {
+              index: true,
+              element: <></>,
+            },
+            {
+              path: "data/:partsName",
+              element: <PartsAnalysis />,
+            },
+          ],
+          errorElement: <ErrorBoundary />,
+        },
+
         {
           path: "/convert",
           element: <ConvertTop />,

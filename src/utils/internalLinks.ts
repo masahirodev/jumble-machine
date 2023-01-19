@@ -3,6 +3,7 @@ export const internalLinks = [
   "intricate",
   "prep",
   "blueprint",
+  "analysis",
   "convert",
   "export",
   "other",
@@ -29,6 +30,9 @@ export const internalLinkContents: {
   },
   convert: {
     title: "Convert",
+  },
+  analysis: {
+    title: "Analysis",
   },
   export: {
     title: "Export",

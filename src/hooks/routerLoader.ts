@@ -136,3 +136,16 @@ export const importLoader = async () => {
 
   return [projectId];
 };
+
+export const analysisLoader = async () => {
+  const projectId: number = await window.storeApi.getStoreValue(
+    "config",
+    "edit"
+  );
+  const data: Data[] | undefined = await window.storeApi.getStoreValue(
+    String(projectId),
+    "blueprint"
+  );
+
+  return [data];
+};

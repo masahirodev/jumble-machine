@@ -1,15 +1,18 @@
-import { useContext } from "react";
+import { ReactNode } from "react";
 import Col from "react-bootstrap/Col";
 import { Outlet } from "react-router-dom";
-import { IntricateContext } from "../pages/intricate/IntricateContext";
-import { Sidebar } from "../pages/intricate/Sidebar";
+import { Data } from "../schema/data";
+import { IntricateDataType } from "../schema/intricate";
 
-export const SubLayout = () => {
-  const { intricateDatas } = useContext(IntricateContext);
+type Props = {
+  datas: IntricateDataType[] | Data[];
+  Sidebar: ReactNode;
+};
 
+export const SubLayout: React.FC<Props> = ({ datas, Sidebar }) => {
   return (
     <>
-      {intricateDatas !== undefined && (
+      {datas !== undefined && (
         <>
           <Col
             className="col-2"
@@ -19,7 +22,7 @@ export const SubLayout = () => {
               maxHeight: `calc(100vh - 48px - 15vh)`,
             }}
           >
-            <Sidebar />
+            {Sidebar}
           </Col>
           <Col
             style={{
