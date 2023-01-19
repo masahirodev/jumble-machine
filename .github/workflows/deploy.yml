@@ -30,6 +30,8 @@ jobs:
 
       - run: npm ci
       - run: npm run dist:win
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: create release
         uses: softprops/action-gh-release@v1
@@ -40,7 +42,6 @@ jobs:
             dist/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
   # m1対応していない
   #  deploy_on_mac:
