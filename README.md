@@ -107,3 +107,5 @@ uvicorn main:app --reload
 | 仮想環境ストップ         | `deactivate`                      | `deactivate`                      |
 | パッケージのインストール | `pip install -r requirements.txt` | `pip install -r requirements.txt` |
 | パッケージの書き出し     | `pip freeze -> requirements.txt`  | `pip freeze -> requirements.txt`  |
+
+※パッケージの書き出しで作った requirements を使うと fastAPI or uvicorn 関連のパッケージにエラーが生じる

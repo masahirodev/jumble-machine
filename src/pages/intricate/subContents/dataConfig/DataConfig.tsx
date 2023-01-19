@@ -40,25 +40,25 @@ export const DataConfig = () => {
   };
 
   //Excelデータを読み込む
-  const importIntricateDatas = async () => {
-    const fetch = await window.electronApi.operateShowOpen({
-      method: "getFile",
-      arg: {
-        fileName: "エクセルファイル",
-        extension: "xlsx",
-      },
-    });
-    if (fetch.status) {
-      await operateIpc({
-        ipc: "operateFastApi",
-        method: "importIntricateDatas",
-        arg: {
-          projectId: projectId,
-          filePath: fetch.response as string,
-        },
-      });
-    }
-  };
+  //const importIntricateDatas = async () => {
+  //  const fetch = await window.electronApi.operateShowOpen({
+  //    method: "getFile",
+  //    arg: {
+  //      fileName: "エクセルファイル",
+  //      extension: "xlsx",
+  //    },
+  //  });
+  //  if (fetch.status) {
+  //    await operateIpc({
+  //      ipc: "operateFastApi",
+  //      method: "importIntricateDatas",
+  //      arg: {
+  //        projectId: projectId,
+  //        filePath: fetch.response as string,
+  //      },
+  //    });
+  //  }
+  //};
 
   return (
     <>

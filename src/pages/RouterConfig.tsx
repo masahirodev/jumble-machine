@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Top } from "./top/Top";
-import { Test } from "./test/Test";
 import {
   blueprintLoader,
   convertLoader,

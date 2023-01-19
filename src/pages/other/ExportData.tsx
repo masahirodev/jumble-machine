@@ -37,24 +37,24 @@ export const ExportData: React.FC<Props> = ({ operateIpc }) => {
   };
 
   //Excelデータを出力する
-  const exportIntricateDatas = async () => {
-    const fetch = await operateIpc({
-      ipc: "operateShowOpen",
-      method: "getFolder",
-      arg: {},
-    });
-
-    if (fetch.status) {
-      await operateIpc({
-        ipc: "operateFastApi",
-        method: "exportIntricateDatas",
-        arg: {
-          projectId: projectId,
-          exportFolderPath: fetch.response as string,
-        },
-      });
-    }
-  };
+  //const exportIntricateDatas = async () => {
+  //  const fetch = await operateIpc({
+  //    ipc: "operateShowOpen",
+  //    method: "getFolder",
+  //    arg: {},
+  //  });
+  //
+  //  if (fetch.status) {
+  //    await operateIpc({
+  //      ipc: "operateFastApi",
+  //      method: "exportIntricateDatas",
+  //      arg: {
+  //        projectId: projectId,
+  //        exportFolderPath: fetch.response as string,
+  //      },
+  //    });
+  //  }
+  //};
 
   const htmlSet = [
     {
