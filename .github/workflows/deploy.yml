@@ -42,7 +42,8 @@ jobs:
           # If the commit is tagged with a version (e.g. "v1.0.0"),
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-          build_script_name: dist:win
+          build_script_name: dist:win-githubAction #test
+          # build_script_name: dist:win
 # Old
 #      - run: npm run dist:win-never
 #      - name: create release
