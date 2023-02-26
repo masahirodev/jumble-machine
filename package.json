@@ -83,6 +83,7 @@
     "extends": null,
     "files": [
       "build/**/*",
+      "./public/electron-starter.js",
       "!README.md"
     ],
     "extraFiles": [
