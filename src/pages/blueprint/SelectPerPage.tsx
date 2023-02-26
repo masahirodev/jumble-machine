@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 
 export const SelectPerPage = () => {
-  const { NumberDataPerPage, setNumberDataPerPage, setPage } =
+  const { numberDataPerPage, setNumberDataPerPage, setPage } =
     useContext(BlueprintContext);
 
   const propertyFunc = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,7 +21,7 @@ export const SelectPerPage = () => {
         <Col className={"p-0"}>
           <Form.Select
             onChange={propertyFunc}
-            defaultValue={NumberDataPerPage}
+            defaultValue={numberDataPerPage}
             style={{ color: "#0d6efd" }}
           >
             <option value={100}>100</option>

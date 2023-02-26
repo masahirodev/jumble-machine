@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import { RenameMainData } from "./RenameMainData";
 import { RenameFileData } from "./RenameFileData";
 import { CardStyle } from "../sortConfig/Card";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 import { RenameConfigHeader } from "./RenameConfigHeader";
 
 export const RenameConfig = () => {

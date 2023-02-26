@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 type Props = {
-  mainContents: ReactElement;
+  mainContents: ReactElement | undefined;
   buttonContents: ReactElement | undefined;
 };
 
@@ -48,17 +48,19 @@ export const GlobalLayoutContext: React.FC<Props> = ({
           </Col>
         )}
       </Row>
-      <Row
-        style={{
-          flex: "1",
-          display: "flex",
-          flexDirection: "row",
-          margin: "0",
-          padding: "0",
-        }}
-      >
-        {mainContents}
-      </Row>
+      {mainContents !== undefined && (
+        <Row
+          style={{
+            flex: "1",
+            display: "flex",
+            flexDirection: "row",
+            margin: "0",
+            padding: "0",
+          }}
+        >
+          {mainContents}
+        </Row>
+      )}
     </>
   );
 };

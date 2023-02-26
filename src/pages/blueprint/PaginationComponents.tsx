@@ -12,7 +12,7 @@ export const PaginationComponents = () => {
   const {
     blueprintDatas,
     setBlueprintDatas,
-    NumberDataPerPage,
+    numberDataPerPage,
     totalData,
     setTotalData,
     page,
@@ -22,11 +22,11 @@ export const PaginationComponents = () => {
   } = useContext(BlueprintContext);
 
   const pageList = [];
-  for (let i = 1; i <= Math.ceil(totalData / NumberDataPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalData / numberDataPerPage); i++) {
     pageList.push(i);
   }
 
-  const { data } = useDatasPerPage(projectId, NumberDataPerPage, page);
+  const { data } = useDatasPerPage(projectId, numberDataPerPage, page);
 
   useEffect(() => {
     if (data !== undefined) {

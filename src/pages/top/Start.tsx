@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
 import { ConfigDatas } from "../../schema/config";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

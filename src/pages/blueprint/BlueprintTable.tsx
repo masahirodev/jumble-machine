@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
-import { Data, SubData } from "../../schema/data";
+import { BlueprintData, SubData } from "../../schema/blueprintData";
 import { EditModal } from "./EditModal";
 import { BlueprintContext } from "./BlueprintContext";
 import { changeTableHeader } from "../../schema/tableHeader";
@@ -75,7 +75,7 @@ export const BlueprintTable: React.FC<Props> = ({ switchingDisplay }) => {
 
   //編集画面の呼出し
   const [modalShow, setModalShow] = useState(false);
-  const openEditScreen = (data: Data) => {
+  const openEditScreen = (data: BlueprintData) => {
     setEditData(data);
     setModalShow(true);
   };

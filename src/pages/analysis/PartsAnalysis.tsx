@@ -29,7 +29,7 @@ export const PartsAnalysis = () => {
       <Container className="py-3">
         <Container>
           <Row>
-            <Col>メインパーツ:{mainParts}</Col>
+            <Col>{mainParts}</Col>
           </Row>
           <Row>
             <Col>
@@ -61,12 +61,18 @@ const AnalysisTable = ({ datas }: { datas: AnalysisData[] }) => {
           return (
             <tr key={i}>
               <th scope="row">{i + 1}</th>
-              <td>{data.value}</td>
-              <td>{data.count}</td>
+              <td>{data.value === "" ? "なし" : data.value}</td>
+              <td>{data.count.toLocaleString()}</td>
               <td>{Math.floor((data.count / total) * 100 * 100) / 100}</td>
             </tr>
           );
         })}
+        <tr>
+          <th scope="row"></th>
+          <td>合計</td>
+          <td>{total.toLocaleString()}</td>
+          <td>100</td>
+        </tr>
       </tbody>
     </Table>
   );

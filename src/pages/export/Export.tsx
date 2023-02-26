@@ -9,16 +9,16 @@ import { initExportData, ExportData } from "../../schema/exportData";
 import { GlobalAlert } from "../../components/GlobalAlert";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { useHandleForm } from "../../hooks/useHandleForm";
-import { useComment } from "../../hooks/useComment";
 
 import Container from "react-bootstrap/Container";
+import { useCheckBlueprintDatas } from "../../hooks/useCheckBlueprintDatas";
 
 export const Export: React.FC = () => {
-  const [savedExportData, projectId, hasBlueprint] = useLoaderData() as [
-    ExportData,
-    number,
-    boolean
-  ];
+  const { savedExportData, projectId, hasBlueprint } = useLoaderData() as {
+    savedExportData: ExportData;
+    projectId: number;
+    hasBlueprint: boolean;
+  };
   const [exportData, setExportData] = useState<ExportData>(
     savedExportData !== undefined ? savedExportData : initExportData
   );
@@ -102,11 +102,7 @@ export const Export: React.FC = () => {
     }
   };
 
-  //コメント
-  const { selectSetComment } = useComment();
-  if (!hasBlueprint) {
-    selectSetComment("noBlueprintDatas");
-  }
+  useCheckBlueprintDatas({ hasBlueprint });
 
   return (
     <>

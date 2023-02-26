@@ -4,7 +4,7 @@ import { BlueprintContext } from "./BlueprintContext";
 import { TiDelete } from "react-icons/ti";
 import { HiPlusCircle } from "react-icons/hi";
 
-import { SubData } from "../../schema/data";
+import { SubData } from "../../schema/blueprintData";
 import { ImageDialog } from "../../components/ImageDialog";
 import { tableHeader } from "../../schema/tableHeader";
 import { useOperateIpc } from "../../hooks/useOperateIpc";

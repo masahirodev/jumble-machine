@@ -2,34 +2,38 @@ import { createContext, ReactNode } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { BlueprintData, SubData } from "../../schema/blueprintData";
+import { DeleteDatas, DeletePairData } from "../../schema/deleteData";
 import { useCheckBlueprintDatas } from "../../hooks/useCheckBlueprintDatas";
 
-export type AnalysisData = {
+export type DeleteData = {
   attribute: string;
   value: string;
   count: number;
 };
 
-type AnalysisContextType = {
+type DeleteContextType = {
   blueprintDatas: BlueprintData[];
   exDatas: string[];
-  analysisDatas: AnalysisData[];
+  bundleSubDatas: DeleteData[];
+  deletePairDatas: DeletePairData[];
 };
 
 type Props = {
   children: ReactNode;
 };
 
-export const AnalysisContext = createContext<AnalysisContextType>(
-  {} as AnalysisContextType
+export const DeleteContext = createContext<DeleteContextType>(
+  {} as DeleteContextType
 );
 
-export const AnalysisProvider: React.FC<Props> = ({ children }) => {
-  const { blueprintDatas } = useLoaderData() as {
+export const DeleteProvider: React.FC<Props> = ({ children }) => {
+  const { blueprintDatas, deleteDatas, projectId } = useLoaderData() as {
     blueprintDatas: BlueprintData[];
+    deleteDatas: DeleteDatas;
+    projectId: number;
   };
 
-  const subDatas = blueprintDatas!!
+  const subDatas = blueprintDatas
     .map((blueprintData) => {
       return blueprintData.subDatas;
     })
@@ -42,9 +46,9 @@ export const AnalysisProvider: React.FC<Props> = ({ children }) => {
       return self.indexOf(x) === i;
     });
 
-  const analysisDatas = subDatas.reduce(
-    (result: AnalysisData[], current: SubData) => {
-      const element: AnalysisData | undefined = result.find((p) => {
+  const bundleSubDatas = subDatas.reduce(
+    (result: DeleteData[], current: SubData) => {
+      const element: DeleteData | undefined = result.find((p) => {
         return p.attribute === current.attribute && p.value === current.value;
       });
       if (element) {
@@ -63,16 +67,17 @@ export const AnalysisProvider: React.FC<Props> = ({ children }) => {
 
   useCheckBlueprintDatas({ blueprintDatas });
 
+  const deletePairDatas: DeletePairData[] = deleteDatas["deletePairDatas"];
+
   const value = {
     blueprintDatas,
     exDatas,
-    analysisDatas,
+    bundleSubDatas,
+    deletePairDatas,
   };
   return (
     <>
-      <AnalysisContext.Provider value={value}>
-        {children}
-      </AnalysisContext.Provider>
+      <DeleteContext.Provider value={value}>{children}</DeleteContext.Provider>
     </>
   );
 };

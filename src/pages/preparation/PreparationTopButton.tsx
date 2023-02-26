@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 import { GlobalAlert } from "../../components/GlobalAlert";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { checkConfirmation } from "../../hooks/checkConfirmation";

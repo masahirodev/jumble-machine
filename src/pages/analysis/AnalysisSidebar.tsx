@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AnalysisContext } from "./AnalysisContext";
-import { AnalysisSidebarContents } from "./AnalysisSidebarContents";
+import { GlobalSidebarContents } from "../../components/GlobalSidebarContents";
 
 export const sidebarData = [
   {
@@ -24,7 +24,7 @@ export const AnalysisSidebar: React.FC = () => {
     <>
       {exDatas &&
         partsDatas.map((menu, index) => {
-          return <AnalysisSidebarContents menu={menu} key={index} />;
+          return <GlobalSidebarContents menu={menu} key={index} />;
         })}
     </>
   );

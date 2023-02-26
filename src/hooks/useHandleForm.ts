@@ -3,8 +3,19 @@ type Props<T> = {
   setUpdateDatas: React.Dispatch<React.SetStateAction<T>>;
 };
 
+type ReturnType = {
+  handleEditData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelectData: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleCheckData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSetData: <S>(name: string, value: S) => void;
+  handleCheckRadio: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
 //TODO T[e.target.name]の型によりupdateの型を変更できるようにする
-export const useHandleForm = <T>({ updateDatas, setUpdateDatas }: Props<T>) => {
+export const useHandleForm = <T>({
+  updateDatas,
+  setUpdateDatas,
+}: Props<T>): ReturnType => {
   const handleEditData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUpdateDatas({ ...updateDatas, [name]: value });

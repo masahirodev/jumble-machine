@@ -1,5 +1,5 @@
 import { useCallback, useReducer, useState } from "react";
-import { Data } from "../schema/data";
+import { BlueprintData } from "../schema/blueprintData";
 import type { IpcStatus } from "../schema/ipc";
 import { AlertProps, alertReducer, initialState } from "./alertReducer";
 
@@ -16,7 +16,7 @@ export const useSaveDatas = (
   projectId: number,
   NumberDataPerPage: number,
   page: number,
-  currentDatas: Data[]
+  currentDatas: BlueprintData[]
 ): ReturnUseOperateIpc => {
   const [status, setStatus] = useState<Status>("stop");
   const [alert, dispatch] = useReducer(alertReducer, initialState);
@@ -32,21 +32,21 @@ export const useSaveDatas = (
       });
 
       try {
-        const data: Data[] = await window.storeApi.getStoreValue(
+        const data: BlueprintData[] = await window.storeApi.getStoreValue(
           String(projectId),
           "blueprint"
         );
 
         //TODO value.idではなくindexが適切？
-        const prevDatas: Data[] = data.filter((value) => {
+        const prevDatas: BlueprintData[] = data.filter((value) => {
           return (page - 1) * NumberDataPerPage > value.id;
         });
 
-        const nextDatas: Data[] = data.filter((value) => {
+        const nextDatas: BlueprintData[] = data.filter((value) => {
           return page * NumberDataPerPage <= value.id;
         });
 
-        const totalDatas: Data[] = [
+        const totalDatas: BlueprintData[] = [
           ...prevDatas,
           ...currentDatas,
           ...nextDatas,

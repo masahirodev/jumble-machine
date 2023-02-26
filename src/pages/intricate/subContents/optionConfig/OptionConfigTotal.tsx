@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import { NavLink } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import { OptionCardHeader } from "./OptionCardHeader";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 
 export const OptionConfigTotal = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);

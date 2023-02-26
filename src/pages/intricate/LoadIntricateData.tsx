@@ -6,6 +6,7 @@ import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { checkConfirmation } from "../../hooks/checkConfirmation";
 
 import Button from "react-bootstrap/Button";
+import { useComment } from "../../hooks/useComment";
 
 type Props = {};
 
@@ -15,10 +16,9 @@ export type FolderContents = {
 };
 
 export const LoadIntricateData: React.FC<Props> = () => {
-  const { projectId, setIntricateDatas, setComment } =
-    useContext(IntricateContext);
+  const { projectId, setIntricateDatas } = useContext(IntricateContext);
   const { operateIpc } = useOperateIpc();
-
+  const { selectSetComment } = useComment();
   const readParts = () => {
     checkConfirmation(projectId, "intricateDatas", () => getFolderContents());
   };
@@ -60,7 +60,7 @@ export const LoadIntricateData: React.FC<Props> = () => {
       );
 
       setIntricateDatas(intricateDatas);
-      setComment("次は、ジェネラティブの設定を行っていこう！");
+      selectSetComment("intricateImportDatas");
     }
   };
 
@@ -71,12 +71,7 @@ export const LoadIntricateData: React.FC<Props> = () => {
         onClick={() => {
           readParts();
         }}
-        onMouseEnter={() =>
-          setComment([
-            "このボタンを押すと、読み込むパーツを変更することが出来るよ。",
-            "ただし、データが上書きになってしまうので注意してね。",
-          ])
-        }
+        onMouseEnter={() => selectSetComment("intricateImportButton")}
       >
         パーツを読み込む
       </Button>

@@ -26,7 +26,10 @@ export const Header = () => {
       </NavLink>
       <Nav className="navbar-nav mr-auto">
         {internalLinks.map((value) => {
-          if (process.env.NODE_ENV !== "development" && value === "test") {
+          if (
+            process.env.NODE_ENV !== "development" &&
+            (value === "test" || value === "delete")
+          ) {
             return null;
           } else {
             return (

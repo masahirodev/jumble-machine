@@ -53,7 +53,7 @@ export const FactoryModal: React.FC<Props> = ({ show, onHide }) => {
   const initFactoryData = {
     start: minId,
     stop: maxId,
-    exportPath: exportPath,
+    exportPath: exportPath === undefined ? "" : exportPath,
   };
 
   const [factoryData, setFactoryData] = useState<FactoryData>(initFactoryData);

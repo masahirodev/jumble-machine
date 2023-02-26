@@ -5,7 +5,7 @@ import { IntricateContext } from "../../IntricateContext";
 import { useHandleForm } from "../../../../hooks/useHandleForm";
 import { GlobalAlert } from "../../../../components/GlobalAlert";
 import { IpcStatus } from "../../../../schema/ipc";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";

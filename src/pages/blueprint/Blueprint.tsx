@@ -9,7 +9,7 @@ export const Blueprint: React.FC = () => {
 
   return (
     <>
-      {blueprintDatas[0].id !== -1 && (
+      {blueprintDatas[0]["id"] !== -1 && (
         <>
           <BlueprintTable switchingDisplay={switchingDisplay} />
           <PaginationComponents />

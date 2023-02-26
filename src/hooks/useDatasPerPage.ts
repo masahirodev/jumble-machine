@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Data } from "../schema/data";
+import { BlueprintData } from "../schema/blueprintData";
 
 export const useDatasPerPage = (
   projectId: number,
@@ -8,12 +8,12 @@ export const useDatasPerPage = (
 ) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
-  const [data, setData] = useState<Data[]>();
+  const [data, setData] = useState<BlueprintData[]>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: Data[] = await window.storeApi.getStoreValue(
+        const data: BlueprintData[] = await window.storeApi.getStoreValue(
           String(projectId),
           "blueprint"
         );

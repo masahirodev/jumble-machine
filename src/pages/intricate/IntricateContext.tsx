@@ -15,8 +15,6 @@ type IntricateContextType = {
   update: boolean;
   setUpdata: React.Dispatch<React.SetStateAction<boolean>>;
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;
-  comment: string | string[];
-  setComment: React.Dispatch<React.SetStateAction<string | string[]>>;
   saveData: () => Promise<void>;
 };
 
@@ -41,10 +39,6 @@ export const IntricateProvider: React.FC<Props> = ({ children }) => {
   const [sampleData, setSampleData] = useState<SampleData>({ 0: "" });
   const [update, setUpdata] = useState<boolean>(false);
 
-  //TODO コメントuseReducerなどで外だし
-  const initComment: string[] = ["ここでは、データを取り込むことができるよ。"];
-  const [comment, setComment] = useState<string | string[]>(initComment);
-
   const saveData = async () => {
     await operateIpc({
       ipc: "store",
@@ -66,8 +60,6 @@ export const IntricateProvider: React.FC<Props> = ({ children }) => {
     update,
     setUpdata,
     operateIpc,
-    comment,
-    setComment,
     saveData,
   };
   return (

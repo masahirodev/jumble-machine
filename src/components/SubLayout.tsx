@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import Col from "react-bootstrap/Col";
 import { Outlet } from "react-router-dom";
-import { Data } from "../schema/data";
+import { BlueprintData } from "../schema/blueprintData";
 import { IntricateDataType } from "../schema/intricate";
 
 type Props = {
-  datas: IntricateDataType[] | Data[];
+  datas: IntricateDataType[] | BlueprintData[];
   Sidebar: ReactNode;
 };
 

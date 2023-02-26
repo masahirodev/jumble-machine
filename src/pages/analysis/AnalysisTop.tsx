@@ -12,7 +12,11 @@ const AnalysisBuffer: React.FC = () => {
     <GlobalLayoutContext
       buttonContents={undefined}
       mainContents={
-        <SubLayout datas={blueprintDatas} Sidebar={<AnalysisSidebar />} />
+        blueprintDatas[0]["id"] === -1 ? (
+          <></>
+        ) : (
+          <SubLayout datas={blueprintDatas} Sidebar={<AnalysisSidebar />} />
+        )
       }
     />
   );

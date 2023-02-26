@@ -1,8 +1,10 @@
 import { ConfigDatas } from "../schema/config";
-import { Data } from "../schema/data";
+import { BlueprintData } from "../schema/blueprintData";
+import { DeleteDatas } from "../schema/deleteData";
 import { DesignDataType } from "../schema/design";
 import { ExportData } from "../schema/exportData";
 import { PrepData } from "../schema/prepData";
+import { getDatas } from "./getDatas";
 
 //TODO ProjectIdは、Context統一後に移行。
 //loader promise型になってないけど、この形が必須
@@ -66,66 +68,36 @@ export const prepLoader = async () => {
 };
 
 export const blueprintLoader = async () => {
-  const projectId: number = await window.storeApi.getStoreValue(
-    "config",
-    "edit"
-  );
-  const preData: Data[] | undefined = await window.storeApi.getStoreValue(
-    String(projectId),
+  const [dbBlueprintDatas, projectId] = await getDatas<BlueprintData[]>(
     "blueprint"
   );
+  const [userNumberDataPerPage] = await getDatas<BlueprintData[]>("pagination");
+  const [exportPath] = await getDatas<BlueprintData[]>("exportPath");
 
-  const totalData = preData === undefined ? 1 : preData.length;
-
-  const userNumberDataPerPage: number | undefined =
-    await window.storeApi.getStoreValue(String(projectId), "pagination");
-
-  const NumberDataPerPage =
-    userNumberDataPerPage === undefined ? 100 : userNumberDataPerPage;
-
-  const data: Data[] | undefined =
-    preData === undefined
-      ? undefined
-      : preData.filter((value, index) => {
-          return NumberDataPerPage > index; //value.id;
-        });
-
-  const exportPath: string | undefined = await window.storeApi.getStoreValue(
-    String(projectId),
-    "exportPath"
-  );
-
-  return [data, projectId, exportPath, NumberDataPerPage, totalData];
+  return {
+    dbBlueprintDatas,
+    projectId,
+    userNumberDataPerPage,
+    exportPath,
+  };
 };
 
 export const convertLoader = async () => {
-  const projectId: number = await window.storeApi.getStoreValue(
-    "config",
-    "edit"
-  );
-  const data: Data[] | undefined = await window.storeApi.getStoreValue(
-    String(projectId),
+  const [blueprintDatas, projectId] = await getDatas<BlueprintData[]>(
     "blueprint"
   );
-  return [data, projectId];
+  return { blueprintDatas, projectId };
 };
 
 export const exportLoader = async () => {
-  const projectId: number = await window.storeApi.getStoreValue(
-    "config",
-    "edit"
-  );
-  const data: ExportData | undefined = await window.storeApi.getStoreValue(
-    String(projectId),
-    "export"
-  );
+  const [exportData, projectId] = await getDatas<ExportData>("export");
 
   const check: boolean = await window.storeApi.hasStoreValue(
     String(projectId),
     "blueprint"
   );
 
-  return [data, projectId, check];
+  return { exportData, projectId, check };
 };
 
 export const importLoader = async () => {
@@ -138,14 +110,15 @@ export const importLoader = async () => {
 };
 
 export const analysisLoader = async () => {
-  const projectId: number = await window.storeApi.getStoreValue(
-    "config",
-    "edit"
-  );
-  const data: Data[] | undefined = await window.storeApi.getStoreValue(
-    String(projectId),
+  const [blueprintDatas] = await getDatas<BlueprintData[]>("blueprint");
+  return { blueprintDatas };
+};
+
+export const deleteLoader = async () => {
+  const [blueprintDatas, projectId] = await getDatas<BlueprintData[]>(
     "blueprint"
   );
+  const [deleteDatas] = await getDatas<DeleteDatas>("deleteDatas");
 
-  return [data];
+  return { blueprintDatas, deleteDatas, projectId };
 };

@@ -1,25 +1,25 @@
 import { createContext, useState, ReactNode } from "react";
 import { useLoaderData } from "react-router-dom";
 
-import { Data, initData } from "../../schema/data";
+import { BlueprintData } from "../../schema/blueprintData";
 import { useSaveDatas } from "../../hooks/useSaveDatas";
 import { GlobalAlert } from "../../components/GlobalAlert";
-import { useComment } from "../../hooks/useComment";
+import { useCheckBlueprintDatas } from "../../hooks/useCheckBlueprintDatas";
 
 type BlueprintContextType = {
-  blueprintDatas: Data[];
-  setBlueprintDatas: React.Dispatch<React.SetStateAction<Data[]>>;
+  blueprintDatas: BlueprintData[];
+  setBlueprintDatas: React.Dispatch<React.SetStateAction<BlueprintData[]>>;
   projectId: number;
-  editData: Data;
-  setEditData: React.Dispatch<React.SetStateAction<Data>>;
+  editData: BlueprintData;
+  setEditData: React.Dispatch<React.SetStateAction<BlueprintData>>;
   deleteData: (delId: number) => void;
-  addData: (editData: Data) => number;
+  addData: (editData: BlueprintData) => number;
   moveData: (editId: number, k: number) => void;
   exData: string[];
   setExData: React.Dispatch<React.SetStateAction<string[]>>;
   exportPath: string;
   saveData: () => Promise<void>;
-  NumberDataPerPage: number;
+  numberDataPerPage: number;
   setNumberDataPerPage: React.Dispatch<React.SetStateAction<number>>;
   totalData: number;
   setTotalData: React.Dispatch<React.SetStateAction<number>>;
@@ -39,23 +39,29 @@ export const BlueprintContext = createContext<BlueprintContextType>(
 );
 
 export const BlueprintProvider: React.FC<Props> = ({ children }) => {
-  const [data, projectId, exportPath, initNumberDataPerPage, initTotalData] =
-    useLoaderData() as [Data[], number, string, number, number];
+  const { dbBlueprintDatas, projectId, userNumberDataPerPage, exportPath } =
+    useLoaderData() as {
+      dbBlueprintDatas: BlueprintData[];
+      projectId: number;
+      userNumberDataPerPage: number;
+      exportPath: string;
+    };
 
-  const initDatas = data !== undefined ? data : [initData];
-  const [blueprintDatas, setBlueprintDatas] = useState(initDatas);
-  const [editData, setEditData] = useState(initDatas[0]);
-  const [totalData, setTotalData] = useState(initTotalData);
+  const initEditDatas: BlueprintData[] = dbBlueprintDatas.filter(
+    (value, index) => {
+      return userNumberDataPerPage > index; //value.id;
+    }
+  );
 
-  //コメント
-  const { selectSetComment } = useComment();
-  if (blueprintDatas[0].id === -1) {
-    selectSetComment("noBlueprintDatas");
-  }
+  const [blueprintDatas, setBlueprintDatas] = useState(initEditDatas);
+  const [editData, setEditData] = useState(initEditDatas[0]);
+  const [totalData, setTotalData] = useState(dbBlueprintDatas.length);
 
-  const initExData = initDatas
-    .map((initData) => {
-      return initData.subDatas.map((subData) => subData.attribute);
+  useCheckBlueprintDatas({ blueprintDatas });
+
+  const initExData = initEditDatas
+    .map((initEditData) => {
+      return initEditData.subDatas.map((subData) => subData.attribute);
     })
     .flat()
     .filter(function (x, i, self) {
@@ -77,7 +83,7 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
   };
 
   //データ追加
-  const addData = (editData: Data): number => {
+  const addData = (editData: BlueprintData): number => {
     const id: number =
       Math.max.apply(
         0,
@@ -110,14 +116,14 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
 
   //ページ設定
   const [page, setPage] = useState(1);
-  const [NumberDataPerPage, setNumberDataPerPage] = useState<number>(
-    initNumberDataPerPage
+  const [numberDataPerPage, setNumberDataPerPage] = useState<number>(
+    userNumberDataPerPage
   );
 
   //テーブルを保存する
   const { status, setStatus, alert, saveDataFunc } = useSaveDatas(
     1,
-    NumberDataPerPage,
+    numberDataPerPage,
     page,
     blueprintDatas
   );
@@ -152,7 +158,7 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     setExData,
     exportPath,
     saveData,
-    NumberDataPerPage,
+    numberDataPerPage,
     setNumberDataPerPage,
     totalData,
     setTotalData,
