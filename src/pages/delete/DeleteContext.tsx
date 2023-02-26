@@ -27,7 +27,7 @@ export const DeleteContext = createContext<DeleteContextType>(
 );
 
 export const DeleteProvider: React.FC<Props> = ({ children }) => {
-  const { blueprintDatas, deleteDatas, projectId } = useLoaderData() as {
+  const { blueprintDatas, deleteDatas } = useLoaderData() as {
     blueprintDatas: BlueprintData[];
     deleteDatas: DeleteDatas;
     projectId: number;
