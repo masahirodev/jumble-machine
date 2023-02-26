@@ -41,7 +41,7 @@
     "dist:linux": "npm run build:python && npm run build && tsc -p electron && electron-builder -l -c.extraMetadata.main=build/electron.js",
     "dist:win-publish": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish always -c.extraMetadata.main=build/electron.js",
     "dist:win-never": "npm run build:python && npm run build && tsc -p electron && electron-builder --win --x64 --publish never -c.extraMetadata.main=build/electron.js",
-    "dist:win-githubAction": "npm run build:python && npm run build && tsc -p electron"
+    "dist": "npm run build:python && npm run build && tsc -p electron"
   },
   "eslintConfig": {
     "extends": [
@@ -83,7 +83,6 @@
     "extends": null,
     "files": [
       "build/**/*",
-      "./public/electron-starter.js",
       "!README.md"
     ],
     "extraFiles": [
