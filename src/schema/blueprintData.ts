@@ -13,7 +13,7 @@ export type SupportData = {
   youtube_url: string;
 };
 
-export type Data = {
+export type BlueprintData = {
   id: number;
   name: string;
 } & SupportData & {
@@ -36,7 +36,7 @@ export const initSupportData = {
   youtube_url: "",
 };
 
-export const initData: Data = {
+export const initBlueprintData: BlueprintData = {
   ...{ id: -1, name: "" },
   ...initSupportData,
   ...{

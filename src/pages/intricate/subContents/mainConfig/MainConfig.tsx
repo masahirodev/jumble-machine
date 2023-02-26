@@ -5,7 +5,7 @@ import { EditIntricateConfig } from "./EditIntricateConfig";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { IntricateMainHeader } from "./IntricateMainHeader";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 
 export const MainConfig = () => {
   const { intricateDatas, saveData } = useContext(IntricateContext);

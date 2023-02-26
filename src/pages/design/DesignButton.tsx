@@ -2,7 +2,7 @@ import React from "react";
 import { useContext, useState } from "react";
 
 import { DesignContext } from "./DesignContext";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 
 import Button from "react-bootstrap/Button";
 import { LoadDesignData } from "./LoadDesignData";

@@ -7,7 +7,7 @@ import { CardHeader } from "./CardHeader";
 import Container from "react-bootstrap/Container";
 import { IntricateContext } from "../../IntricateContext";
 import Button from "react-bootstrap/Button";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 
 export type Sample = {
   folder: string;

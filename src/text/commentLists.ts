@@ -3,22 +3,7 @@ export const commentLists = [
   { target: "start", comment: "今日は、どんなプロジェクトを作って楽しむ？" },
   {
     target: "/",
-    comment: [
-      "まずは、WalletConnectよりウォレットを接続してね。ウォレットが接続されると、接続したウォレットのアドレスを取得します。取得したアドレスを元にメンバーシップが有効か確認するよ。",
-    ],
-  },
-  {
-    target: "loginNotConnect",
-    comment: "ブロックチェーンにつながらないみたい・・・",
-  },
-  {
-    target: "loginSuccess",
-    comment:
-      "メンバーシップへようこそ！もうウォレットの接続を解除しても大丈夫なので、右側のボタンを押して接続を解除してもいいよ。",
-  },
-  {
-    target: "loginFalse",
-    comment: "このアドレスは、メンバーシップが有効じゃないみたい・・・",
+    comment: "今日は、どんなプロジェクトを作って楽しむ？",
   },
   {
     target: "/design",
@@ -264,20 +249,23 @@ export const commentLists = [
     ],
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateImportButton",
+    comment: [
+      "このボタンを押すと、読み込むパーツを変更することが出来るよ。",
+      "ただし、データが上書きになってしまうので注意してね。",
+    ],
   },
   {
-    target: "",
-    comment: "",
+    target: "intricateImportDatas",
+    comment: "次は、ジェネラティブの設定を行っていこう！",
   },
   {
-    target: "",
-    comment: "",
+    target: "/analysis",
+    comment: "ここでは、パーツの排出個数や排出率をチェックすることができるよ",
   },
   {
-    target: "",
-    comment: "",
+    target: "/delete",
+    comment: "ここでは、パーツの組み合わせを削除することができるよ",
   },
   {
     target: "",

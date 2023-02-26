@@ -3,7 +3,7 @@ import { TfiReload } from "react-icons/tfi";
 
 import { BlueprintContext } from "./BlueprintContext";
 import { FactoryModal } from "./FactoryModal";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 import { useComment } from "../../hooks/useComment";
 
 import Button from "react-bootstrap/Button";

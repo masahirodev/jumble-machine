@@ -4,6 +4,7 @@ export const internalLinks = [
   "prep",
   "blueprint",
   "analysis",
+  "delete",
   "convert",
   "export",
   "other",
@@ -33,6 +34,9 @@ export const internalLinkContents: {
   },
   analysis: {
     title: "Analysis",
+  },
+  delete: {
+    title: "Delete",
   },
   export: {
     title: "Export",

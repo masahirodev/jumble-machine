@@ -1,10 +1,5 @@
-import { RouterConfig } from "./pages/RouterConfig";
-import { LoginProvider } from "./pages/common/LoginContext";
+import { RouterConfig } from "./router/RouterConfig";
 
 export const App = () => {
-  return (
-    <LoginProvider>
-      <RouterConfig />
-    </LoginProvider>
-  );
+  return <RouterConfig />;
 };

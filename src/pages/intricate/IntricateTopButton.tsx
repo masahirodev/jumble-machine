@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { LoadIntricateData } from "./LoadIntricateData";
 import { IntricateContext } from "./IntricateContext";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 import { Sample } from "../../schema/intricate";
 import { SampleModal } from "../design/SampleModal";
 import { useComment } from "../../hooks/useComment";

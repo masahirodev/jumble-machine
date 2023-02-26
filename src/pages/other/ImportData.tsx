@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { tableHeader } from "../../schema/tableHeader";
 import { checkConfirmation } from "../../hooks/checkConfirmation";
-import { linkTo } from "../../hooks/linkTo";
+import { linkTo } from "../../router/linkTo";
 
 type Props = {
   operateIpc: ({ ipc, method, arg }: OperateIpc) => Promise<ReturnOperateIpc>;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-import type { Data } from "../../schema/data";
+import type { BlueprintData } from "../../schema/blueprintData";
 import { useHandleForm } from "../../hooks/useHandleForm";
 import { GlobalAlert } from "../../components/GlobalAlert";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
@@ -15,7 +15,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export const ConvertConfig: React.FC = () => {
-  const [data, projectId] = useLoaderData() as [Data[], number];
+  const { blueprintDatas, projectId } = useLoaderData() as {
+    blueprintDatas: BlueprintData[];
+    projectId: number;
+  };
   const { ipcStatus, setIpcStatus, alert, operateIpc } = useOperateIpc();
   const [convertDatas, setConvertDatas] = useState<Convert>(initConvertDatas);
 
@@ -27,9 +30,9 @@ export const ConvertConfig: React.FC = () => {
   const { selectSetComment } = useComment();
 
   //プロパティリスト
-  const main = data
-    .map((data) => {
-      return Object.keys(data);
+  const main = blueprintDatas
+    .map((blueprintDatas) => {
+      return Object.keys(blueprintDatas);
     })
     .flat()
     .filter(function (x, i, self) {
@@ -40,9 +43,9 @@ export const ConvertConfig: React.FC = () => {
     });
 
   const selectList = main.concat(
-    data
-      .map((data) => {
-        return data.subDatas.map((subData) => subData.attribute);
+    blueprintDatas
+      .map((blueprintData) => {
+        return blueprintData.subDatas.map((subData) => subData.attribute);
       })
       .flat()
       .filter(function (x, i, self) {

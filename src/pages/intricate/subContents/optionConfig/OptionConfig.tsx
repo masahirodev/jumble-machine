@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import { NavLink, useParams } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import { sidebarData1 } from "../../../../utils/intricateSidebarData";
-import { linkTo } from "../../../../hooks/linkTo";
+import { linkTo } from "../../../../router/linkTo";
 import { OptionCardHeader } from "./OptionCardHeader";
 
 export const OptionConfig = () => {

@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Data } from "../../schema/data";
+import { BlueprintData } from "../../schema/blueprintData";
 import { tableHeader } from "../../schema/tableHeader";
 import { useOperateIpc } from "../../hooks/useOperateIpc";
 import { GlobalAlert } from "../../components/GlobalAlert";
@@ -44,7 +44,7 @@ export const ExportMetadata: React.FC<Props> = ({ projectId }) => {
     workbook.addWorksheet(sheetName);
     const arraySheet = workbook.getWorksheet(sheetName);
 
-    const blueprintDatas: Data[] = await window.storeApi.getStoreValue(
+    const blueprintDatas: BlueprintData[] = await window.storeApi.getStoreValue(
       String(projectId),
       "blueprint"
     );

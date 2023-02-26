@@ -5,37 +5,40 @@ import {
   useRouteError,
 } from "react-router-dom";
 import { Header } from "../components/Header";
-import { Top } from "./top/Top";
+import { Top } from "../pages/top/Top";
 import {
   analysisLoader,
   blueprintLoader,
   convertLoader,
+  deleteLoader,
   designLoader,
   exportLoader,
   importLoader,
   intricateLoader,
   prepLoader,
   topLoader,
-} from "../hooks/routerLoader";
-import { TestTop } from "./test/TestTop";
-import { IntricateTop } from "./intricate/IntricateTop";
-import { SettingFolder } from "./intricate/subContents/folderConfig/SettingFolder";
-import { MainConfig } from "./intricate/subContents/mainConfig/MainConfig";
-import { OptionConfig } from "./intricate/subContents/optionConfig/OptionConfig";
+} from "./routerLoader";
+import { TestTop } from "../pages/test/TestTop";
+import { IntricateTop } from "../pages/intricate/IntricateTop";
+import { SettingFolder } from "../pages/intricate/subContents/folderConfig/SettingFolder";
+import { MainConfig } from "../pages/intricate/subContents/mainConfig/MainConfig";
+import { OptionConfig } from "../pages/intricate/subContents/optionConfig/OptionConfig";
 import Container from "react-bootstrap/esm/Container";
-import { DesignTop } from "./design/DesignTop";
-import { OptionConfigTotal } from "./intricate/subContents/optionConfig/OptionConfigTotal";
-import { SortConfig } from "./intricate/subContents/sortConfig/SortConfig";
-import { IntricateDescription } from "./intricate/subContents/IntricateDescription";
-import { RenameConfig } from "./intricate/subContents/renameConfig/RenameConfig";
-import { PreparationTop } from "./preparation/PreparationTop";
-import { BlueprintTop } from "./blueprint/BlueprintTop";
-import { ConvertTop } from "./convert/ConvertTop";
-import { ExportTop } from "./export/ExportTop";
-import { OtherTop } from "./other/OtherTop";
-import { DataConfig } from "./intricate/subContents/dataConfig/DataConfig";
-import { AnalysisTop } from "./analysis/AnalysisTop";
-import { PartsAnalysis } from "./analysis/PartsAnalysis";
+import { DesignTop } from "../pages/design/DesignTop";
+import { OptionConfigTotal } from "../pages/intricate/subContents/optionConfig/OptionConfigTotal";
+import { SortConfig } from "../pages/intricate/subContents/sortConfig/SortConfig";
+import { IntricateDescription } from "../pages/intricate/subContents/IntricateDescription";
+import { RenameConfig } from "../pages/intricate/subContents/renameConfig/RenameConfig";
+import { PreparationTop } from "../pages/preparation/PreparationTop";
+import { BlueprintTop } from "../pages/blueprint/BlueprintTop";
+import { ConvertTop } from "../pages/convert/ConvertTop";
+import { ExportTop } from "../pages/export/ExportTop";
+import { OtherTop } from "../pages/other/OtherTop";
+import { DataConfig } from "../pages/intricate/subContents/dataConfig/DataConfig";
+import { AnalysisTop } from "../pages/analysis/AnalysisTop";
+import { PartsAnalysis } from "../pages/analysis/PartsAnalysis";
+import { DeleteTop } from "../pages/delete/DeleteTop";
+import { DeletePairDatas } from "../pages/delete/DeletePairDatas";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -159,6 +162,21 @@ export const RouterConfig: React.FC = () => {
             {
               path: "data/:partsName",
               element: <PartsAnalysis />,
+            },
+          ],
+          errorElement: <ErrorBoundary />,
+        },
+
+        {
+          path: "/delete",
+          element: <DeleteTop />,
+          loader: async () => {
+            return deleteLoader();
+          },
+          children: [
+            {
+              index: true,
+              element: <DeletePairDatas />,
             },
           ],
           errorElement: <ErrorBoundary />,

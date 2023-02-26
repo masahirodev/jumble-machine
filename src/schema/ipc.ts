@@ -2,7 +2,7 @@ import { Sample } from "../pages/design/DesignConfig";
 import { FolderContents } from "../pages/design/LoadDesignData";
 import { AddOption } from "./add";
 import { ConvertContents } from "./convert";
-import { Data } from "./data";
+import { BlueprintData } from "./blueprintData";
 import { DesignDataType } from "./design";
 import { ExportData } from "./exportData";
 import { IntricateDataType } from "./intricate";
@@ -47,7 +47,7 @@ export type OperateIpc =
       ipc: "operateShowSave";
       method: "fileSave";
       arg: {
-        data: Data[];
+        data: BlueprintData[];
         fileName: string;
         extension: string;
       };

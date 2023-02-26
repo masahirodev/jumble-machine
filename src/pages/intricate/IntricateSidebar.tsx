@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 import { IntricateContext } from "./IntricateContext";
-import { IntricateSidebarContents } from "./IntricateSidebarContents";
+import { GlobalSidebarContents } from "../../components/GlobalSidebarContents";
+
 import { sidebarData1, sidebarData2 } from "../../utils/intricateSidebarData";
 
 export const IntricateSidebar = () => {
@@ -27,14 +28,14 @@ export const IntricateSidebar = () => {
   return (
     <>
       {sidebarData1.map((menu, index) => {
-        return <IntricateSidebarContents menu={menu} key={index} />;
+        return <GlobalSidebarContents menu={menu} key={index} />;
       })}
       {result &&
         mainPartsDatas.map((menu, index) => {
-          return <IntricateSidebarContents menu={menu} key={index} />;
+          return <GlobalSidebarContents menu={menu} key={index} />;
         })}
       {sidebarData2.map((menu, index) => {
-        return <IntricateSidebarContents menu={menu} key={index} />;
+        return <GlobalSidebarContents menu={menu} key={index} />;
       })}
     </>
   );
