@@ -25,7 +25,6 @@ type BlueprintContextType = {
   setTotalData: React.Dispatch<React.SetStateAction<number>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  reloadData: () => Promise<void>;
   switchingDisplay: boolean;
   setSwitchingDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -132,16 +131,6 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     await saveDataFunc();
   };
 
-  //TODO saveDataFuncとreloadDataとをuseOperateIpcに統合
-  //データをリロードする
-  const reloadData = async () => {
-    const dataStore = await window.storeApi.getStoreValue(
-      String(projectId),
-      "blueprint"
-    );
-    setBlueprintDatas(dataStore);
-  };
-
   //画面切替
   const [switchingDisplay, setSwitchingDisplay] = useState<boolean>(false);
 
@@ -164,7 +153,6 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
     setTotalData,
     page,
     setPage,
-    reloadData,
     switchingDisplay,
     setSwitchingDisplay,
   };

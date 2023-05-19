@@ -8,6 +8,7 @@ import { useComment } from "../../hooks/useComment";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useReload } from "../../hooks/useReload";
 
 type Props = {};
 
@@ -16,7 +17,6 @@ export const BlueprintTopButton: React.FC<Props> = () => {
     blueprintDatas,
     setBlueprintDatas,
     saveData,
-    reloadData,
     switchingDisplay,
     setSwitchingDisplay,
   } = useContext(BlueprintContext);
@@ -37,6 +37,7 @@ export const BlueprintTopButton: React.FC<Props> = () => {
     setModalShow(true);
   };
 
+  const refreshPage = useReload();
   return (
     <>
       <Form.Check
@@ -50,7 +51,7 @@ export const BlueprintTopButton: React.FC<Props> = () => {
       <Button
         variant="success"
         type="button"
-        onClick={reloadData}
+        onClick={refreshPage}
         className={"me-3"}
         onMouseEnter={() => selectSetComment("blueprintReload")}
       >

@@ -6,11 +6,3 @@ export const linkTo = (internalLink: InternalLinks | IntricateLinks) => {
   window.location.href =
     internalLink.charAt(0) === "/" ? `#${internalLink}` : `#/${internalLink}`;
 };
-
-//TODO routerに標準機能あり
-
-//リロード
-//const navigate = useNavigate();
-//const refreshPage = () => {
-//  navigate(0);
-//};
