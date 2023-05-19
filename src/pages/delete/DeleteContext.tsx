@@ -30,7 +30,6 @@ export const DeleteProvider: React.FC<Props> = ({ children }) => {
   const { blueprintDatas, deleteDatas } = useLoaderData() as {
     blueprintDatas: BlueprintData[];
     deleteDatas: DeleteDatas;
-    projectId: number;
   };
 
   const subDatas = blueprintDatas

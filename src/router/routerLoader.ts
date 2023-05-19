@@ -90,14 +90,14 @@ export const convertLoader = async () => {
 };
 
 export const exportLoader = async () => {
-  const [exportData, projectId] = await getDatas<ExportData>("export");
+  const [savedExportData, projectId] = await getDatas<ExportData>("export");
 
-  const check: boolean = await window.storeApi.hasStoreValue(
+  const hasBlueprint: boolean = await window.storeApi.hasStoreValue(
     String(projectId),
     "blueprint"
   );
 
-  return { exportData, projectId, check };
+  return { savedExportData, projectId, hasBlueprint };
 };
 
 export const importLoader = async () => {

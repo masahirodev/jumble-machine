@@ -19,6 +19,7 @@ export const Export: React.FC = () => {
     projectId: number;
     hasBlueprint: boolean;
   };
+
   const [exportData, setExportData] = useState<ExportData>(
     savedExportData !== undefined ? savedExportData : initExportData
   );
