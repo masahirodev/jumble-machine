@@ -122,7 +122,7 @@ export const BlueprintProvider: React.FC<Props> = ({ children }) => {
 
   //テーブルを保存する
   const { status, setStatus, alert, saveDataFunc } = useSaveDatas(
-    1,
+    projectId,
     numberDataPerPage,
     page,
     blueprintDatas
