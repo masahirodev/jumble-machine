@@ -223,7 +223,7 @@ def add_option_parts(option_datas, df_subDatas):
 
 # 並び替え
 def sort_columns(df_subDatas, sort_datas):
-    sort_columns = sorted(df_subDatas.columns, key=lambda x: sort_datas[x])
+    sort_columns = list(sort_datas.keys())
     return df_subDatas[sort_columns]
 
 
@@ -257,7 +257,6 @@ def do_rename(projectPath, df_subDatas):
         df_subDatas = df_subDatas.drop(columns=remove_lists[i])
 
     return df_subDatas
-
 
 
 def result_jumble_datas(projectPath):
