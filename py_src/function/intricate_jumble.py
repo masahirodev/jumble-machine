@@ -224,6 +224,8 @@ def add_option_parts(option_datas, df_subDatas):
 # 並び替え
 def sort_columns(df_subDatas, sort_datas):
     sort_columns = list(sort_datas.keys())
+    columns = df_subDatas.columns
+    sort_columns = [col for col in sort_columns if col in columns]
     return df_subDatas[sort_columns]
 
 

@@ -109,3 +109,7 @@ uvicorn main:app --reload
 | パッケージの書き出し     | `pip freeze -> requirements.txt`  | `pip freeze -> requirements.txt`  |
 
 ※パッケージの書き出しで作った requirements を使うと fastAPI or uvicorn 関連のパッケージにエラーが生じる
+
+## その他コマンド
+
+xattr -rc /Applications/jumble-machine.app
