@@ -64,6 +64,10 @@ export const Start: React.FC = () => {
           ];
     await window.storeApi.setStoreValue("config", "project", data);
     await window.storeApi.setStoreValue("config", "edit", maxProjectId);
+
+    // jsonファイルの作成（`maxQuantity`は適当）
+    await window.storeApi.setStoreValue(String(maxProjectId), "maxQuantity", 0);
+
     linkTo("design");
   };
 

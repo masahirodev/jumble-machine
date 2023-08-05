@@ -6,6 +6,8 @@ from common.operate_json import overwrite_json
 # excel to df
 def read_excel(xlsxFilePath):
     df = pd.read_excel(xlsxFilePath)
+    # NaNを空白に置き換える
+    df = df.fillna('')
     return df
 
 
