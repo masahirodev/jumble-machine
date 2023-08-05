@@ -8,11 +8,13 @@ def export_json(path, folderPath):
     table = json_load["blueprint"]
 
     for i in range(0, len(table)):
+        # jsonファイル名をidに連動させる
+        id = table[i]["id"]
         table[i].pop("id", None)
         table[i].pop("tokenId", None)
         table[i].pop("imagePath", None)
 
-        path = os.path.join(folderPath, str(i+1)+".json")
+        path = os.path.join(folderPath, str(id)+".json")
         write_json(path, table[i])
 
     return "OK"
