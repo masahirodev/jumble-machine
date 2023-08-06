@@ -14,6 +14,16 @@ def export_json(path, folderPath):
         table[i].pop("tokenId", None)
         table[i].pop("imagePath", None)
 
+        attributes = []
+
+        for sub_data in table[i]["subDatas"]:
+            attributes.append({
+                "trait_type": sub_data["attribute"],
+                "value": sub_data["value"],
+            })
+        table[i]["attributes"] = attributes
+        table[i].pop("subDatas")
+
         path = os.path.join(folderPath, str(id)+".json")
         write_json(path, table[i])
 
