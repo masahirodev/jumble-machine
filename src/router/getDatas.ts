@@ -15,7 +15,13 @@ export const initDatas: {
 type ReturnType<T> = [datas: T, projectId: number];
 
 export const getDatas = async <T>(
-  target: "deleteDatas" | "blueprint" | "export" | "pagination" | "exportPath"
+  target:
+    | "deleteDatas"
+    | "blueprint"
+    | "export"
+    | "pagination"
+    | "exportPath"
+    | "collection"
 ): Promise<ReturnType<T>> => {
   const init = initDatas[target] as T;
   const projectId: number = await window.storeApi.getStoreValue(

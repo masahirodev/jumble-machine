@@ -7,10 +7,11 @@ export const internalLinks = [
   "delete",
   "convert",
   "export",
+  "xrpl",
   "other",
   "test",
 ] as const;
-export type InternalLinks = typeof internalLinks[number];
+export type InternalLinks = (typeof internalLinks)[number];
 
 export const internalLinkContents: {
   [key in InternalLinks]: {
@@ -40,6 +41,9 @@ export const internalLinkContents: {
   },
   export: {
     title: "Export",
+  },
+  xrpl: {
+    title: "XRPL",
   },
   other: {
     title: "Other",

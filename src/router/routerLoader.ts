@@ -100,6 +100,18 @@ export const exportLoader = async () => {
   return { savedExportData, projectId, hasBlueprint };
 };
 
+export const exportXRPLLoader = async () => {
+  const [savedExportData, projectId] = await getDatas<ExportData>("export");
+  const [savedCollectionData] = await getDatas<ExportData>("collection");
+
+  const hasBlueprint: boolean = await window.storeApi.hasStoreValue(
+    String(projectId),
+    "blueprint"
+  );
+
+  return { savedExportData, projectId, hasBlueprint, savedCollectionData };
+};
+
 export const importLoader = async () => {
   const projectId: number = await window.storeApi.getStoreValue(
     "config",

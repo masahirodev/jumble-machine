@@ -10,6 +10,12 @@ export type ExportData = {
   step: number;
 };
 
+export type CollectionData = {
+  collectionName?: string;
+  collectionDescription?: string;
+  collectionImage?: string;
+};
+
 export const initExportData: ExportData = {
   name: "",
   startTokenId: 1,
@@ -20,4 +26,10 @@ export const initExportData: ExportData = {
   aniServer: "arweave",
   aniHash: "",
   step: 1,
+};
+
+export const initCollectionData: CollectionData = {
+  collectionName: "",
+  collectionDescription: "",
+  collectionImage: "",
 };

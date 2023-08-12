@@ -13,6 +13,7 @@ import {
   deleteLoader,
   designLoader,
   exportLoader,
+  exportXRPLLoader,
   importLoader,
   intricateLoader,
   prepLoader,
@@ -39,6 +40,7 @@ import { AnalysisTop } from "../pages/analysis/AnalysisTop";
 import { PartsAnalysis } from "../pages/analysis/PartsAnalysis";
 import { DeleteTop } from "../pages/delete/DeleteTop";
 import { DeletePairDatas } from "../pages/delete/DeletePairDatas";
+import { ExportXRPTop } from "../pages/xrpl/ExportXRPLTop";
 
 const ErrorBoundary: React.FC = () => {
   let error = useRouteError();
@@ -195,6 +197,14 @@ export const RouterConfig: React.FC = () => {
           element: <ExportTop />,
           loader: async () => {
             return exportLoader();
+          },
+          errorElement: <ErrorBoundary />,
+        },
+        {
+          path: "/xrpl",
+          element: <ExportXRPTop />,
+          loader: async () => {
+            return exportXRPLLoader();
           },
           errorElement: <ErrorBoundary />,
         },

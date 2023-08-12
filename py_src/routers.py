@@ -16,6 +16,7 @@ from function.intricate_jumble import do_intricate_jumble
 from function.add_jumble import add_intricate_jumble
 from function.export_intricate import export_intricate
 from function.import_intricate import import_intricate
+from function.export_xrpl import export_xrpl
 
 router = APIRouter()
 
@@ -33,6 +34,11 @@ class ExportData(BaseModel):
 @router.post("/exportJson")
 async def exportJson(data: ExportData) -> str:
     return export_json(data.projectPath, data.arg.folderPath)
+
+
+@router.post("/exportXRPLJson")
+async def exportXRPLJson(data: ExportData) -> str:
+    return export_xrpl(data.projectPath, data.arg.folderPath)
 
 
 class SampleData(BaseModel):

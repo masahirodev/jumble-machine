@@ -4,7 +4,7 @@ import { AddOption } from "./add";
 import { ConvertContents } from "./convert";
 import { BlueprintData } from "./blueprintData";
 import { DesignDataType } from "./design";
-import { ExportData } from "./exportData";
+import { CollectionData, ExportData } from "./exportData";
 import { IntricateDataType } from "./intricate";
 import { PrepData } from "./prepData";
 
@@ -27,6 +27,7 @@ export type OperateIpc =
         value:
           | string
           | ExportData
+          | CollectionData
           | PrepData
           | DesignDataType[]
           | Sample
@@ -81,6 +82,14 @@ export type OperateIpc =
   | {
       ipc: "operateFastApi";
       method: "exportJson";
+      arg: {
+        projectId: number;
+        folderPath: string;
+      };
+    }
+  | {
+      ipc: "operateFastApi";
+      method: "exportXRPLJson";
       arg: {
         projectId: number;
         folderPath: string;
