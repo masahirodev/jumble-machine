@@ -119,19 +119,6 @@ export const Export: React.FC = () => {
     savedCollectionData !== undefined ? savedCollectionData : initCollectionData
   );
 
-  //データを保存する
-  const saveCollectionData = async () => {
-    await operateIpc({
-      ipc: "store",
-      method: "set",
-      arg: {
-        name: String(projectId),
-        key: "collection",
-        value: collectionData,
-      },
-    });
-  };
-
   return (
     <>
       {hasBlueprint && (
@@ -168,7 +155,6 @@ export const Export: React.FC = () => {
                   projectId={projectId}
                   setCollectionData={setCollectionData}
                   collectionData={collectionData}
-                  saveCollectionData={saveCollectionData}
                 />
               }
               color={exportData.step === 3 ? "#0d6efd" : ""}

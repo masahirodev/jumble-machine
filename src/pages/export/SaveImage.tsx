@@ -50,7 +50,25 @@ export const SaveImage: React.FC<Props> = ({
       <Row>
         <Form className="align-items-center">
           <Form.Group as={Row} className="m-2">
-            <Form.Label column>①まずはデータを保存しよう！</Form.Label>
+            <Form.Label column>
+              ①まずは画像データをオンラインサーバーに保存しよう！{" ( "}
+              <a
+                href="https://eggdragons.com/web3storage-nftstorage/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                IPFSへのアップロードの仕方
+              </a>
+              {" / "}
+              <a
+                href="https://eggdragons.com/ardrive-tokenuri/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                ARWEAVEへのアップロードの仕方
+              </a>
+              {" ) "}
+            </Form.Label>
           </Form.Group>
         </Form>
       </Row>

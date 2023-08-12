@@ -186,6 +186,20 @@ export const Start: React.FC = () => {
                 </Col>
               </Form.Group>
             </Form>
+
+            <Form className="align-items-center">
+              <Form.Group as={Row} className="m-2">
+                <Form.Label column className="col-12">
+                  <a
+                    href="https://eggdragons.com/jumble-machine2/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    使い方を見る
+                  </a>
+                </Form.Label>
+              </Form.Group>
+            </Form>
           </Row>
         </Container>
       </Container>

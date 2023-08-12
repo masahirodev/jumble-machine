@@ -235,6 +235,11 @@ export const commentLists = [
     comment: "ここでは、NFTにするために必要なデータの整理を行っていくよ。",
   },
   {
+    target: "/xrpl",
+    comment:
+      "ここでは、XRPLのNFTを発行するために必要なデータの整理を行っていくよ。",
+  },
+  {
     target: "/other",
     comment: [
       "ここでは、 データを取り出したり、データを取り込むことができるよ。",

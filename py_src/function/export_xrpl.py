@@ -42,7 +42,8 @@ def export_xrpl(path, folderPath):
                 "image": collectionData["collectionImage"]
             })
 
-        table[i]["collection"] = collection
+        if collection:
+            table[i]["collection"] = collection
 
         # attributes
         attributes = []

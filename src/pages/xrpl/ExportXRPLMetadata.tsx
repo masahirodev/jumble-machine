@@ -12,14 +12,12 @@ type Props = {
   projectId: number;
   setCollectionData: React.Dispatch<React.SetStateAction<CollectionData>>;
   collectionData: CollectionData;
-  saveCollectionData: () => Promise<void>;
 };
 
 export const ExportMetadata: React.FC<Props> = ({
   projectId,
   setCollectionData,
   collectionData,
-  saveCollectionData,
 }) => {
   const { handleEditData } = useHandleForm<CollectionData>({
     updateDatas: collectionData,
@@ -28,8 +26,18 @@ export const ExportMetadata: React.FC<Props> = ({
 
   const { ipcStatus, setIpcStatus, alert, operateIpc } = useOperateIpc();
 
-  // JSONデータを出力する
-  const exportJson = async () => {
+  // collection dataを保存して、JSONデータを出力する
+  const saveExportXRPLJson = async () => {
+    await operateIpc({
+      ipc: "store",
+      method: "set",
+      arg: {
+        name: String(projectId),
+        key: "collection",
+        value: collectionData,
+      },
+    });
+
     const fetch = await operateIpc({
       ipc: "operateShowOpen",
       method: "getFolder",
@@ -106,8 +114,7 @@ export const ExportMetadata: React.FC<Props> = ({
               <Button
                 variant="primary"
                 onClick={() => {
-                  saveCollectionData();
-                  exportJson();
+                  saveExportXRPLJson();
                 }}
               >
                 出力
